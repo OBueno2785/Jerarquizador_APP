@@ -1,0 +1,92 @@
+
+=== Agricultura e irrigación  (6 proyectos | corte P70 = 0.6941 | indicadores no aplicados: [2, 7])
+  >>  1. Proyecto Chavimochic - Tercera Etapa                 0.7183  Formu
+  >>  2. O&M Olmos                                            0.6961  Estru
+      3. Majes Siguas - II Etapa                              0.6920  Formu
+      4. Proyecto Chinecas                                    0.6080  Formu
+      5. Nueva Concesión Olmos                                0.5810  Formu
+      6. Sistema Hídrico Valle Chancay - Lambayeque           0.5173  Formu
+
+=== Agua y saneamiento  (17 proyectos | corte P70 = 0.4701 | indicadores no aplicados: ninguno)
+  >>  1. Desaladora Lima Norte                                0.6886  Formu
+  >>  2. PTAR Trujillo                                        0.6137  Estru
+  >>  3. PTAR Huancayo                                        0.5567  Estru
+  >>  4. PTAP Cajamarca                                       0.5314  Estru
+  >>  5. Saneamiento Chanchamayo y Concepción                 0.4743  Estru
+      6. PTAR Cañete                                          0.4690  Estru
+      7. Servicios de Saneamiento Talara                      0.4686  Formu
+      8. PTAR Cusco                                           0.4667  Estru
+      9. PTAR San Martín                                      0.4524  Estru
+     10. PTAR Iquitos                                         0.4344  Formu
+     11. Saneamiento San Ignacio                              0.4216  Formu
+     12. Saneamiento Rural de Loreto                          0.4108  Formu
+     13. Servicios de Saneamiento de Huara y Barranca         0.4063  Formu
+     14. PTAR Lambayeque                                      0.4051  Formu
+     15. Desaladora Ilo                                       0.3875  Estru
+     16. Agua y Saneamiento Tumbes y Contralmirante Villar    0.3863  Estru
+     17. Desaladora Lambayeque                                0.3580  Formu
+
+=== Educación  (3 proyectos | corte P70 = 0.6120 | indicadores no aplicados: [1, 2, 4, 7])  [ATENCION: menos de 4 proyectos, ranking poco discriminante]
+  >>  1. Colegios Cusco                                       0.6328  Estru
+      2. Sayari                                               0.5981  Formu
+      3. CER VMT                                              0.4920  Estru
+
+=== Hidrocarburos  (3 proyectos | corte P70 = 0.6340 | indicadores no aplicados: [1, 4, 6])  [ATENCION: menos de 4 proyectos, ranking poco discriminante]
+  >>  1. Masificación del Gas Natural en Arequipa, Moquegua y 0.8398  Estru
+      2. SITGAS                                               0.4968  Formu
+      3. Gasoducto Regional de Cusco                          0.2944  Formu
+
+=== Salud  (10 proyectos | corte P70 = 0.7460 | indicadores no aplicados: [1, 2, 7])
+  >>  1. Hospital Militar                                     0.7835  Estru
+  >>  2. Hospital de Iquitos                                  0.7460  Estru
+  >>  3. Hospital de Yurimaguas                               0.7460  Estru
+  >>  4. Hospital Regional de Loreto                          0.7460  Estru
+      5. Hospital PNP                                         0.7365  Estru
+      6. GIRSE                                                0.6325  Estru
+      7. Operación y Mantenimiento del Hospital de Cajamarca  0.6059  Formu
+      8. Hospital Unanue                                      0.6031  Formu
+      9. Hospital de Alta Complejidad de Lambayeque           0.5596  Formu
+     10. Hospital Regional Lambayeque                         0.5596  Formu
+
+=== Tecnología  (2 proyectos | corte P70 = 0.7715 | indicadores no aplicados: [1, 3, 4, 5, 6, 8])  [ATENCION: menos de 4 proyectos, ranking poco discriminante]
+  >>  1. Centro de Gestión y Monitoreo Tecnológico            1.0000  Formu
+      2. Port Community System                                0.2382  Formu
+
+=== Transporte  (27 proyectos | corte P70 = 0.5793 | indicadores no aplicados: ninguno)
+  >>  1. Terminal Internacional de Chimbote                   0.8534  Estru
+  >>  2. Tercer Grupo de Aeropuertos                          0.8227  Formu
+  >>  3. Nuevo Terminal Portuario Pucallpa                    0.7998  Formu
+  >>  4. Terminal Portuario Almirante Miguel Grau de Tacna    0.6413  Formu
+  >>  5. Vía de Evitamiento de Cusco                          0.6204  Formu
+  >>  6. Corredor Vial 4                                      0.5873  Estru
+  >>  7. Corredor Vial 5                                      0.5873  Estru
+  >>  8. Corredor Vial 6                                      0.5830  Estru
+      9. Carretera Empalme 1B – Buenos Aires – Canchaque      0.5784  Estru
+     10. Pte. Carrizales (Casma) – Pariacoto                  0.5595  Estru
+     11. Nuevos terminales Portuarios de Loreto               0.5559  Estru
+     12. Dv. Las Vegas – Mazamari – Pto. Ocopa                0.5537  Estru
+     13. Kimbiri – Kepashiato                                 0.5537  Estru
+     14. Pte. Los Maestros – Huaytará                         0.5537  Estru
+     15. Corredor Vial 2                                      0.5537  Estru
+     16. Santa – Pte Chuquicara – Tauca – Dv. Sihuas          0.5438  Formu
+     17. Dv. Chiguata – Santa Lucía – Mañazo                  0.5380  Formu
+     18. Atico – Dv. Quilca – Matarani – Ilo                  0.5325  Estru
+     19. Corredor Vial 7                                      0.5302  Estru
+     20. Cusco – Pisac                                        0.5302  Estru
+     21. Sicuani – Pucará – Calapuja                          0.5302  Estru
+     22. Pto. Yoyato – Cubantia                               0.5302  Estru
+     23. Corredor Vial 1                                      0.5276  Estru
+     24. Dv. Urcos – Sicuani                                  0.4910  Formu
+     25. Zapallal – Ventanilla                                0.4878  Estru
+     26. Canal de Navegación Amazónico                        0.4520  Formu
+     27. Ferrocarril Tacna - Arica                            0.2860  Formu
+
+=== Turismo  (5 proyectos | corte P70 = 0.6250 | indicadores no aplicados: [1, 2, 7, 8])
+  >>  1. Teleférico Huascarán                                 0.6428  Formu
+  >>  2. Teleférico Collpani Grande                           0.6250  Formu
+  >>  3. Teleférico Querocancha                               0.6250  Formu
+  >>  4. Teleférico Waqrapukara                               0.6250  Formu
+  >>  5. Teleférico Cerro Azoguini – Lago Titicaca            0.6250  Formu
+
+Seleccionados sobre la linea de corte: 27 de 73  (US$ 8632 MM)
+CSV: C:\Users\oscar\OneDrive\Claude Code\Jerarquizador_APP\salidas\ranking.csv

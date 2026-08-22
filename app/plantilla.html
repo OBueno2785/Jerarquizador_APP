@@ -1,0 +1,723 @@
+<title>Jerarquizador APP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  --ground:#F4F6F3; --surface:#FFFFFF; --surface-2:#EDF1EC; --line:#D9E0D8;
+  --ink:#16211D; --ink-2:#4E5C56; --ink-3:#7C8A83;
+  --accent:#0B6E4F; --accent-2:#0A5A41; --accent-soft:#DFEEE6; --on-accent:#FFFFFF;
+  --warn:#9A5A0F; --warn-soft:#F6EBD7;
+  --strip:#0B6E4F;
+  --shadow:0 1px 2px rgba(20,40,32,.06),0 8px 24px rgba(20,40,32,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1412; --surface:#161D1A; --surface-2:#1C2521; --line:#2B3631;
+    --ink:#E8EEEA; --ink-2:#A7B4AD; --ink-3:#77867F;
+    --accent:#5CC79A; --accent-2:#7FD8B2; --accent-soft:#15291F; --on-accent:#08150F;
+    --warn:#DFA85B; --warn-soft:#2A2114;
+    --strip:#5CC79A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.32);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1412; --surface:#161D1A; --surface-2:#1C2521; --line:#2B3631;
+  --ink:#E8EEEA; --ink-2:#A7B4AD; --ink-3:#77867F;
+  --accent:#5CC79A; --accent-2:#7FD8B2; --accent-soft:#15291F; --on-accent:#08150F;
+  --warn:#DFA85B; --warn-soft:#2A2114;
+  --strip:#5CC79A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.32);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; text-wrap:balance; font-weight:600; letter-spacing:-.015em}
+button,input,select{font:inherit; color:inherit}
+a{color:var(--accent); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+
+.eyebrow{
+  font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+/* ---------- cabecera ---------- */
+.top{
+  border-bottom:1px solid var(--line); background:var(--surface);
+  padding:18px 24px 16px; display:flex; flex-wrap:wrap; gap:16px 28px; align-items:flex-end;
+}
+.top h1{font-size:23px; line-height:1.15}
+.top .sub{
+  font-family:"Source Serif 4",Georgia,serif; font-size:14px; color:var(--ink-2);
+  max-width:62ch; margin-top:5px;
+}
+.top .right{margin-left:auto; display:flex; gap:8px; align-items:center}
+.ghost{
+  background:transparent; border:1px solid var(--line); border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:500; cursor:pointer; color:var(--ink-2);
+}
+.ghost:hover{border-color:var(--accent); color:var(--accent)}
+.solid{
+  background:var(--accent); color:var(--on-accent); border:1px solid var(--accent);
+  border-radius:6px; padding:7px 13px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.solid:hover{background:var(--accent-2); border-color:var(--accent-2)}
+
+/* ---------- shell ---------- */
+.shell{display:grid; grid-template-columns:288px minmax(0,1fr); gap:0; align-items:start}
+.rail{
+  position:sticky; top:0; max-height:100vh; overflow-y:auto;
+  border-right:1px solid var(--line); background:var(--surface);
+  padding:20px 20px 40px; display:flex; flex-direction:column; gap:22px;
+}
+main{padding:24px 28px 80px; min-width:0}
+
+.block{display:flex; flex-direction:column; gap:9px}
+.block > .eyebrow{padding-bottom:2px; border-bottom:1px solid var(--line)}
+
+.kpis{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.kpi{background:var(--surface-2); border-radius:7px; padding:9px 11px}
+.kpi b{display:block; font-family:"IBM Plex Mono",monospace; font-size:19px; font-weight:600; letter-spacing:-.02em}
+.kpi span{font-size:11px; color:var(--ink-3); line-height:1.3; display:block; margin-top:1px}
+
+.field{display:flex; flex-direction:column; gap:5px}
+.field label{font-size:12px; color:var(--ink-2); font-weight:500}
+.field input,.field select{
+  background:var(--ground); border:1px solid var(--line); border-radius:6px;
+  padding:6px 9px; font-size:13px; width:100%;
+}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{
+  border:1px solid var(--line); background:var(--surface); border-radius:999px;
+  padding:5px 11px; font-size:12px; cursor:pointer; color:var(--ink-2); font-weight:500;
+}
+.chip[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+
+.wlist{display:flex; flex-direction:column; gap:5px}
+.wrow{display:grid; grid-template-columns:16px 1fr 44px; gap:8px; align-items:center; font-size:12px}
+.wrow .bar{height:5px; background:var(--surface-2); border-radius:3px; overflow:hidden}
+.wrow .bar i{display:block; height:100%; background:var(--strip); border-radius:3px}
+.wrow .n{color:var(--ink-3); font-family:"IBM Plex Mono",monospace; font-size:11px}
+.wrow .v{text-align:right; font-family:"IBM Plex Mono",monospace; color:var(--ink-2)}
+.wrow.off{opacity:.4}
+
+.note{font-family:"Source Serif 4",Georgia,serif; font-size:12.5px; line-height:1.55; color:var(--ink-3)}
+.note b{color:var(--ink-2); font-weight:600}
+
+/* ---------- secciones sectoriales ---------- */
+.sector{margin-bottom:34px}
+.sector-head{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
+  padding-bottom:8px; margin-bottom:10px; border-bottom:2px solid var(--ink);
+}
+.sector-head h2{font-size:18px}
+.sector-head .meta{font-size:12px; color:var(--ink-3); margin-left:auto; text-align:right}
+.sector-head .meta em{font-style:normal; color:var(--warn)}
+
+.row{
+  display:grid; grid-template-columns:34px minmax(0,1fr) 132px 108px 70px;
+  gap:12px; align-items:center; width:100%; text-align:left; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:8px;
+  padding:9px 12px; margin-bottom:5px;
+}
+.row:hover{border-color:var(--accent)}
+.row.bajo{background:transparent; border-color:transparent; opacity:.62}
+.row.bajo:hover{opacity:1; border-color:var(--line)}
+.row .rk{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink-3); text-align:right}
+.row.sel .rk{color:var(--accent); font-weight:600}
+.row .nm{min-width:0}
+.row .nm b{display:block; font-weight:600; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.row .tags{display:flex; gap:5px; flex-wrap:wrap; margin-top:3px}
+.tag{font-size:10.5px; color:var(--ink-3); border:1px solid var(--line); border-radius:4px; padding:1px 5px; white-space:nowrap}
+.tag.auto{color:var(--accent); border-color:var(--accent)}
+.row .mto{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-2); text-align:right}
+.row .pt{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600; text-align:right}
+
+.strip{display:grid; grid-template-columns:repeat(10,1fr); gap:2px; height:22px}
+.strip i{background:var(--surface-2); border-radius:2px; position:relative; overflow:hidden}
+.strip i.na{background:repeating-linear-gradient(45deg,var(--surface-2),var(--surface-2) 2px,transparent 2px,transparent 4px)}
+.strip i.pend{box-shadow:inset 0 0 0 1px var(--warn)}
+
+.cutline{
+  display:flex; align-items:center; gap:10px; margin:10px 0 9px;
+  font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);
+}
+.cutline::before,.cutline::after{content:""; height:1px; background:var(--accent); flex:1; opacity:.55}
+.cutline::before{flex:0 0 14px}
+
+/* ---------- panel de detalle ---------- */
+.scrim{position:fixed; inset:0; background:rgba(10,20,16,.44); opacity:0; pointer-events:none; transition:opacity .18s}
+.scrim.on{opacity:1; pointer-events:auto}
+.drawer{
+  position:fixed; top:0; right:0; height:100vh; width:min(520px,100vw);
+  background:var(--surface); border-left:1px solid var(--line); box-shadow:var(--shadow);
+  transform:translateX(100%); transition:transform .22s cubic-bezier(.2,.7,.3,1);
+  display:flex; flex-direction:column; z-index:5;
+}
+.drawer.on{transform:none}
+.drawer-head{padding:18px 20px 14px; border-bottom:1px solid var(--line)}
+.drawer-head h3{font-size:17px; line-height:1.25}
+.drawer-head p{margin:7px 0 0; font-family:"Source Serif 4",Georgia,serif; font-size:13px; color:var(--ink-2)}
+.drawer-body{overflow-y:auto; padding:4px 20px 40px; flex:1}
+.close{position:absolute; top:14px; right:16px; background:none; border:0; cursor:pointer; color:var(--ink-3); font-size:20px; line-height:1}
+
+.ind{border-bottom:1px solid var(--line); padding:13px 0}
+.ind:last-child{border-bottom:0}
+.ind-top{display:flex; gap:10px; align-items:baseline}
+.ind-top .id{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); width:22px; flex:none}
+.ind-top .ttl{font-size:13.5px; font-weight:600; flex:1}
+.ind-top .w{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-3)}
+.ind-ctl{display:flex; gap:8px; align-items:center; margin:8px 0 0 32px}
+.ind-ctl select,.ind-ctl input{
+  background:var(--ground); border:1px solid var(--line); border-radius:6px; padding:5px 8px;
+  font-size:12.5px; flex:1; min-width:0;
+}
+.ind-ctl .score{
+  font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+  background:var(--accent-soft); color:var(--accent); border-radius:5px; padding:4px 8px; flex:none;
+}
+.ind-src{margin:6px 0 0 32px; font-family:"Source Serif 4",Georgia,serif; font-size:12px; color:var(--ink-3); line-height:1.5}
+.badge{font-size:9.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border-radius:3px; padding:1px 5px; margin-right:6px}
+.badge.auto{background:var(--accent-soft); color:var(--accent)}
+.badge.proxy{background:var(--surface-2); color:var(--ink-2)}
+.badge.pendiente{background:var(--warn-soft); color:var(--warn)}
+.badge.edit{background:var(--warn); color:var(--surface)}
+
+.total{
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  background:var(--surface-2); border-radius:8px; padding:12px 14px; margin:14px 0 4px;
+}
+.total .v{font-family:"IBM Plex Mono",monospace; font-size:24px; font-weight:600; letter-spacing:-.02em}
+.total .lbl{font-size:12px; color:var(--ink-2)}
+
+.mzbox{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0 32px}
+.provbox{margin:8px 0 0 32px; max-height:132px; overflow-y:auto; border:1px solid var(--line); border-radius:6px}
+.provbox label{display:flex; gap:7px; align-items:center; padding:4px 9px; font-size:12px; cursor:pointer}
+.provbox label:hover{background:var(--surface-2)}
+.provbox .t{margin-left:auto; font-family:"IBM Plex Mono",monospace; color:var(--ink-3); font-size:11px}
+
+.foot{border-top:1px solid var(--line); padding:20px 28px 40px; color:var(--ink-3)}
+.foot .note{max-width:78ch}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--line)}
+  main{padding:18px 16px 60px}
+  .row{grid-template-columns:28px minmax(0,1fr) 64px; row-gap:8px}
+  .row .strip{grid-column:1/-1}
+  .row .mto{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<header class="top">
+  <div>
+    <div class="eyebrow">Resolución Directoral N.° 002-2026-EF/68.01</div>
+    <h1>Jerarquizador APP</h1>
+    <p class="sub">Metodología multicriterio del MEF aplicada al portafolio de ProInversión: los
+      <b id="nProy">—</b> potenciales proyectos de Asociación Público Privada que hoy se encuentran en
+      fase de Formulación y Estructuración.</p>
+  </div>
+  <div class="right">
+    <button class="ghost" id="btnTema" title="Cambiar tema">Tema</button>
+    <button class="ghost" id="btnReset">Restablecer</button>
+    <button class="solid" id="btnCsv">Exportar CSV</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="block">
+      <div class="eyebrow">Resultado</div>
+      <div class="kpis">
+        <div class="kpi"><b class="num" id="kSel">—</b><span>sobre la línea de corte</span></div>
+        <div class="kpi"><b class="num" id="kTot">—</b><span>proyectos evaluados</span></div>
+        <div class="kpi"><b class="num" id="kMonto">—</b><span>US$ MM seleccionados</span></div>
+        <div class="kpi"><b class="num" id="kSec">—</b><span>rankings sectoriales</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="eyebrow">Bloque opcional · 15 %</div>
+      <div class="chips">
+        <button class="chip" id="ch9" aria-pressed="false">Ind. 9 · Brecha</button>
+        <button class="chip" id="ch10" aria-pressed="false">Ind. 10 · Viabilidad</button>
+      </div>
+      <p class="note" id="notaOpc"></p>
+    </div>
+
+    <div class="block">
+      <div class="eyebrow">Parámetros</div>
+      <div class="field">
+        <label for="selSector">Nivel del ranking sectorial</label>
+        <select id="selSector">
+          <option value="sector">Sector (8 rankings)</option>
+          <option value="cartera">Cartera / subsector (12 rankings)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="selFase">Fase</label>
+        <select id="selFase">
+          <option value="">Formulación y Estructuración</option>
+          <option value="Formulación">Solo Formulación</option>
+          <option value="Estructuración">Solo Estructuración</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="inUit">Valor de la UIT (S/)</label>
+        <input id="inUit" type="number" step="50" min="1">
+      </div>
+      <div class="field">
+        <label for="inBuscar">Buscar proyecto</label>
+        <input id="inBuscar" type="search" placeholder="PTAR, corredor vial, hospital…">
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="eyebrow">Ponderaciones aplicadas</div>
+      <div class="wlist" id="wlist"></div>
+      <p class="note">Los ocho indicadores fijos suman 85 %. Sin bloque opcional el 15 % restante se
+        redistribuye entre ellos para preservar la escala 0–1.</p>
+    </div>
+
+    <div class="block">
+      <div class="eyebrow">Calidad del dato</div>
+      <p class="note">
+        <span class="badge auto">Auto</span> derivado de fuente oficial.<br>
+        <span class="badge proxy">Proxy</span> supuesto documentado, revisable.<br>
+        <span class="badge pendiente">Pend.</span> requiere el estudio del proyecto.
+      </p>
+    </div>
+  </aside>
+
+  <main id="main"></main>
+</div>
+
+<footer class="foot">
+  <p class="note" id="fuentes"></p>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="close" id="btnClose" aria-label="Cerrar">&times;</button>
+    <div class="eyebrow" id="dSec"></div>
+    <h3 id="dNom"></h3>
+    <p id="dEnun"></p>
+  </div>
+  <div class="drawer-body" id="dBody"></div>
+</aside>
+
+<script>
+const DATOS = /*__DATOS__*/;
+const P = DATOS.parametros, PROY = DATOS.proyectos;
+const FIJOS = [1,2,3,4,5,6,7,8];
+const LS = "jerarquizador-app-v1";
+
+let cfg = {opc:[], sector:"sector", fase:"", uit:P.uit, q:""};
+let ov = {};
+try{
+  const g = JSON.parse(localStorage.getItem(LS)||"{}");
+  if(g.cfg) cfg = Object.assign(cfg, g.cfg);
+  if(g.ov) ov = g.ov;
+}catch(e){}
+const guardar = () => { try{ localStorage.setItem(LS, JSON.stringify({cfg,ov})); }catch(e){} };
+
+/* ---------- calificación ---------- */
+const rango = (v, tabla) => { for(const [lim,pt] of tabla){ if(v<=lim) return pt; } return tabla[tabla.length-1][1]; };
+const norm = (pt,[lo,hi]) => hi===lo ? 0 : (pt-lo)/(hi-lo);
+const O = (p,k,d) => { const o = ov[p.id]; return (o && o[k]!==undefined && o[k]!==null) ? o[k] : d; };
+const editado = (p,k) => { const o = ov[p.id]; return !!(o && o[k]!==undefined && o[k]!==null); };
+
+function calificar(p){
+  const c = {};
+
+  c[1] = {pt:O(p,"i1", p.pni?1:0), origen:"auto", edit:editado(p,"i1"),
+          nota: p.pni || "No identificado en el portafolio priorizado del PNI 2026-2031."};
+
+  const auto2 = p.modalidad==="Autofinanciada" ? 3 : 1;
+  c[2] = {pt:O(p,"i2",auto2), origen:"auto", edit:editado(p,"i2"),
+          nota: p.modalidad==="Autofinanciada" ? "Clasificación autofinanciada del portafolio."
+              : "Clasificación cofinanciada del portafolio; elevar a 2 si se acredita que el proyecto percibe tarifas o peajes."};
+
+  const provSel = O(p,"i3_prov", null);
+  let tasa = O(p,"i3_tasa", null);
+  if(tasa===null){
+    const lista = provSel ? p.provincias_ambito.filter(x=>provSel.includes(x.ubigeo)) : p.provincias_ambito;
+    tasa = lista.length ? Math.max(...lista.map(x=>x.tasa)) : null;
+  }
+  c[3] = tasa===null
+    ? {pt:1, origen:"pendiente", edit:false, nota:"Sin provincia identificada en el ámbito."}
+    : {pt:rango(tasa,P.rangos[3]), origen: (provSel||editado(p,"i3_tasa"))?"auto":"proxy",
+       edit: editado(p,"i3_tasa")||!!provSel, tasa,
+       nota:"Tasa provincial máxima aplicable: "+tasa.toFixed(2)+" % · INEI, Mapa de Pobreza Monetaria Provincial 2018."};
+
+  const ben = O(p,"i4", p.poblacion_ambito);
+  c[4] = ben ? {pt:rango(ben,P.rangos[4]), origen: editado(p,"i4")?"auto":"proxy", edit:editado(p,"i4"), ben,
+                nota: editado(p,"i4") ? "Beneficiarios directos declarados por el analista."
+                    : "Aproximación por población del ámbito ("+fmt(ben)+" hab., INEI 2020). Reemplazar por los beneficiarios directos del estudio."}
+              : {pt:1, origen:"pendiente", edit:false, nota:"Sin población de referencia."};
+
+  let soles = O(p,"i5", null);
+  if(soles===null && p.monto_usd_mm) soles = p.monto_usd_mm * p.tipo_cambio;
+  const uits = soles ? soles*1e6/cfg.uit : null;
+  c[5] = uits ? {pt:rango(uits,P.rangos[5]), origen: editado(p,"i5")?"auto":"auto", edit:editado(p,"i5"), soles, uits,
+                 nota:"CTI/CTP ≈ S/ "+fmt(Math.round(soles))+" MM = "+fmt(Math.round(uits))+" UIT (UIT = S/ "+fmt(cfg.uit)+")."}
+               : {pt:1, origen:"pendiente", edit:false, nota:"El portafolio no publica monto de inversión para este proyecto."};
+
+  const mzs = O(p,"i6", p.macrozonas.length ? p.macrozonas : ["MLC"]);
+  const det = [], vs = [];
+  for(const mz of mzs){
+    const bruto = P.anexo5[mz].reduce((a,c2,i)=>a+c2*p.anexo4.contribucion[i],0);
+    const [lo,hi] = P.rango6[mz];
+    vs.push(norm(bruto,[lo,hi]));
+    det.push(P.macrozonas[mz]+": "+bruto+" (rango "+lo+"–"+hi+")");
+  }
+  const v6 = vs.reduce((a,b)=>a+b,0)/vs.length;
+  c[6] = {pt:null, v:v6, origen:"auto", edit:editado(p,"i6"), mzs,
+          nota:"Anexo 4 ("+p.anexo4.sector+" / "+p.anexo4.subsector+") × Anexo 5 → "+det.join(" · ")+"."};
+
+  const auto7 = p.modalidad==="Autofinanciada" ? 3 : 2;
+  c[7] = {pt:O(p,"i7",auto7), origen:"proxy", edit:editado(p,"i7"),
+          nota: p.modalidad==="Autofinanciada" ? "Supuesto: la demanda y el financiamiento se transfieren al privado."
+              : "Supuesto: transferencia media en esquemas cofinanciados. Ajustar con la matriz de riesgos preliminar."};
+
+  const auto8 = p.es_oym ? (p.fase==="Estructuración"?4:1) : (p.fase==="Estructuración"?3:2);
+  c[8] = {pt:O(p,"i8",auto8), origen:"proxy", edit:editado(p,"i8"), oym:p.es_oym,
+          nota: p.es_oym ? "Proyecto de O&M: la ficha del Anexo 2 aplica la escala binaria 1 / 4 según exista documentación técnica."
+              : "Supuesto por fase: Estructuración ≈ ingeniería básica; Formulación ≈ ingeniería conceptual."};
+
+  const bre = O(p,"i9", null);
+  c[9] = bre===null ? {pt:1, origen:"pendiente", edit:false, nota:"Requiere la brecha de acceso básico sectorial del PNIC 2019."}
+                    : {pt:rango(bre,P.rangos[9]), origen:"auto", edit:true, bre,
+                       nota:"El proyecto cubre "+bre+" % de la brecha de acceso básico del sector."};
+
+  c[10] = {pt:O(p,"i10",1), origen: editado(p,"i10")?"auto":"pendiente", edit:editado(p,"i10"),
+           nota: editado(p,"i10") ? "Verificado por el analista." : "Requiere consulta al Banco de Inversiones del MEF."};
+
+  for(const i of [1,2,3,4,5,7,8,9,10]) c[i].v = norm(c[i].pt, P.escalas[i]);
+  return c;
+}
+const fmt = n => (n===null||n===undefined) ? "—" : n.toLocaleString("es-PE");
+
+/* ---------- ponderación y ranking ---------- */
+function pesosBase(){
+  const w = {};
+  for(const i of FIJOS) w[i] = P.pesos[i];
+  if(cfg.opc.length){ for(const i of cfg.opc) w[i] = 0.15/cfg.opc.length; }
+  else { for(const i of FIJOS) w[i] = w[i]/0.85; }
+  return w;
+}
+function percentil(arr,q){
+  const d = arr.slice().sort((a,b)=>a-b);
+  if(d.length===1) return d[0];
+  const k = (d.length-1)*q/100, f = Math.floor(k), c = Math.min(f+1,d.length-1);
+  return d[f] + (d[c]-d[f])*(k-f);
+}
+function jerarquizar(){
+  const base = pesosBase();
+  const universo = PROY.filter(p => !cfg.fase || p.fase===cfg.fase);
+  universo.forEach(p => { p._c = calificar(p); });
+
+  const grupos = new Map();
+  for(const p of universo){
+    const k = p[cfg.sector];
+    if(!grupos.has(k)) grupos.set(k, []);
+    grupos.get(k).push(p);
+  }
+  const out = [];
+  for(const [sector,g] of grupos){
+    const constantes = FIJOS.filter(i => new Set(g.map(p=>Math.round(p._c[i].v*1e6))).size===1);
+    let w = Object.assign({}, base), excl = [];
+    if(constantes.length && constantes.length<FIJOS.length){
+      excl = constantes;
+      let libre = 0;
+      for(const i of constantes){ libre += w[i]; delete w[i]; }
+      const rest = FIJOS.filter(i=>!constantes.includes(i));
+      for(const i of rest) w[i] += libre/rest.length;
+    }
+    for(const p of g){
+      p._w = w; p._excl = excl;
+      p._pt = Object.keys(w).reduce((a,i)=>a + w[i]*p._c[i].v, 0);
+    }
+    g.sort((a,b)=>b._pt-a._pt);
+    const corte = percentil(g.map(p=>p._pt), 70);
+    g.forEach((p,n)=>{ p._rk=n+1; p._corte=corte; p._sel = p._pt >= corte - 1e-9; });
+    out.push({sector, grupo:g, corte, excl});
+  }
+  out.sort((a,b)=>a.sector.localeCompare(b.sector,"es"));
+  return out;
+}
+
+/* ---------- render ---------- */
+const esc = s => (s||"").replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+
+function render(){
+  const secciones = jerarquizar();
+  const q = cfg.q.trim().toLowerCase();
+  const main = document.getElementById("main");
+  main.innerHTML = "";
+  let nSel=0, nTot=0, monto=0;
+
+  for(const s of secciones){
+    for(const p of s.grupo){ nTot++; if(p._sel){ nSel++; monto += p.monto_usd_mm||0; } }
+    const visibles = q ? s.grupo.filter(p => (p.nombre_corto+" "+p.nombre+" "+p.ambito).toLowerCase().includes(q)) : s.grupo;
+    if(!visibles.length) continue;
+
+    const sec = document.createElement("section");
+    sec.className = "sector";
+    const alerta = s.grupo.length<4 ? "<em>· muestra pequeña, poder de discriminación limitado</em>" : "";
+    sec.innerHTML =
+      '<div class="sector-head"><h2>'+esc(s.sector)+'</h2>'+
+      '<span class="eyebrow">'+s.grupo.length+' proyectos</span>'+
+      '<div class="meta">Línea de corte P70 = <span class="num">'+s.corte.toFixed(4)+'</span>'+
+      (s.excl.length ? '<br>Indicadores sin variación, no aplicados: '+s.excl.join(", ") : '')+
+      '<br>'+alerta+'</div></div>';
+
+    let cortado = false;
+    for(const p of visibles){
+      if(!p._sel && !cortado && !q){
+        const cl = document.createElement("div");
+        cl.className = "cutline";
+        cl.textContent = "Percentil 70 — tercio superior del sector";
+        sec.appendChild(cl);
+        cortado = true;
+      }
+      sec.appendChild(fila(p));
+    }
+    main.appendChild(sec);
+  }
+  if(!main.children.length) main.innerHTML = '<p class="note">Ningún proyecto coincide con la búsqueda.</p>';
+
+  document.getElementById("kSel").textContent = nSel;
+  document.getElementById("kTot").textContent = nTot;
+  document.getElementById("kMonto").textContent = Math.round(monto).toLocaleString("es-PE");
+  document.getElementById("kSec").textContent = secciones.length;
+  document.getElementById("nProy").textContent = PROY.length;
+  renderPesos(secciones);
+}
+
+function fila(p){
+  const el = document.createElement("button");
+  el.className = "row" + (p._sel ? " sel" : " bajo");
+  el.onclick = () => abrir(p);
+  const tags = ['<span class="tag">'+esc(p.fase)+'</span>',
+                '<span class="tag">'+esc(p.modalidad)+'</span>',
+                '<span class="tag">'+esc(p.ambito.length>34?p.ambito.slice(0,32)+"…":p.ambito)+'</span>'];
+  if(p.pni) tags.push('<span class="tag auto">PNI 2026-2031</span>');
+  el.innerHTML =
+    '<span class="rk">'+p._rk+'</span>'+
+    '<span class="nm"><b>'+esc(p.nombre_corto)+'</b><span class="tags">'+tags.join("")+'</span></span>'+
+    '<span class="strip">'+strip(p)+'</span>'+
+    '<span class="mto">'+(p.monto_usd_mm ? "US$ "+p.monto_usd_mm.toLocaleString("es-PE",{maximumFractionDigits:0})+" MM" : "—")+'</span>'+
+    '<span class="pt">'+p._pt.toFixed(3)+'</span>';
+  return el;
+}
+function strip(p){
+  let h = "";
+  for(let i=1;i<=10;i++){
+    const c = p._c[i], aplicado = p._w[i]!==undefined;
+    const cls = !aplicado ? "na" : (c.origen==="pendiente" ? "pend" : "");
+    const alto = Math.round((c.v||0)*100);
+    h += '<i class="'+cls+'" title="'+esc(i+". "+P.indicadores[i].nombre)+' — normalizado '+(c.v||0).toFixed(2)+
+         (aplicado?"":" (no aplicado)")+'"><span style="position:absolute;inset:auto 0 0 0;height:'+alto+'%;background:var(--strip)"></span></i>';
+  }
+  return h;
+}
+function renderPesos(secciones){
+  const w = pesosBase();
+  const el = document.getElementById("wlist");
+  el.innerHTML = "";
+  for(let i=1;i<=10;i++){
+    const on = w[i]!==undefined;
+    const v = on ? w[i] : 0;
+    el.insertAdjacentHTML("beforeend",
+      '<div class="wrow'+(on?"":" off")+'" title="'+esc(P.indicadores[i].nombre)+'">'+
+      '<span class="n">'+i+'</span><span class="bar"><i style="width:'+(v/0.20*100)+'%"></i></span>'+
+      '<span class="v">'+(on ? (v*100).toFixed(1)+"%" : "—")+'</span></div>');
+  }
+  document.getElementById("notaOpc").innerHTML = cfg.opc.length
+    ? "El bloque opcional aporta "+(15/cfg.opc.length).toFixed(1)+" % por indicador seleccionado."
+    : "Sin indicadores opcionales seleccionados. La norma prevé que PROINVERSIÓN elija al menos uno según la evidencia disponible.";
+}
+
+/* ---------- panel de detalle ---------- */
+let actual = null;
+function abrir(p){
+  actual = p;
+  document.getElementById("dSec").textContent = p.sector + " · " + p.cartera + " · " + p.titular;
+  document.getElementById("dNom").textContent = p.nombre_corto;
+  document.getElementById("dEnun").innerHTML = esc(p.enunciado||p.nombre) +
+    ' <a href="'+esc(p.url)+'" target="_blank" rel="noopener">Ficha ProInversión ↗</a>';
+  detalle();
+  document.getElementById("drawer").classList.add("on");
+  document.getElementById("drawer").setAttribute("aria-hidden","false");
+  document.getElementById("scrim").classList.add("on");
+}
+function cerrar(){
+  document.getElementById("drawer").classList.remove("on");
+  document.getElementById("drawer").setAttribute("aria-hidden","true");
+  document.getElementById("scrim").classList.remove("on");
+  actual = null;
+}
+function detalle(){
+  const p = actual, b = document.getElementById("dBody");
+  const c = p._c;
+  let h = '<div class="total"><span class="lbl">Puntaje total ponderado<br><span class="num">'+
+          p._pt.toFixed(4)+'</span> vs. corte sectorial <span class="num">'+p._corte.toFixed(4)+'</span></span>'+
+          '<span class="v">'+(p._sel?"↑":"↓")+' '+p._rk+'</span></div>';
+
+  for(let i=1;i<=10;i++){
+    const ind = P.indicadores[i], on = p._w[i]!==undefined;
+    const badge = c[i].edit ? '<span class="badge edit">Editado</span>'
+                : '<span class="badge '+c[i].origen+'">'+({auto:"Auto",proxy:"Proxy",pendiente:"Pend."})[c[i].origen]+'</span>';
+    h += '<div class="ind"'+(on?"":' style="opacity:.5"')+'>'+
+         '<div class="ind-top"><span class="id">'+i+'</span><span class="ttl">'+esc(ind.nombre)+'</span>'+
+         '<span class="w">'+(on ? (p._w[i]*100).toFixed(1)+"%" : "no aplicado")+'</span></div>'+
+         control(p,i,c[i])+
+         '<div class="ind-src">'+badge+esc(c[i].nota)+'</div></div>';
+  }
+  b.innerHTML = h;
+  b.querySelectorAll("[data-set]").forEach(el => {
+    el.onchange = () => {
+      const k = el.dataset.set;
+      let v = el.type==="number" ? (el.value===""?null:parseFloat(el.value)) : el.value;
+      if(k==="i3_prov"){ return; }
+      if(v!==null && el.tagName==="SELECT") v = parseInt(v,10);
+      ov[p.id] = ov[p.id] || {};
+      ov[p.id][k] = v;
+      guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle();
+    };
+  });
+  b.querySelectorAll("[data-mz]").forEach(el => {
+    el.onclick = () => {
+      const set = new Set(c[6].mzs);
+      const mz = el.dataset.mz;
+      set.has(mz) ? set.delete(mz) : set.add(mz);
+      if(!set.size) return;
+      ov[p.id] = ov[p.id]||{}; ov[p.id].i6 = [...set];
+      guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle();
+    };
+  });
+  b.querySelectorAll("[data-prov]").forEach(el => {
+    el.onchange = () => {
+      const sel = [...b.querySelectorAll("[data-prov]")].filter(x=>x.checked).map(x=>x.dataset.prov);
+      ov[p.id] = ov[p.id]||{};
+      ov[p.id].i3_prov = sel.length ? sel : null;
+      ov[p.id].i3_tasa = null;
+      guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle();
+    };
+  });
+}
+function sel(k, opciones, valor){
+  return '<select data-set="'+k+'">'+opciones.map(([t,v]) =>
+    '<option value="'+v+'"'+(v===valor?" selected":"")+'>'+esc(t)+' · '+v+' pt</option>').join("")+'</select>';
+}
+function control(p,i,c){
+  const pts = c.pt===null ? c.v.toFixed(2) : c.pt;
+  const marco = inner => '<div class="ind-ctl">'+inner+'<span class="score">'+pts+' → '+c.v.toFixed(3)+'</span></div>';
+  if(i===1) return marco(sel("i1",[["No incluido en el PNI vigente",0],["Incluido en el portafolio priorizado del PNI",1]], c.pt));
+  if(i===2) return marco(sel("i2",P.escala2, c.pt));
+  if(i===3){
+    let h = marco('<input type="number" step="0.01" min="0" max="100" data-set="i3_tasa" value="'+(c.tasa!==undefined&&c.tasa!==null?c.tasa:"")+'" placeholder="Tasa de pobreza provincial %">');
+    if(p.provincias_ambito.length){
+      const selP = O(p,"i3_prov",null);
+      h += '<div class="provbox">'+p.provincias_ambito.slice(0,60).map(x =>
+        '<label><input type="checkbox" data-prov="'+x.ubigeo+'"'+(selP&&selP.includes(x.ubigeo)?" checked":"")+'>'+
+        esc(x.provincia)+'<span class="t">'+x.tasa.toFixed(1)+' %</span></label>').join("")+'</div>';
+    }
+    return h;
+  }
+  if(i===4) return marco('<input type="number" min="0" step="1000" data-set="i4" value="'+(c.ben||"")+'" placeholder="Beneficiarios directos">');
+  if(i===5) return marco('<input type="number" min="0" step="1" data-set="i5" value="'+(c.soles?Math.round(c.soles):"")+'" placeholder="CTI o CTP en S/ millones">');
+  if(i===6){
+    return '<div class="mzbox">'+Object.keys(P.macrozonas).map(mz =>
+      '<button class="chip" data-mz="'+mz+'" aria-pressed="'+(c.mzs.includes(mz))+'">'+esc(P.macrozonas[mz])+'</button>').join("")+
+      '<span class="score">'+c.v.toFixed(3)+'</span></div>';
+  }
+  if(i===7) return marco(sel("i7",P.escala7, c.pt));
+  if(i===8) return marco(sel("i8", c.oym ? P.escala8oym : P.escala8ing, c.pt));
+  if(i===9) return marco('<input type="number" min="0" step="0.01" data-set="i9" value="'+(c.bre!==undefined?c.bre:"")+'" placeholder="% de la brecha sectorial cubierta">');
+  if(i===10) return marco(sel("i10",P.escala10, c.pt));
+  return "";
+}
+
+/* ---------- exportación ---------- */
+function csv(){
+  const secciones = jerarquizar();
+  const cab = ["Sector","Puesto","Proyecto","Fase","Modalidad","Ambito","Monto US$ MM","Puntaje","Corte P70","Seleccionado"];
+  for(let i=1;i<=10;i++) cab.push("Ind"+i+" pt","Ind"+i+" norm","Ind"+i+" peso");
+  const filas = [cab];
+  for(const s of secciones) for(const p of s.grupo){
+    const f = [s.sector,p._rk,p.nombre_corto,p.fase,p.modalidad,p.ambito,p.monto_usd_mm||"",
+               p._pt.toFixed(6),s.corte.toFixed(6),p._sel?"Si":"No"];
+    for(let i=1;i<=10;i++) f.push(p._c[i].pt===null?"":p._c[i].pt, p._c[i].v.toFixed(6), p._w[i]!==undefined?p._w[i].toFixed(6):"");
+    filas.push(f);
+  }
+  const txt = "﻿"+filas.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(";")).join("\r\n");
+  navigator.clipboard.writeText(txt).then(
+    ()=>toast("Ranking copiado al portapapeles en formato CSV. Pégalo en Excel y usa Datos → Texto en columnas con separador «;»."),
+    ()=>toast("No se pudo copiar. Selecciona el ranking manualmente."));
+}
+function toast(m){
+  const t = document.createElement("div");
+  t.textContent = m;
+  t.style.cssText = "position:fixed;left:50%;bottom:26px;transform:translateX(-50%);max-width:520px;background:var(--ink);color:var(--ground);padding:11px 16px;border-radius:8px;font-size:13px;z-index:9;box-shadow:var(--shadow)";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 5200);
+}
+
+/* ---------- controles ---------- */
+document.getElementById("ch9").onclick = e => toggleOpc(9,e.currentTarget);
+document.getElementById("ch10").onclick = e => toggleOpc(10,e.currentTarget);
+function toggleOpc(i,el){
+  cfg.opc = cfg.opc.includes(i) ? cfg.opc.filter(x=>x!==i) : cfg.opc.concat(i);
+  el.setAttribute("aria-pressed", cfg.opc.includes(i));
+  guardar(); render(); if(actual) detalle();
+}
+document.getElementById("selSector").onchange = e => { cfg.sector = e.target.value; guardar(); render(); };
+document.getElementById("selFase").onchange = e => { cfg.fase = e.target.value; guardar(); render(); };
+document.getElementById("inUit").onchange = e => { cfg.uit = parseFloat(e.target.value)||P.uit; guardar(); render(); if(actual) detalle(); };
+document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; render(); };
+document.getElementById("btnCsv").onclick = csv;
+document.getElementById("btnReset").onclick = () => {
+  if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
+  ov = {}; cfg = {opc:[], sector:"sector", fase:"", uit:P.uit, q:""};
+  guardar(); sincronizar(); render(); cerrar();
+};
+document.getElementById("btnTema").onclick = () => {
+  const r = document.documentElement;
+  const oscuro = r.getAttribute("data-theme")==="dark" ||
+    (!r.getAttribute("data-theme") && matchMedia("(prefers-color-scheme:dark)").matches);
+  r.setAttribute("data-theme", oscuro ? "light" : "dark");
+};
+document.getElementById("btnClose").onclick = cerrar;
+document.getElementById("scrim").onclick = cerrar;
+addEventListener("keydown", e => { if(e.key==="Escape") cerrar(); });
+
+function sincronizar(){
+  document.getElementById("selSector").value = cfg.sector;
+  document.getElementById("selFase").value = cfg.fase;
+  document.getElementById("inUit").value = cfg.uit;
+  document.getElementById("inBuscar").value = cfg.q;
+  document.getElementById("ch9").setAttribute("aria-pressed", cfg.opc.includes(9));
+  document.getElementById("ch10").setAttribute("aria-pressed", cfg.opc.includes(10));
+}
+document.getElementById("fuentes").innerHTML =
+  "<b>Fuentes.</b> Metodología, ponderaciones y escalas: Resolución Directoral N.° 002-2026-EF/68.01 y Anexos 1 a 6 (MEF · DGPPIP, 8 de julio de 2026). " +
+  "Cartera de proyectos: portafolio APP de ProInversión, consultado el "+P.fecha_datos+" (fases de Formulación y Estructuración). " +
+  "Pobreza monetaria provincial y población: INEI, Mapa de Pobreza Monetaria Provincial y Distrital 2018. " +
+  "Portafolio priorizado del PNI 2026-2031: Decreto Supremo N.° 039-2026-EF, tablas 24 a 27. " +
+  "UIT 2026: Decreto Supremo N.° 301-2025-EF. " +
+  "Los indicadores marcados como proxy o pendientes usan supuestos de trabajo: la jerarquía es preliminar hasta que el equipo técnico complete la ficha de cada proyecto.";
+
+sincronizar();
+render();
+</script>

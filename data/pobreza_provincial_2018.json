@@ -1,0 +1,982 @@
+{
+"010100": {
+"dep": "AMAZONAS",
+"prov": "CHACHAPOYAS",
+"tasa": 22.02
+},
+"010200": {
+"dep": "AMAZONAS",
+"prov": "BAGUA",
+"tasa": 34.84
+},
+"010300": {
+"dep": "AMAZONAS",
+"prov": "BONGARÁ",
+"tasa": 33.24
+},
+"010400": {
+"dep": "AMAZONAS",
+"prov": "CONDORCANQUI",
+"tasa": 56.83
+},
+"010500": {
+"dep": "AMAZONAS",
+"prov": "LUYA",
+"tasa": 48.15
+},
+"010600": {
+"dep": "AMAZONAS",
+"prov": "RODRIGUEZ DE MENDOZA",
+"tasa": 33.21
+},
+"010700": {
+"dep": "AMAZONAS",
+"prov": "UTCUBAMBA",
+"tasa": 29.9
+},
+"020100": {
+"dep": "ÁNCASH",
+"prov": "HUARAZ",
+"tasa": 14.51
+},
+"020200": {
+"dep": "ÁNCASH",
+"prov": "AIJA",
+"tasa": 31.73
+},
+"020300": {
+"dep": "ÁNCASH",
+"prov": "ANTONIO RAYMONDI",
+"tasa": 41.13
+},
+"020400": {
+"dep": "ÁNCASH",
+"prov": "ASUNCION",
+"tasa": 33.41
+},
+"020500": {
+"dep": "ÁNCASH",
+"prov": "BOLOGNESI",
+"tasa": 27.11
+},
+"020600": {
+"dep": "ÁNCASH",
+"prov": "CARHUAZ",
+"tasa": 30.44
+},
+"020700": {
+"dep": "ÁNCASH",
+"prov": "CARLOS F. FITZCARRALD",
+"tasa": 41.32
+},
+"020800": {
+"dep": "ÁNCASH",
+"prov": "CASMA",
+"tasa": 18.54
+},
+"020900": {
+"dep": "ÁNCASH",
+"prov": "CORONGO",
+"tasa": 41.45
+},
+"021000": {
+"dep": "ÁNCASH",
+"prov": "HUARI",
+"tasa": 30.59
+},
+"021100": {
+"dep": "ÁNCASH",
+"prov": "HUARMEY",
+"tasa": 15.07
+},
+"021200": {
+"dep": "ÁNCASH",
+"prov": "HUAYLAS",
+"tasa": 36.66
+},
+"021300": {
+"dep": "ÁNCASH",
+"prov": "MARISCAL LUZURIAGA",
+"tasa": 51.92
+},
+"021400": {
+"dep": "ÁNCASH",
+"prov": "OCROS",
+"tasa": 26.66
+},
+"021500": {
+"dep": "ÁNCASH",
+"prov": "PALLASCA",
+"tasa": 53.94
+},
+"021600": {
+"dep": "ÁNCASH",
+"prov": "POMABAMBA",
+"tasa": 41.62
+},
+"021700": {
+"dep": "ÁNCASH",
+"prov": "RECUAY",
+"tasa": 25.48
+},
+"021800": {
+"dep": "ÁNCASH",
+"prov": "SANTA",
+"tasa": 14.77
+},
+"021900": {
+"dep": "ÁNCASH",
+"prov": "SIHUAS",
+"tasa": 50.93
+},
+"022000": {
+"dep": "ÁNCASH",
+"prov": "YUNGAY",
+"tasa": 40.3
+},
+"030100": {
+"dep": "APURÍMAC",
+"prov": "ABANCAY",
+"tasa": 24.32
+},
+"030200": {
+"dep": "APURÍMAC",
+"prov": "ANDAHUAYLAS",
+"tasa": 37.39
+},
+"030300": {
+"dep": "APURÍMAC",
+"prov": "ANTABAMBA",
+"tasa": 32.9
+},
+"030400": {
+"dep": "APURÍMAC",
+"prov": "AYMARAES",
+"tasa": 36.6
+},
+"030500": {
+"dep": "APURÍMAC",
+"prov": "COTABAMBAS",
+"tasa": 43.76
+},
+"030600": {
+"dep": "APURÍMAC",
+"prov": "CHINCHEROS",
+"tasa": 44.89
+},
+"030700": {
+"dep": "APURÍMAC",
+"prov": "GRAU",
+"tasa": 44.96
+},
+"040100": {
+"dep": "AREQUIPA",
+"prov": "AREQUIPA",
+"tasa": 6.49
+},
+"040200": {
+"dep": "AREQUIPA",
+"prov": "CAMANA",
+"tasa": 12.96
+},
+"040300": {
+"dep": "AREQUIPA",
+"prov": "CARAVELÍ",
+"tasa": 12.68
+},
+"040400": {
+"dep": "AREQUIPA",
+"prov": "CASTILLA",
+"tasa": 18.49
+},
+"040500": {
+"dep": "AREQUIPA",
+"prov": "CAYLLOMA",
+"tasa": 17.18
+},
+"040600": {
+"dep": "AREQUIPA",
+"prov": "CONDESUYOS",
+"tasa": 21.16
+},
+"040700": {
+"dep": "AREQUIPA",
+"prov": "ISLAY",
+"tasa": 10.18
+},
+"040800": {
+"dep": "AREQUIPA",
+"prov": "LA UNIÓN",
+"tasa": 36.91
+},
+"050100": {
+"dep": "AYACUCHO",
+"prov": "HUAMANGA",
+"tasa": 24.43
+},
+"050200": {
+"dep": "AYACUCHO",
+"prov": "CANGALLO",
+"tasa": 48.74
+},
+"050300": {
+"dep": "AYACUCHO",
+"prov": "HUANCA SANCOS",
+"tasa": 42.47
+},
+"050400": {
+"dep": "AYACUCHO",
+"prov": "HUANTA",
+"tasa": 43.98
+},
+"050500": {
+"dep": "AYACUCHO",
+"prov": "LA MAR",
+"tasa": 46.67
+},
+"050600": {
+"dep": "AYACUCHO",
+"prov": "LUCANAS",
+"tasa": 40.73
+},
+"050700": {
+"dep": "AYACUCHO",
+"prov": "PARINACOCHAS",
+"tasa": 38.25
+},
+"050800": {
+"dep": "AYACUCHO",
+"prov": "PAUCAR DEL SARA SARA",
+"tasa": 29.88
+},
+"050900": {
+"dep": "AYACUCHO",
+"prov": "SUCRE",
+"tasa": 46.25
+},
+"051000": {
+"dep": "AYACUCHO",
+"prov": "VICTOR FAJARDO",
+"tasa": 53.02
+},
+"051100": {
+"dep": "AYACUCHO",
+"prov": "VILCAS HUAMÁN",
+"tasa": 44.64
+},
+"060100": {
+"dep": "CAJAMARCA",
+"prov": "CAJAMARCA",
+"tasa": 33.69
+},
+"060200": {
+"dep": "CAJAMARCA",
+"prov": "CAJABAMBA",
+"tasa": 52.59
+},
+"060300": {
+"dep": "CAJAMARCA",
+"prov": "CELENDÍN",
+"tasa": 57.94
+},
+"060400": {
+"dep": "CAJAMARCA",
+"prov": "CHOTA",
+"tasa": 58.11
+},
+"060500": {
+"dep": "CAJAMARCA",
+"prov": "CONTUMAZÁ",
+"tasa": 45.35
+},
+"060600": {
+"dep": "CAJAMARCA",
+"prov": "CUTERVO",
+"tasa": 57.5
+},
+"060700": {
+"dep": "CAJAMARCA",
+"prov": "HUALGAYOC",
+"tasa": 51.94
+},
+"060800": {
+"dep": "CAJAMARCA",
+"prov": "JAEN",
+"tasa": 39.36
+},
+"060900": {
+"dep": "CAJAMARCA",
+"prov": "SAN IGNACIO",
+"tasa": 51.97
+},
+"061000": {
+"dep": "CAJAMARCA",
+"prov": "SAN MARCOS",
+"tasa": 57.21
+},
+"061100": {
+"dep": "CAJAMARCA",
+"prov": "SAN MIGUEL",
+"tasa": 53.11
+},
+"061200": {
+"dep": "CAJAMARCA",
+"prov": "SAN PABLO",
+"tasa": 67.31
+},
+"061300": {
+"dep": "CAJAMARCA",
+"prov": "SANTA CRUZ",
+"tasa": 53.25
+},
+"070100": {
+"dep": "CALLAO",
+"prov": "CALLAO",
+"tasa": 16.89
+},
+"080100": {
+"dep": "CUSCO",
+"prov": "CUSCO",
+"tasa": 8.14
+},
+"080200": {
+"dep": "CUSCO",
+"prov": "ACOMAYO",
+"tasa": 40.04
+},
+"080300": {
+"dep": "CUSCO",
+"prov": "ANTA",
+"tasa": 29.47
+},
+"080400": {
+"dep": "CUSCO",
+"prov": "CALCA",
+"tasa": 34.02
+},
+"080500": {
+"dep": "CUSCO",
+"prov": "CANAS",
+"tasa": 49.69
+},
+"080600": {
+"dep": "CUSCO",
+"prov": "CANCHIS",
+"tasa": 28.81
+},
+"080700": {
+"dep": "CUSCO",
+"prov": "CHUMBIVILCAS",
+"tasa": 48.14
+},
+"080800": {
+"dep": "CUSCO",
+"prov": "ESPINAR",
+"tasa": 30.93
+},
+"080900": {
+"dep": "CUSCO",
+"prov": "LA CONVENCIÓN",
+"tasa": 25.37
+},
+"081000": {
+"dep": "CUSCO",
+"prov": "PARURO",
+"tasa": 42.06
+},
+"081100": {
+"dep": "CUSCO",
+"prov": "PAUCARTAMBO",
+"tasa": 46.89
+},
+"081200": {
+"dep": "CUSCO",
+"prov": "QUISPICANCHI",
+"tasa": 41.34
+},
+"081300": {
+"dep": "CUSCO",
+"prov": "URUBAMBA",
+"tasa": 24.59
+},
+"090100": {
+"dep": "HUANCAVELICA",
+"prov": "HUANCAVELICA",
+"tasa": 33.7
+},
+"090200": {
+"dep": "HUANCAVELICA",
+"prov": "ACOBAMBA",
+"tasa": 41.08
+},
+"090300": {
+"dep": "HUANCAVELICA",
+"prov": "ANGARAES",
+"tasa": 47.59
+},
+"090400": {
+"dep": "HUANCAVELICA",
+"prov": "CASTROVIRREYNA",
+"tasa": 33.93
+},
+"090500": {
+"dep": "HUANCAVELICA",
+"prov": "CHURCAMPA",
+"tasa": 40.31
+},
+"090600": {
+"dep": "HUANCAVELICA",
+"prov": "HUAYTARÁ",
+"tasa": 28.69
+},
+"090700": {
+"dep": "HUANCAVELICA",
+"prov": "TAYACAJA",
+"tasa": 43.64
+},
+"100100": {
+"dep": "HUÁNUCO",
+"prov": "HUÁNUCO",
+"tasa": 21.1
+},
+"100200": {
+"dep": "HUÁNUCO",
+"prov": "AMBO",
+"tasa": 34.0
+},
+"100300": {
+"dep": "HUÁNUCO",
+"prov": "DOS DE MAYO",
+"tasa": 39.41
+},
+"100400": {
+"dep": "HUÁNUCO",
+"prov": "HUACAYBAMBA",
+"tasa": 53.2
+},
+"100500": {
+"dep": "HUÁNUCO",
+"prov": "HUAMALIES",
+"tasa": 39.27
+},
+"100600": {
+"dep": "HUÁNUCO",
+"prov": "LEONCIO PRADO",
+"tasa": 17.28
+},
+"100700": {
+"dep": "HUÁNUCO",
+"prov": "MARAÑÓN",
+"tasa": 37.6
+},
+"100800": {
+"dep": "HUÁNUCO",
+"prov": "PACHITEA",
+"tasa": 46.55
+},
+"100900": {
+"dep": "HUÁNUCO",
+"prov": "PUERTO INCA",
+"tasa": 23.64
+},
+"101000": {
+"dep": "HUÁNUCO",
+"prov": "LAURICOCHA",
+"tasa": 33.66
+},
+"101100": {
+"dep": "HUÁNUCO",
+"prov": "YAROWILCA",
+"tasa": 43.26
+},
+"110100": {
+"dep": "ICA",
+"prov": "ICA",
+"tasa": 3.2
+},
+"110200": {
+"dep": "ICA",
+"prov": "CHINCHA",
+"tasa": 3.13
+},
+"110300": {
+"dep": "ICA",
+"prov": "NASCA",
+"tasa": 3.11
+},
+"110400": {
+"dep": "ICA",
+"prov": "PALPA",
+"tasa": 4.68
+},
+"110500": {
+"dep": "ICA",
+"prov": "PISCO",
+"tasa": 3.68
+},
+"120100": {
+"dep": "JUNÍN",
+"prov": "HUANCAYO",
+"tasa": 12.8
+},
+"120200": {
+"dep": "JUNÍN",
+"prov": "CONCEPCIÓN",
+"tasa": 27.11
+},
+"120300": {
+"dep": "JUNÍN",
+"prov": "CHANCHAMAYO",
+"tasa": 25.07
+},
+"120400": {
+"dep": "JUNÍN",
+"prov": "JAUJA",
+"tasa": 23.96
+},
+"120500": {
+"dep": "JUNÍN",
+"prov": "JUNÍN",
+"tasa": 33.49
+},
+"120600": {
+"dep": "JUNÍN",
+"prov": "SATIPO",
+"tasa": 35.49
+},
+"120700": {
+"dep": "JUNÍN",
+"prov": "TARMA",
+"tasa": 22.78
+},
+"120800": {
+"dep": "JUNÍN",
+"prov": "YAULI",
+"tasa": 12.78
+},
+"120900": {
+"dep": "JUNÍN",
+"prov": "CHUPACA",
+"tasa": 20.33
+},
+"130100": {
+"dep": "LA LIBERTAD",
+"prov": "TRUJILLO",
+"tasa": 14.53
+},
+"130200": {
+"dep": "LA LIBERTAD",
+"prov": "ASCOPE",
+"tasa": 22.28
+},
+"130300": {
+"dep": "LA LIBERTAD",
+"prov": "BOLÍVAR",
+"tasa": 52.76
+},
+"130400": {
+"dep": "LA LIBERTAD",
+"prov": "CHEPÉN",
+"tasa": 26.69
+},
+"130500": {
+"dep": "LA LIBERTAD",
+"prov": "JULCÁN",
+"tasa": 51.91
+},
+"130600": {
+"dep": "LA LIBERTAD",
+"prov": "OTUZCO",
+"tasa": 47.35
+},
+"130700": {
+"dep": "LA LIBERTAD",
+"prov": "PACASMAYO",
+"tasa": 24.34
+},
+"130800": {
+"dep": "LA LIBERTAD",
+"prov": "PATAZ",
+"tasa": 48.01
+},
+"130900": {
+"dep": "LA LIBERTAD",
+"prov": "SÁNCHEZ CARRIÓN",
+"tasa": 49.2
+},
+"131000": {
+"dep": "LA LIBERTAD",
+"prov": "SANTIAGO DE CHUCO",
+"tasa": 46.29
+},
+"131100": {
+"dep": "LA LIBERTAD",
+"prov": "GRAN CHIMÚ",
+"tasa": 44.37
+},
+"131200": {
+"dep": "LA LIBERTAD",
+"prov": "VIRÚ",
+"tasa": 33.21
+},
+"140100": {
+"dep": "LAMBAYEQUE",
+"prov": "CHICLAYO",
+"tasa": 11.75
+},
+"140200": {
+"dep": "LAMBAYEQUE",
+"prov": "FERREÑAFE",
+"tasa": 28.53
+},
+"140300": {
+"dep": "LAMBAYEQUE",
+"prov": "LAMBAYEQUE",
+"tasa": 24.99
+},
+"150100": {
+"dep": "LIMA",
+"prov": "LIMA",
+"tasa": 13.26
+},
+"150200": {
+"dep": "LIMA",
+"prov": "BARRANCA",
+"tasa": 12.25
+},
+"150300": {
+"dep": "LIMA",
+"prov": "CAJATAMBO",
+"tasa": 31.63
+},
+"150400": {
+"dep": "LIMA",
+"prov": "CANTA",
+"tasa": 13.78
+},
+"150500": {
+"dep": "LIMA",
+"prov": "CAÑETE",
+"tasa": 14.28
+},
+"150600": {
+"dep": "LIMA",
+"prov": "HUARAL",
+"tasa": 12.28
+},
+"150700": {
+"dep": "LIMA",
+"prov": "HUAROCHIRI",
+"tasa": 15.86
+},
+"150800": {
+"dep": "LIMA",
+"prov": "HUAURA",
+"tasa": 13.56
+},
+"150900": {
+"dep": "LIMA",
+"prov": "OYÓN",
+"tasa": 23.35
+},
+"151000": {
+"dep": "LIMA",
+"prov": "YAUYOS",
+"tasa": 25.4
+},
+"160100": {
+"dep": "LORETO",
+"prov": "MAYNAS",
+"tasa": 22.19
+},
+"160200": {
+"dep": "LORETO",
+"prov": "ALTO AMAZONAS",
+"tasa": 35.99
+},
+"160300": {
+"dep": "LORETO",
+"prov": "LORETO",
+"tasa": 44.24
+},
+"160400": {
+"dep": "LORETO",
+"prov": "MARISCAL RAMON CASTILLA",
+"tasa": 43.94
+},
+"160500": {
+"dep": "LORETO",
+"prov": "REQUENA",
+"tasa": 47.7
+},
+"160600": {
+"dep": "LORETO",
+"prov": "UCAYALI",
+"tasa": 42.12
+},
+"160700": {
+"dep": "LORETO",
+"prov": "DATEM DEL MARAÑÓN",
+"tasa": 44.83
+},
+"160800": {
+"dep": "LORETO",
+"prov": "PUTUMAYO",
+"tasa": 43.71
+},
+"170100": {
+"dep": "MADRE DE DIOS",
+"prov": "TAMBOPATA",
+"tasa": 5.14
+},
+"170200": {
+"dep": "MADRE DE DIOS",
+"prov": "MANU",
+"tasa": 6.46
+},
+"170300": {
+"dep": "MADRE DE DIOS",
+"prov": "TAHUAMANU",
+"tasa": 5.27
+},
+"180100": {
+"dep": "MOQUEGUA",
+"prov": "MARISCAL NIETO",
+"tasa": 8.09
+},
+"180200": {
+"dep": "MOQUEGUA",
+"prov": "GENERAL SÁNCHEZ CERRO",
+"tasa": 20.51
+},
+"180300": {
+"dep": "MOQUEGUA",
+"prov": "ILO",
+"tasa": 6.0
+},
+"190100": {
+"dep": "PASCO",
+"prov": "PASCO",
+"tasa": 29.95
+},
+"190200": {
+"dep": "PASCO",
+"prov": "DANIEL ALCIDES CARRIÓN",
+"tasa": 60.28
+},
+"190300": {
+"dep": "PASCO",
+"prov": "OXAPAMPA",
+"tasa": 33.8
+},
+"200100": {
+"dep": "PIURA",
+"prov": "PIURA",
+"tasa": 23.01
+},
+"200200": {
+"dep": "PIURA",
+"prov": "AYABACA",
+"tasa": 55.68
+},
+"200300": {
+"dep": "PIURA",
+"prov": "HUANCABAMBA",
+"tasa": 49.24
+},
+"200400": {
+"dep": "PIURA",
+"prov": "MORROPON",
+"tasa": 35.2
+},
+"200500": {
+"dep": "PIURA",
+"prov": "PAITA",
+"tasa": 22.51
+},
+"200600": {
+"dep": "PIURA",
+"prov": "SULLANA",
+"tasa": 21.94
+},
+"200700": {
+"dep": "PIURA",
+"prov": "TALARA",
+"tasa": 15.65
+},
+"200800": {
+"dep": "PIURA",
+"prov": "SECHURA",
+"tasa": 28.14
+},
+"210100": {
+"dep": "PUNO",
+"prov": "PUNO",
+"tasa": 27.15
+},
+"210200": {
+"dep": "PUNO",
+"prov": "AZÁNGARO",
+"tasa": 41.41
+},
+"210300": {
+"dep": "PUNO",
+"prov": "CARABAYA",
+"tasa": 49.31
+},
+"210400": {
+"dep": "PUNO",
+"prov": "CHUCUITO",
+"tasa": 48.58
+},
+"210500": {
+"dep": "PUNO",
+"prov": "EL COLLAO",
+"tasa": 41.1
+},
+"210600": {
+"dep": "PUNO",
+"prov": "HUANCANÉ",
+"tasa": 43.11
+},
+"210700": {
+"dep": "PUNO",
+"prov": "LAMPA",
+"tasa": 47.6
+},
+"210800": {
+"dep": "PUNO",
+"prov": "MELGAR",
+"tasa": 41.45
+},
+"210900": {
+"dep": "PUNO",
+"prov": "MOHO",
+"tasa": 47.93
+},
+"211000": {
+"dep": "PUNO",
+"prov": "SAN ANTONIO DE PUTINA",
+"tasa": 39.15
+},
+"211100": {
+"dep": "PUNO",
+"prov": "SAN ROMÁN",
+"tasa": 23.11
+},
+"211200": {
+"dep": "PUNO",
+"prov": "SANDIA",
+"tasa": 37.94
+},
+"211300": {
+"dep": "PUNO",
+"prov": "YUNGUYO",
+"tasa": 45.23
+},
+"220100": {
+"dep": "SAN MARTÍN",
+"prov": "MOYOBAMBA",
+"tasa": 21.8
+},
+"220200": {
+"dep": "SAN MARTÍN",
+"prov": "BELLAVISTA",
+"tasa": 31.52
+},
+"220300": {
+"dep": "SAN MARTÍN",
+"prov": "EL DORADO",
+"tasa": 34.97
+},
+"220400": {
+"dep": "SAN MARTÍN",
+"prov": "HUALLAGA",
+"tasa": 21.98
+},
+"220500": {
+"dep": "SAN MARTÍN",
+"prov": "LAMAS",
+"tasa": 28.74
+},
+"220600": {
+"dep": "SAN MARTÍN",
+"prov": "MARISCAL CÁCERES",
+"tasa": 24.27
+},
+"220700": {
+"dep": "SAN MARTÍN",
+"prov": "PICOTA",
+"tasa": 32.21
+},
+"220800": {
+"dep": "SAN MARTÍN",
+"prov": "RIOJA",
+"tasa": 29.33
+},
+"220900": {
+"dep": "SAN MARTÍN",
+"prov": "SAN MARTÍN",
+"tasa": 15.34
+},
+"221000": {
+"dep": "SAN MARTÍN",
+"prov": "TOCACHE",
+"tasa": 20.59
+},
+"230100": {
+"dep": "TACNA",
+"prov": "TACNA",
+"tasa": 14.64
+},
+"230200": {
+"dep": "TACNA",
+"prov": "CANDARAVE",
+"tasa": 26.88
+},
+"230300": {
+"dep": "TACNA",
+"prov": "JORGE BASADRE",
+"tasa": 7.9
+},
+"230400": {
+"dep": "TACNA",
+"prov": "TARATA",
+"tasa": 32.02
+},
+"240100": {
+"dep": "TUMBES",
+"prov": "TUMBES",
+"tasa": 10.2
+},
+"240200": {
+"dep": "TUMBES",
+"prov": "CONTRALMIRANTE VILLAR",
+"tasa": 10.8
+},
+"240300": {
+"dep": "TUMBES",
+"prov": "ZARUMILLA",
+"tasa": 9.46
+},
+"250100": {
+"dep": "UCAYALI",
+"prov": "CORONEL PORTILLO",
+"tasa": 9.49
+},
+"250200": {
+"dep": "UCAYALI",
+"prov": "ATALAYA",
+"tasa": 32.25
+},
+"250300": {
+"dep": "UCAYALI",
+"prov": "PADRE ABAD",
+"tasa": 10.55
+},
+"250400": {
+"dep": "UCAYALI",
+"prov": "PURÚS",
+"tasa": 31.93
+}
+}

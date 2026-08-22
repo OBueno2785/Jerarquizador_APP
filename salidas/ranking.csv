@@ -1,0 +1,74 @@
+﻿Rank global;Rank sector;Sector;Proyecto;Fase;Modalidad;Ambito;Monto US$ MM;Puntaje total;Corte P70 sector;Seleccionado;Ind 1 (pt);Ind 2 (pt);Ind 3 (pt);Ind 4 (pt);Ind 5 (pt);Ind 6 (pt);Ind 7 (pt);Ind 8 (pt);Ind 9 (pt);Ind 10 (pt);Ind 1 (norm);Ind 2 (norm);Ind 3 (norm);Ind 4 (norm);Ind 5 (norm);Ind 6 (norm);Ind 7 (norm);Ind 8 (norm);Ind 9 (norm);Ind 10 (norm)
+1;1;Tecnología;Centro de Gestión y Monitoreo Tecnológico;Formulación;Autofinanciada;ÁMBITO NACIONAL;;1.0;0.7715;Si;0;3;6;10;1;0.2;3;2;1;1;0.0;1.0;1.0;1.0;0.0;0.2042;1.0;0.3333;0.0;0.0
+2;1;Transporte;Terminal Internacional de Chimbote;Estructuración;Autofinanciada;ANCASH, LA LIBERTAD;462.89;0.8534;0.5793;Si;1;3;6;10;6;0.21;3;3;1;1;1.0;1.0;1.0;1.0;0.8333;0.2083;1.0;0.6667;0.0;0.0
+3;1;Hidrocarburos;Masificación del Gas Natural en Arequipa, Moquegua y Tacna;Estructuración;Autofinanciada;AREQUIPA, MOQUEGUA, TACNA;349.14;0.8398;0.634;Si;0;3;4;10;6;0.2;3;3;1;1;0.0;1.0;0.6;1.0;0.8333;0.2;1.0;0.6667;0.0;0.0
+4;2;Transporte;Tercer Grupo de Aeropuertos;Formulación;Autofinanciada;ANCASH, CAJAMARCA, CUSCO, HUANUCO, JUNIN, LORETO, MOQUEGUA, SAN MARTIN;618.71;0.8227;0.5793;Si;1;3;6;10;7;0.07;3;2;1;1;1.0;1.0;1.0;1.0;1.0;0.0667;1.0;0.3333;0.0;0.0
+5;3;Transporte;Nuevo Terminal Portuario Pucallpa;Formulación;Autofinanciada;LIMA, LORETO, UCAYALI;336.08;0.7998;0.5793;Si;1;3;5;10;6;0.27;3;2;1;1;1.0;1.0;0.8;1.0;0.8333;0.2722;1.0;0.3333;0.0;0.0
+6;1;Salud;Hospital Militar;Estructuración;Cofinanciada;ÁMBITO NACIONAL, LIMA;800.13;0.7835;0.746;Si;0;1;6;10;7;0.2;2;3;1;1;0.0;0.0;1.0;1.0;1.0;0.2042;0.5;0.6667;0.0;0.0
+7;2;Salud;Hospital de Iquitos;Estructuración;Cofinanciada;LORETO;135.07;0.746;0.746;Si;0;1;5;9;6;0.17;2;4;1;1;0.0;0.0;0.8;0.8889;0.8333;0.1667;0.5;1.0;0.0;0.0
+8;3;Salud;Hospital de Yurimaguas;Estructuración;Cofinanciada;LORETO;138.63;0.746;0.746;Si;0;1;5;9;6;0.17;2;4;1;1;0.0;0.0;0.8;0.8889;0.8333;0.1667;0.5;1.0;0.0;0.0
+9;4;Salud;Hospital Regional de Loreto;Estructuración;Cofinanciada;LORETO;292.33;0.746;0.746;Si;0;1;5;9;6;0.17;2;4;1;1;0.0;0.0;0.8;0.8889;0.8333;0.1667;0.5;1.0;0.0;0.0
+10;5;Salud;Hospital PNP;Estructuración;Cofinanciada;LIMA;602.94;0.7365;0.746;No;0;1;3;10;7;0.2;2;4;1;1;0.0;0.0;0.4;1.0;1.0;0.2;0.5;1.0;0.0;0.0
+11;1;Agricultura e irrigación;Proyecto Chavimochic - Tercera Etapa;Formulación;Cofinanciada;LA LIBERTAD;450;0.7183;0.6941;Si;1;1;6;10;6;0.17;2;2;1;1;1.0;0.0;1.0;1.0;0.8333;0.1667;0.5;0.3333;0.0;0.0
+12;2;Agricultura e irrigación;O&M Olmos;Estructuración;Cofinanciada;LAMBAYEQUE, PIURA, CAJAMARCA;156;0.6961;0.6941;Si;0;1;6;10;6;0.17;2;4;1;1;0.0;0.0;1.0;1.0;0.8333;0.1667;0.5;1.0;0.0;0.0
+13;3;Agricultura e irrigación;Majes Siguas - II Etapa;Formulación;Cofinanciada;AREQUIPA;720;0.692;0.6941;No;1;1;4;10;7;0.2;2;2;1;1;1.0;0.0;0.6;1.0;1.0;0.2;0.5;0.3333;0.0;0.0
+14;1;Agua y saneamiento;Desaladora Lima Norte;Formulación;Autofinanciada;LIMA;204.77;0.6886;0.4701;Si;0;3;3;10;6;0.4;3;2;1;1;0.0;1.0;0.4;1.0;0.8333;0.4;1.0;0.3333;0.0;0.0
+15;1;Turismo;Teleférico Huascarán;Formulación;Cofinanciada;ANCASH;74.56;0.6428;0.625;Si;0;1;6;9;5;0.0;2;2;1;1;0.0;0.0;1.0;0.8889;0.6667;0.0;0.5;0.3333;0.0;0.0
+16;4;Transporte;Terminal Portuario Almirante Miguel Grau de Tacna;Formulación;Autofinanciada;TACNA;400;0.6413;0.5793;Si;0;3;3;8;6;0.2;3;2;1;1;0.0;1.0;0.4;0.7778;0.8333;0.2;1.0;0.3333;0.0;0.0
+17;1;Educación;Colegios Cusco;Estructuración;Cofinanciada;CUSCO;217.5;0.6328;0.612;Si;0;1;5;10;6;0.2;2;3;1;1;0.0;0.0;0.8;1.0;0.8333;0.2;0.5;0.6667;0.0;0.0
+18;6;Salud;GIRSE;Estructuración;Cofinanciada;LIMA;220.5;0.6325;0.746;No;0;1;3;10;6;0.2;2;3;1;1;0.0;0.0;0.4;1.0;0.8333;0.2;0.5;0.6667;0.0;0.0
+19;2;Turismo;Teleférico Collpani Grande;Formulación;Cofinanciada;CUSCO;56.85;0.625;0.625;Si;0;1;5;10;4;0.2;2;2;1;1;0.0;0.0;0.8;1.0;0.5;0.2;0.5;0.3333;0.0;0.0
+20;3;Turismo;Teleférico Querocancha;Formulación;Cofinanciada;CUSCO;44.25;0.625;0.625;Si;0;1;5;10;4;0.2;2;2;1;1;0.0;0.0;0.8;1.0;0.5;0.2;0.5;0.3333;0.0;0.0
+21;4;Turismo;Teleférico Waqrapukara;Formulación;Cofinanciada;CUSCO;47.71;0.625;0.625;Si;0;1;5;10;4;0.2;2;2;1;1;0.0;0.0;0.8;1.0;0.5;0.2;0.5;0.3333;0.0;0.0
+22;5;Turismo;Teleférico Cerro Azoguini – Lago Titicaca;Formulación;Cofinanciada;PUNO;37.93;0.625;0.625;Si;0;1;5;10;4;0.2;2;2;1;1;0.0;0.0;0.8;1.0;0.5;0.2;0.5;0.3333;0.0;0.0
+23;5;Transporte;Vía de Evitamiento de Cusco;Formulación;Cofinanciada;CUSCO;917.96;0.6204;0.5793;Si;1;1;5;10;7;0.8;2;2;1;1;1.0;0.0;0.8;1.0;1.0;0.8;0.5;0.3333;0.0;0.0
+24;2;Agua y saneamiento;PTAR Trujillo;Estructuración;Cofinanciada;LA LIBERTAD;808.67;0.6137;0.4701;Si;1;1;6;10;7;0.17;2;3;1;1;1.0;0.0;1.0;1.0;1.0;0.1667;0.5;0.6667;0.0;0.0
+25;4;Agricultura e irrigación;Proyecto Chinecas;Formulación;Cofinanciada;ANCASH;5045.81;0.608;0.6941;No;0;1;6;9;7;0.25;2;2;1;1;0.0;0.0;1.0;0.8889;1.0;0.25;0.5;0.3333;0.0;0.0
+26;7;Salud;Operación y Mantenimiento del Hospital de Cajamarca;Formulación;Cofinanciada;CAJAMARCA;197.84;0.6059;0.746;No;0;1;6;10;6;0.17;2;1;1;1;0.0;0.0;1.0;1.0;0.8333;0.1667;0.5;0.0;0.0;0.0
+27;8;Salud;Hospital Unanue;Formulación;Cofinanciada;LIMA;1111.56;0.6031;0.746;No;0;1;3;10;7;0.2;2;2;1;1;0.0;0.0;0.4;1.0;1.0;0.2;0.5;0.3333;0.0;0.0
+28;2;Educación;Sayari;Formulación;Cofinanciada;ÁMBITO NACIONAL;263.69;0.5981;0.612;No;0;1;6;10;6;0.2;2;2;1;1;0.0;0.0;1.0;1.0;0.8333;0.2042;0.5;0.3333;0.0;0.0
+29;6;Transporte;Corredor Vial 4;Estructuración;Cofinanciada;HUANUCO, SAN MARTIN;162.54;0.5873;0.5793;Si;0;1;6;10;6;0.92;2;3;1;1;0.0;0.0;1.0;1.0;0.8333;0.9167;0.5;0.6667;0.0;0.0
+30;7;Transporte;Corredor Vial 5;Estructuración;Cofinanciada;ANCASH, HUANUCO, SAN MARTIN;151.29;0.5873;0.5793;Si;0;1;6;10;6;0.92;2;3;1;1;0.0;0.0;1.0;1.0;0.8333;0.9167;0.5;0.6667;0.0;0.0
+31;8;Transporte;Corredor Vial 6;Estructuración;Cofinanciada;HUANUCO, PASCO;192.46;0.583;0.5793;Si;0;1;6;9;6;1.0;2;3;1;1;0.0;0.0;1.0;0.8889;0.8333;1.0;0.5;0.6667;0.0;0.0
+32;5;Agricultura e irrigación;Nueva Concesión Olmos;Formulación;Cofinanciada;CAJAMARCA, LAMBAYEQUE, PIURA;424;0.581;0.6941;No;0;1;6;10;6;0.17;2;2;1;1;0.0;0.0;1.0;1.0;0.8333;0.1667;0.5;0.3333;0.0;0.0
+33;9;Transporte;Carretera Empalme 1B – Buenos Aires – Canchaque;Estructuración;Cofinanciada;PIURA;297.09;0.5784;0.5793;No;0;1;6;10;6;0.83;2;3;1;1;0.0;0.0;1.0;1.0;0.8333;0.8333;0.5;0.6667;0.0;0.0
+34;9;Salud;Hospital de Alta Complejidad de Lambayeque;Formulación;Cofinanciada;LAMBAYEQUE;398.06;0.5596;0.746;No;0;1;3;10;6;0.17;2;2;1;1;0.0;0.0;0.4;1.0;0.8333;0.1667;0.5;0.3333;0.0;0.0
+35;10;Salud;Hospital Regional Lambayeque;Formulación;Cofinanciada;LAMBAYEQUE;186.18;0.5596;0.746;No;0;1;3;10;6;0.17;2;2;1;1;0.0;0.0;0.4;1.0;0.8333;0.1667;0.5;0.3333;0.0;0.0
+36;10;Transporte;Pte. Carrizales (Casma) – Pariacoto;Estructuración;Cofinanciada;ANCASH;105.84;0.5595;0.5793;No;0;1;6;9;5;1.0;2;3;1;1;0.0;0.0;1.0;0.8889;0.6667;1.0;0.5;0.6667;0.0;0.0
+37;3;Agua y saneamiento;PTAR Huancayo;Estructuración;Cofinanciada;JUNIN;466.08;0.5567;0.4701;Si;1;1;4;10;6;0.25;2;3;1;1;1.0;0.0;0.6;1.0;0.8333;0.25;0.5;0.6667;0.0;0.0
+38;11;Transporte;Nuevos terminales Portuarios de Loreto;Estructuración;Cofinanciada;LORETO;198.77;0.5559;0.5793;No;1;1;5;9;6;0.17;2;3;1;1;1.0;0.0;0.8;0.8889;0.8333;0.1667;0.5;0.6667;0.0;0.0
+39;12;Transporte;Dv. Las Vegas – Mazamari – Pto. Ocopa;Estructuración;Cofinanciada;JUNIN;352.66;0.5537;0.5793;No;0;1;4;10;6;1.0;2;3;1;1;0.0;0.0;0.6;1.0;0.8333;1.0;0.5;0.6667;0.0;0.0
+40;13;Transporte;Kimbiri – Kepashiato;Estructuración;Cofinanciada;CUSCO;155.26;0.5537;0.5793;No;0;1;5;10;6;0.8;2;3;1;1;0.0;0.0;0.8;1.0;0.8333;0.8;0.5;0.6667;0.0;0.0
+41;14;Transporte;Pte. Los Maestros – Huaytará;Estructuración;Cofinanciada;HUANCAVELICA, ICA;161.09;0.5537;0.5793;No;0;1;5;10;6;0.8;2;3;1;1;0.0;0.0;0.8;1.0;0.8333;0.8;0.5;0.6667;0.0;0.0
+42;15;Transporte;Corredor Vial 2;Estructuración;Cofinanciada;PUNO;241.2;0.5537;0.5793;No;0;1;5;10;6;0.8;2;3;1;1;0.0;0.0;0.8;1.0;0.8333;0.8;0.5;0.6667;0.0;0.0
+43;16;Transporte;Santa – Pte Chuquicara – Tauca – Dv. Sihuas;Formulación;Cofinanciada;ANCASH;145.43;0.5438;0.5793;No;0;1;6;9;6;1.0;2;2;1;1;0.0;0.0;1.0;0.8889;0.8333;1.0;0.5;0.3333;0.0;0.0
+44;17;Transporte;Dv. Chiguata – Santa Lucía – Mañazo;Formulación;Cofinanciada;AREQUIPA, CUSCO, PUNO;647.01;0.538;0.5793;No;0;1;5;10;7;0.8;2;2;1;1;0.0;0.0;0.8;1.0;1.0;0.8;0.5;0.3333;0.0;0.0
+45;18;Transporte;Atico – Dv. Quilca – Matarani – Ilo;Estructuración;Cofinanciada;AREQUIPA, MOQUEGUA;240.27;0.5325;0.5793;No;0;1;4;10;6;0.8;2;3;1;1;0.0;0.0;0.6;1.0;0.8333;0.8;0.5;0.6667;0.0;0.0
+46;4;Agua y saneamiento;PTAP Cajamarca;Estructuración;Cofinanciada;CAJAMARCA;920.87;0.5314;0.4701;Si;0;1;6;10;7;0.17;2;3;1;1;0.0;0.0;1.0;1.0;1.0;0.1667;0.5;0.6667;0.0;0.0
+47;19;Transporte;Corredor Vial 7;Estructuración;Cofinanciada;JUNIN, UCAYALI;91.87;0.5302;0.5793;No;0;1;4;10;5;1.0;2;3;1;1;0.0;0.0;0.6;1.0;0.6667;1.0;0.5;0.6667;0.0;0.0
+48;20;Transporte;Cusco – Pisac;Estructuración;Cofinanciada;CUSCO;107.28;0.5302;0.5793;No;0;1;5;10;5;0.8;2;3;1;1;0.0;0.0;0.8;1.0;0.6667;0.8;0.5;0.6667;0.0;0.0
+49;21;Transporte;Sicuani – Pucará – Calapuja;Estructuración;Cofinanciada;CUSCO, PUNO;110.5;0.5302;0.5793;No;0;1;5;10;5;0.8;2;3;1;1;0.0;0.0;0.8;1.0;0.6667;0.8;0.5;0.6667;0.0;0.0
+50;22;Transporte;Pto. Yoyato – Cubantia;Estructuración;Cofinanciada;JUNIN;85.36;0.5302;0.5793;No;0;1;4;10;5;1.0;2;3;1;1;0.0;0.0;0.6;1.0;0.6667;1.0;0.5;0.6667;0.0;0.0
+51;23;Transporte;Corredor Vial 1;Estructuración;Cofinanciada;HUANCAVELICA;211.44;0.5276;0.5793;No;0;1;5;8;6;0.8;2;3;1;1;0.0;0.0;0.8;0.7778;0.8333;0.8;0.5;0.6667;0.0;0.0
+52;6;Agricultura e irrigación;Sistema Hídrico Valle Chancay - Lambayeque;Formulación;Cofinanciada;LAMBAYEQUE;618.8;0.5173;0.6941;No;0;1;3;10;7;0.17;2;2;1;1;0.0;0.0;0.4;1.0;1.0;0.1667;0.5;0.3333;0.0;0.0
+53;2;Hidrocarburos;SITGAS;Formulación;Cofinanciada;AREQUIPA, MOQUEGUA, TACNA, APURIMAC, CUSCO, PUNO;4320.8;0.4968;0.634;No;0;1;5;10;7;0.2;2;2;1;1;0.0;0.0;0.8;1.0;1.0;0.2;0.5;0.3333;0.0;0.0
+54;3;Educación;CER VMT;Estructuración;Cofinanciada;LIMA;127.68;0.492;0.612;No;0;1;3;10;5;0.2;2;3;1;1;0.0;0.0;0.4;1.0;0.6667;0.2;0.5;0.6667;0.0;0.0
+55;24;Transporte;Dv. Urcos – Sicuani;Formulación;Cofinanciada;CUSCO;123.37;0.491;0.5793;No;0;1;5;10;5;0.8;2;2;1;1;0.0;0.0;0.8;1.0;0.6667;0.8;0.5;0.3333;0.0;0.0
+56;25;Transporte;Zapallal – Ventanilla;Estructuración;Cofinanciada;LIMA;88.26;0.4878;0.5793;No;0;1;3;10;5;0.8;2;3;1;1;0.0;0.0;0.4;1.0;0.6667;0.8;0.5;0.6667;0.0;0.0
+57;5;Agua y saneamiento;Saneamiento Chanchamayo y Concepción;Estructuración;Cofinanciada;JUNIN;189.94;0.4743;0.4701;Si;0;1;4;10;6;0.25;2;3;1;1;0.0;0.0;0.6;1.0;0.8333;0.25;0.5;0.6667;0.0;0.0
+58;6;Agua y saneamiento;PTAR Cañete;Estructuración;Cofinanciada;LIMA;281.11;0.469;0.4701;No;0;1;3;10;6;0.4;2;3;1;1;0.0;0.0;0.4;1.0;0.8333;0.4;0.5;0.6667;0.0;0.0
+59;7;Agua y saneamiento;Servicios de Saneamiento Talara;Formulación;Cofinanciada;PIURA;180;0.4686;0.4701;No;0;1;6;10;6;0.17;2;2;1;1;0.0;0.0;1.0;1.0;0.8333;0.1667;0.5;0.3333;0.0;0.0
+60;8;Agua y saneamiento;PTAR Cusco;Estructuración;Cofinanciada;CUSCO;128.97;0.4667;0.4701;No;0;1;5;10;5;0.2;2;3;1;1;0.0;0.0;0.8;1.0;0.6667;0.2;0.5;0.6667;0.0;0.0
+61;9;Agua y saneamiento;PTAR San Martín;Estructuración;Cofinanciada;SAN MARTIN;239.17;0.4524;0.4701;No;0;1;4;9;6;0.17;2;3;1;1;0.0;0.0;0.6;0.8889;0.8333;0.1667;0.5;0.6667;0.0;0.0
+62;26;Transporte;Canal de Navegación Amazónico;Formulación;Cofinanciada;LORETO;303.75;0.452;0.5793;No;0;1;5;9;6;0.33;2;2;1;1;0.0;0.0;0.8;0.8889;0.8333;0.3333;0.5;0.3333;0.0;0.0
+63;10;Agua y saneamiento;PTAR Iquitos;Formulación;Cofinanciada;LORETO;414.73;0.4344;0.4701;No;0;1;5;9;6;0.17;2;2;1;1;0.0;0.0;0.8;0.8889;0.8333;0.1667;0.5;0.3333;0.0;0.0
+64;11;Agua y saneamiento;Saneamiento San Ignacio;Formulación;Cofinanciada;CAJAMARCA;25;0.4216;0.4701;No;0;1;6;10;4;0.17;2;2;1;1;0.0;0.0;1.0;1.0;0.5;0.1667;0.5;0.3333;0.0;0.0
+65;12;Agua y saneamiento;Saneamiento Rural de Loreto;Formulación;Cofinanciada;LORETO;89.21;0.4108;0.4701;No;0;1;5;9;5;0.17;2;2;1;1;0.0;0.0;0.8;0.8889;0.6667;0.1667;0.5;0.3333;0.0;0.0
+66;13;Agua y saneamiento;Servicios de Saneamiento de Huara y Barranca;Formulación;Cofinanciada;LIMA;80;0.4063;0.4701;No;0;1;3;10;5;0.4;2;2;1;1;0.0;0.0;0.4;1.0;0.6667;0.4;0.5;0.3333;0.0;0.0
+67;14;Agua y saneamiento;PTAR Lambayeque;Formulación;Cofinanciada;LAMBAYEQUE;144;0.4051;0.4701;No;0;1;3;10;6;0.17;2;2;1;1;0.0;0.0;0.4;1.0;0.8333;0.1667;0.5;0.3333;0.0;0.0
+68;15;Agua y saneamiento;Desaladora Ilo;Estructuración;Cofinanciada;MOQUEGUA;231.75;0.3875;0.4701;No;0;1;2;7;6;0.2;2;3;1;1;0.0;0.0;0.2;0.6667;0.8333;0.2;0.5;0.6667;0.0;0.0
+69;16;Agua y saneamiento;Agua y Saneamiento Tumbes y Contralmirante Villar;Estructuración;Cofinanciada;TUMBES;652.67;0.3863;0.4701;No;0;1;1;7;7;0.17;2;3;1;1;0.0;0.0;0.0;0.6667;1.0;0.1667;0.5;0.6667;0.0;0.0
+70;17;Agua y saneamiento;Desaladora Lambayeque;Formulación;Cofinanciada;LAMBAYEQUE;53.75;0.358;0.4701;No;0;1;3;10;4;0.17;2;2;1;1;0.0;0.0;0.4;1.0;0.5;0.1667;0.5;0.3333;0.0;0.0
+71;3;Hidrocarburos;Gasoducto Regional de Cusco;Formulación;Cofinanciada;CUSCO;;0.2944;0.634;No;0;1;5;10;1;0.2;2;2;1;1;0.0;0.0;0.8;1.0;0.0;0.2;0.5;0.3333;0.0;0.0
+72;27;Transporte;Ferrocarril Tacna - Arica;Formulación;Cofinanciada;TACNA;;0.286;0.5793;No;0;1;3;8;1;0.4;2;2;1;1;0.0;0.0;0.4;0.7778;0.0;0.4;0.5;0.3333;0.0;0.0
+73;2;Tecnología;Port Community System;Formulación;Cofinanciada;ÁMBITO NACIONAL;;0.2382;0.7715;No;0;1;6;10;1;0.2;2;2;1;1;0.0;0.0;1.0;1.0;0.0;0.2042;0.5;0.3333;0.0;0.0
