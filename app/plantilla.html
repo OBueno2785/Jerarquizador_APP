@@ -32,6 +32,8 @@
 }
 
 *{box-sizing:border-box}
+/* Varios contenedores declaran display, que gana sobre el [hidden] del navegador. */
+[hidden]{display:none !important}
 body{
   margin:0; background:var(--ground); color:var(--ink);
   font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -60,6 +62,54 @@ a{color:var(--accent); text-underline-offset:2px}
 .solid{background:var(--accent); color:var(--on-accent); border:1px solid var(--accent); border-radius:6px;
   padding:7px 13px; font-size:13px; font-weight:600; cursor:pointer}
 .solid:hover{background:var(--accent-2); border-color:var(--accent-2)}
+
+/* ---------- pestañas ---------- */
+.tabs{display:flex; gap:2px; padding:0 24px; background:var(--surface); border-bottom:1px solid var(--line)}
+.tabs button{
+  background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px;
+  padding:9px 14px; font-size:13.5px; font-weight:600; color:var(--ink-3); cursor:pointer;
+}
+.tabs button:hover{color:var(--ink-2)}
+.tabs button[aria-selected="true"]{color:var(--accent); border-bottom-color:var(--accent)}
+
+/* ---------- glosario ---------- */
+.glosario{display:grid; grid-template-columns:212px minmax(0,1fr); gap:34px; padding:22px 24px 72px; align-items:start}
+.gidx{position:sticky; top:12px; display:flex; flex-direction:column; gap:2px}
+.gidx a{font-size:12.5px; color:var(--ink-3); text-decoration:none; padding:3px 8px; border-left:2px solid var(--line); border-radius:0 4px 4px 0}
+.gidx a:hover{color:var(--accent); border-left-color:var(--accent); background:var(--surface)}
+.gcont{max-width:74ch; min-width:0}
+.gsec{margin-bottom:38px; scroll-margin-top:16px}
+.gsec > h2{font-size:17px; padding-bottom:7px; border-bottom:2px solid var(--ink); margin-bottom:4px}
+.gsec > p.intro{font-family:"Source Serif 4",Georgia,serif; font-size:13.5px; color:var(--ink-2); margin:10px 0 16px}
+dl.defs{margin:0}
+dl.defs dt{font-size:13.5px; font-weight:600; margin-top:15px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+dl.defs dt:first-child{margin-top:0}
+dl.defs dt .en{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); font-weight:500}
+dl.defs dd{margin:4px 0 0; font-family:"Source Serif 4",Georgia,serif; font-size:13.5px; color:var(--ink-2); line-height:1.6}
+dl.defs dd em{font-style:normal; color:var(--ink); font-weight:600; font-family:Archivo,sans-serif; font-size:12.5px}
+.formula{
+  font-family:"IBM Plex Mono",monospace; font-size:13px; background:var(--surface-2);
+  border-radius:7px; padding:10px 13px; margin:9px 0 0; color:var(--ink); display:inline-block;
+}
+.gtabla{overflow-x:auto; margin-top:12px; border:1px solid var(--line); border-radius:8px}
+table.g{border-collapse:collapse; width:100%; font-size:12.5px; min-width:880px}
+table.g td.nom{min-width:190px}
+table.g th{
+  text-align:left; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3);
+  font-weight:600; padding:9px 11px; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+table.g td{padding:9px 11px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink-2)}
+table.g tr:last-child td{border-bottom:0}
+table.g td.n,table.g td.w{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap}
+table.g td.nom{color:var(--ink); font-weight:500}
+table.g tr.opc td{background:var(--surface-2)}
+.muestra{display:inline-flex; align-items:center; gap:7px; margin-right:4px}
+.muestra i{width:12px; height:12px; border-radius:3px; display:inline-block}
+.mini-strip{display:inline-grid; grid-template-columns:repeat(10,7px); gap:2px; height:18px; vertical-align:-4px; margin-right:7px}
+.mini-strip i{background:var(--surface-2); border-radius:2px; position:relative; overflow:hidden}
+.mini-strip i span{position:absolute; inset:auto 0 0 0; background:var(--mark-sel)}
+.mini-strip i.na{background:repeating-linear-gradient(45deg,var(--surface-2),var(--surface-2) 2px,transparent 2px,transparent 4px)}
+.mini-strip i.pend{box-shadow:inset 0 0 0 1px var(--warn)}
 
 /* ---------- barra de filtros ---------- */
 .filtros{
@@ -202,6 +252,11 @@ a{color:var(--accent); text-underline-offset:2px}
   .c8,.c6,.c4{grid-column:span 12}
   .kpis{grid-template-columns:repeat(3,1fr)}
 }
+@media (max-width:860px){
+  .glosario{grid-template-columns:1fr; gap:18px}
+  .gidx{position:static; flex-direction:row; flex-wrap:wrap}
+  .gidx a{border-left:0; border:1px solid var(--line); border-radius:999px; padding:4px 10px}
+}
 @media (max-width:720px){
   .kpis{grid-template-columns:repeat(2,1fr)}
   .grid{padding:14px 14px 56px}
@@ -229,7 +284,12 @@ a{color:var(--accent); text-underline-offset:2px}
   </div>
 </header>
 
-<div class="filtros">
+<nav class="tabs" role="tablist">
+  <button role="tab" data-tab="panel" aria-selected="true">Dashboard</button>
+  <button role="tab" data-tab="glosario" aria-selected="false">Glosario</button>
+</nav>
+
+<div class="filtros" id="barraFiltros">
   <div class="f">
     <label for="selModo">Jerarquía</label>
     <select id="selModo">
@@ -273,7 +333,7 @@ a{color:var(--accent); text-underline-offset:2px}
   </div>
 </div>
 
-<div class="grid">
+<div class="grid" id="vistaPanel">
   <div class="kpis" id="kpis"></div>
 
   <section class="panel c8">
@@ -333,6 +393,269 @@ a{color:var(--accent); text-underline-offset:2px}
   </section>
 </div>
 
+<div class="glosario" id="vistaGlosario" hidden>
+  <nav class="gidx">
+    <a href="#g-ranking">Leer el ranking</a>
+    <a href="#g-presupuesto">Presupuesto</a>
+    <a href="#g-calculo">Cómo se calcula</a>
+    <a href="#g-indicadores">Los 10 indicadores</a>
+    <a href="#g-calidad">Calidad del dato</a>
+    <a href="#g-graficos">Leer los gráficos</a>
+    <a href="#g-portafolio">Términos del portafolio</a>
+    <a href="#g-territorio">Territorio</a>
+  </nav>
+
+  <div class="gcont">
+    <section class="gsec" id="g-ranking">
+      <h2>Leer el ranking</h2>
+      <p class="intro">Cada proyecto recibe un puntaje entre 0 y 1. Dentro de su grupo se ordenan de mayor
+        a menor y se traza una línea de corte; los que quedan arriba son los que se proponen promover.</p>
+      <dl class="defs">
+        <dt>Puntaje total <span class="en">0 a 1</span></dt>
+        <dd>Suma de los puntajes ponderados de todos los indicadores aplicados. No es un porcentaje de
+          nada ni una nota: solo sirve para comparar proyectos entre sí dentro del mismo ejercicio.
+          Si cambias un supuesto o el bloque opcional, todos los puntajes se recalculan.</dd>
+
+        <dt>Línea de corte · Percentil 70 <span class="en">P70</span></dt>
+        <dd>El valor por encima del cual queda el 30 % de puntajes más altos del grupo. La norma
+          selecciona solo ese tercio superior. Un proyecto pasa si su puntaje es <em>mayor o igual</em>
+          al corte, así que cuando varios empatan exactamente en el valor de corte pasan todos —por eso
+          en Turismo entran los cinco teleféricos.</dd>
+
+        <dt>Percentil</dt>
+        <dd>Posición relativa dentro de un conjunto ordenado. El percentil 70 deja al 70 % de los
+          proyectos por debajo. Se calcula por interpolación lineal, igual que la función
+          <span class="en">PERCENTIL</span> de Excel.</dd>
+
+        <dt>Ranking sectorial</dt>
+        <dd>Lo que manda la norma: un orden y una línea de corte independientes para cada sector,
+          calculados solo con los proyectos de ese sector. Un hospital compite contra hospitales,
+          no contra puertos.</dd>
+
+        <dt>Ranking general</dt>
+        <dd>Una sola lista con los 73 proyectos y un único corte. <em>Es una extensión a la norma</em>,
+          agregada porque el presupuesto se asigna sobre una sola bolsa. Usa un único juego de pesos
+          para que los puntajes sean comparables entre sectores, y ya no garantiza equilibrio sectorial.</dd>
+
+        <dt>Puesto</dt>
+        <dd>La posición dentro del grupo activo. En modo general cada fila muestra además su puesto
+          dentro de su sector, y la ficha de cada proyecto muestra siempre los dos.</dd>
+
+        <dt>Muestra pequeña</dt>
+        <dd>Aviso que aparece en sectores con menos de 4 proyectos. Con tan pocos casos la regla de
+          reponderación descarta casi todos los indicadores y el orden resultante dice poco: en
+          Tecnología, con 2 proyectos, quedan 2 indicadores en juego de 8.</dd>
+      </dl>
+    </section>
+
+    <section class="gsec" id="g-presupuesto">
+      <h2>Presupuesto</h2>
+      <dl class="defs">
+        <dt>Acumulado</dt>
+        <dd>Suma de la inversión de ese proyecto y de todos los que están por encima de él en el
+          ranking general. Responde a la pregunta «si financio hasta aquí, ¿cuánto llevo gastado?».
+          Los proyectos sin monto publicado no suman nada, así que el acumulado se queda plano en
+          ellos.</dd>
+
+        <dt>Límite de capacidad de financiamiento</dt>
+        <dd>Tope de compromisos que el MEF aprueba y dentro del cual PROINVERSIÓN debe caber. La norma
+          lo aplica <em>después</em> del corte, junto con la capacidad operativa, para decidir cuáles
+          de los proyectos seleccionados puede efectivamente desarrollar. En el dashboard escribes el
+          monto y la lista se corta donde el acumulado lo supera.</dd>
+
+        <dt>Monto de inversión</dt>
+        <dd>Lo que publica ProInversión para cada proyecto, en millones de dólares. Según el proyecto
+          corresponde al monto de inversión, al monto del proyecto o a una estimación preliminar; 4 de
+          los 73 no tienen monto publicado.</dd>
+      </dl>
+    </section>
+
+    <section class="gsec" id="g-calculo">
+      <h2>Cómo se calcula un puntaje</h2>
+      <p class="intro">Tres pasos por indicador, siempre en el mismo orden: se califica en su escala
+        propia, se lleva a una escala común de 0 a 1, y se multiplica por su peso.</p>
+      <dl class="defs">
+        <dt>1. Escala interna <span class="en">P</span></dt>
+        <dd>Cada indicador tiene su propia escala de puntaje, definida en su ficha del Anexo 2: binaria
+          para la inclusión en el PNI, 1 a 3 para la capacidad de generar ingresos, 1 a 10 para los
+          beneficiarios. No son comparables entre sí, por eso hace falta el paso siguiente.</dd>
+
+        <dt>2. Normalización de rango fijo <span class="en">v</span></dt>
+        <dd>Lleva cualquier escala a un valor entre 0 y 1, donde 0 es el mínimo posible de esa escala y
+          1 el máximo. Se usa el rango <em>teórico</em> de la escala, no el observado en la cartera, así
+          que agregar o quitar proyectos no altera el valor normalizado de los demás.
+          <div class="formula">v = (P − P<sub>mín</sub>) ÷ (P<sub>máx</sub> − P<sub>mín</sub>)</div></dd>
+
+        <dt>3. Peso y puntaje ponderado</dt>
+        <dd>El peso es la importancia relativa del indicador, fijada por el MEF a partir de la
+          valoración de un grupo de expertos. El puntaje ponderado es <em>peso × valor normalizado</em>,
+          y el puntaje total del proyecto es la suma de todos ellos.</dd>
+
+        <dt>Bloque fijo · 85 %</dt>
+        <dd>Los ocho indicadores obligatorios, que se aplican siempre. Sus pesos suman 85 %.</dd>
+
+        <dt>Bloque opcional · 15 %</dt>
+        <dd>Los indicadores 9 y 10, que PROINVERSIÓN elige según la evidencia disponible; el 15 % se
+          reparte entre los seleccionados. Si no eliges ninguno, este dashboard reparte ese 15 % entre
+          los ocho fijos para que la escala siga llegando a 1 —una decisión de modelado, no de la norma,
+          que da por hecho que se aplica al menos un opcional.</dd>
+
+        <dt>Reponderación por indicador sin variación</dt>
+        <dd>Si dentro de un sector todos los proyectos sacan exactamente el mismo valor en un indicador
+          obligatorio, ese indicador no distingue a nadie: se retira del cálculo y su peso se reparte
+          por partes iguales entre los demás obligatorios, manteniendo el bloque en 85 %. Los
+          indicadores retirados aparecen en la cabecera de cada sector como «sin variación, no
+          aplicados», y en la ficha del proyecto como «no aplicado». Se recalcula para cada sector por
+          separado, así que un mismo indicador puede pesar distinto en Salud y en Transporte.</dd>
+      </dl>
+    </section>
+
+    <section class="gsec" id="g-indicadores">
+      <h2>Los 10 indicadores</h2>
+      <p class="intro">Pesos nominales de la norma. El peso efectivo en cada sector puede ser mayor si
+        la reponderación retiró algún indicador.</p>
+      <div class="gtabla" id="gIndicadores"></div>
+    </section>
+
+    <section class="gsec" id="g-calidad">
+      <h2>Calidad del dato</h2>
+      <p class="intro">De dónde sale cada calificación. La etiqueta aparece en la ficha de cada
+        proyecto, junto a cada indicador.</p>
+      <dl class="defs">
+        <dt><span class="badge auto">Auto</span> Automático</dt>
+        <dd>Se deriva de una fuente oficial sin supuestos adicionales: la modalidad autofinanciada que
+          publica ProInversión, la pertenencia al PNI verificada contra el DS 039-2026-EF, el monto de
+          inversión publicado, o la matriz territorial cuando el proyecto está en una sola macrozona.</dd>
+
+        <dt><span class="badge proxy">Proxy</span> Aproximación documentada</dt>
+        <dd>El dato que pide la norma no es público y se sustituye por otro más grueso, con el supuesto
+          escrito en la ficha. Es revisable y, en varios casos, corregible desde la propia app.</dd>
+
+        <dt><span class="badge pendiente">Pend.</span> Pendiente</dt>
+        <dd>No hay ni dato ni aproximación razonable; el indicador se califica con el mínimo de su
+          escala hasta que alguien lo complete. Baja el puntaje del proyecto, así que un pendiente
+          nunca lo favorece.</dd>
+
+        <dt><span class="badge edit">Editado</span> Editado</dt>
+        <dd>El valor lo fijaste tú desde la ficha del proyecto. Se guarda en el navegador y sobrevive a
+          recargar la página; el botón <em>Restablecer</em> borra todas las ediciones de golpe.</dd>
+      </dl>
+    </section>
+
+    <section class="gsec" id="g-graficos">
+      <h2>Leer los gráficos</h2>
+      <dl class="defs">
+        <dt><span class="mini-strip" id="gStrip"></span>Franja de indicadores</dt>
+        <dd>Las diez barritas de cada fila del ranking son los diez indicadores, en orden del 1 al 10.
+          La altura de cada una es su valor normalizado. Una celda <em>rayada</em> es un indicador que
+          la reponderación retiró en ese sector; una con <em>borde ámbar</em> es un pendiente. Sirve
+          para ver de un vistazo por qué dos proyectos con puntaje parecido llegaron ahí por caminos
+          distintos.</dd>
+
+        <dt>Enjambre de puntos</dt>
+        <dd>En la distribución de puntajes, cada punto es un proyecto y solo importa su posición
+          <em>horizontal</em>. El desplazamiento vertical existe únicamente para que los puntos no se
+          tapen entre sí: una columna de puntos apilados significa varios proyectos con el mismo
+          puntaje, no una jerarquía dentro de la fila.</dd>
+
+        <dt>Δ (delta)</dt>
+        <dd>En «Qué separa a los seleccionados», la diferencia entre el promedio de los que están sobre
+          el corte y el de los que están debajo. Un delta grande significa que ese indicador es el que
+          está decidiendo la selección; un delta negativo, que los proyectos de abajo puntúan mejor ahí
+          y otros indicadores los están hundiendo.</dd>
+
+        <dt>Colores</dt>
+        <dd><span class="muestra"><i style="background:var(--mark-sel)"></i>verde</span> es «sobre la
+          línea de corte»; <span class="muestra"><i style="background:var(--mark-out)"></i>gris</span>,
+          debajo; <span class="muestra"><i style="background:var(--mark-lim)"></i>ámbar</span> marca el
+          límite de financiamiento y los datos pendientes. El color nunca lleva la información solo:
+          siempre hay una etiqueta o un trazo distinto al lado.</dd>
+      </dl>
+    </section>
+
+    <section class="gsec" id="g-portafolio">
+      <h2>Términos del portafolio</h2>
+      <dl class="defs">
+        <dt>Fases del proceso APP</dt>
+        <dd>El ciclo que fija la Ley 32441: <em>Planeamiento y programación</em> → <em>Formulación</em>
+          → <em>Estructuración</em> → <em>Transacción</em> → <em>Ejecución contractual</em>. Este
+          dashboard trabaja con los proyectos en Formulación y Estructuración, que son los que ya
+          existen como proyecto pero todavía no salieron al mercado.</dd>
+
+        <dt>Autofinanciada</dt>
+        <dd>El proyecto se paga con lo que cobra a sus usuarios —peajes, tarifas, precios— y no
+          necesita recursos públicos. La escala le da el puntaje máximo del indicador 2.</dd>
+
+        <dt>Cofinanciada</dt>
+        <dd>Requiere cofinanciamiento del Estado o garantías que demandan recursos públicos. La escala
+          distingue <em>total</em> (1 punto, sin ingresos propios) de <em>parcial</em> (2 puntos, con
+          ingresos propios que cubren una parte), pero ProInversión solo publica la categoría genérica:
+          por eso este dashboard asume total y marca el indicador como proxy.</dd>
+
+        <dt>Iniciativa estatal / iniciativa privada</dt>
+        <dd>Quién originó el proyecto: la entidad pública, o un privado que lo propuso por su cuenta.</dd>
+
+        <dt>Greenfield / Brownfield</dt>
+        <dd>Infraestructura nueva desde cero, frente a intervención sobre infraestructura existente
+          —ampliación, rehabilitación, operación y mantenimiento—.</dd>
+
+        <dt>CTI · CTP</dt>
+        <dd>Costo Total de Inversión y Costo Total del Proyecto. El segundo incluye además operación,
+          mantenimiento y reposición. El indicador 5 usa el que corresponda según el proyecto,
+          expresado en UIT.</dd>
+
+        <dt>UIT</dt>
+        <dd>Unidad Impositiva Tributaria, el valor de referencia del sistema tributario peruano. El
+          indicador 5 mide la inversión en UIT para que los rangos no se desactualicen con la
+          inflación. En 2026 vale S/ 5 500 (DS 301-2025-EF) y es editable en la barra de filtros.</dd>
+
+        <dt>PNI 2026-2031</dt>
+        <dd>Plan Nacional de Infraestructura, aprobado por el DS 039-2026-EF, con 72 proyectos
+          priorizados por S/ 144 117 millones. Estar en ese portafolio es lo que mide el indicador 1;
+          9 de los 73 proyectos del dashboard aparecen ahí y llevan la etiqueta correspondiente.</dd>
+
+        <dt>PNIC 2019</dt>
+        <dd>Plan Nacional de Infraestructura para la Competitividad, del que sale la brecha de acceso
+          básico por sector que necesita el indicador 9.</dd>
+
+        <dt>Criterios de elegibilidad</dt>
+        <dd>Filtro previo, anterior a todo este cálculo: determina si un proyecto puede desarrollarse
+          como APP. Se aplica según la RD 004-2016-EF/68.01 y no forma parte del puntaje. Los 73
+          proyectos del portafolio ya lo pasaron.</dd>
+      </dl>
+    </section>
+
+    <section class="gsec" id="g-territorio">
+      <h2>Territorio</h2>
+      <dl class="defs">
+        <dt>Macrozona</dt>
+        <dd>Agrupación de departamentos que usa el PNI 2026-2031. Determina qué actividades productivas
+          tienen potencial consolidado en la zona y, con ello, el rango de normalización del indicador 6.</dd>
+      </dl>
+      <div class="gtabla" id="gMacrozonas"></div>
+      <dl class="defs" style="margin-top:20px">
+        <dt>Impulso territorial <span class="en">indicador 6</span></dt>
+        <dd>Cruza dos matrices: el <em>Anexo 5</em> dice qué actividades tienen potencial consolidado en
+          la macrozona del proyecto, y el <em>Anexo 4</em> dice cuánto contribuye el sector del proyecto
+          a cada actividad —2 si el impacto es directo, 1 si es indirecto—. El puntaje es la suma de esos
+          productos. Como el máximo posible cambia según cuántas actividades tenga consolidadas cada
+          macrozona, la normalización usa un rango propio por macrozona.</dd>
+
+        <dt>Ámbito</dt>
+        <dd>Los departamentos donde se desarrolla el proyecto, tal como los publica ProInversión. Es la
+          única resolución geográfica disponible: no hay provincia ni distrito, y de ahí vienen los
+          proxies de los indicadores 3 y 4.</dd>
+
+        <dt>Tasa de pobreza monetaria provincial</dt>
+        <dd>Porcentaje de población bajo la línea de pobreza, del Mapa de Pobreza Monetaria Provincial y
+          Distrital 2018 del INEI. La ficha del indicador 3 pide la <em>mayor</em> tasa entre las
+          provincias que toca el proyecto. En la ficha de cada proyecto puedes marcar las provincias
+          reales y el indicador pasa de proxy a automático.</dd>
+      </dl>
+    </section>
+  </div>
+</div>
+
 <footer class="foot"><p class="note" id="fuentes"></p></footer>
 
 <div class="tip" id="tip"></div>
@@ -353,7 +676,7 @@ const P = DATOS.parametros, PROY = DATOS.proyectos;
 const FIJOS = [1,2,3,4,5,6,7,8];
 const LS = "jerarquizador-app-v2";
 
-let cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:""};
+let cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"", tab:"panel"};
 let ov = {};
 try{
   const g = JSON.parse(localStorage.getItem(LS)||"{}");
@@ -1035,7 +1358,7 @@ document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; ren
 document.getElementById("btnCsv").onclick = csv;
 document.getElementById("btnReset").onclick = () => {
   if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
-  ov = {}; cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:""};
+  ov = {}; cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"", tab:cfg.tab};
   guardar(); sincronizar(); render(); cerrar();
 };
 document.getElementById("btnTema").onclick = () => {
@@ -1050,6 +1373,50 @@ document.getElementById("scrim").onclick = cerrar;
 addEventListener("keydown", e => { if(e.key==="Escape") cerrar(); });
 let tRes;
 addEventListener("resize", () => { clearTimeout(tRes); tRes = setTimeout(() => ultimo && render(), 160); });
+
+/* ================= pestañas ================= */
+function mostrarTab(t){
+  cfg.tab = t;
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab===t));
+  document.getElementById("vistaPanel").hidden = t!=="panel";
+  document.getElementById("vistaGlosario").hidden = t!=="glosario";
+  document.getElementById("barraFiltros").hidden = t!=="panel";
+  if(t==="panel" && ultimo) render();
+  guardar();
+}
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => mostrarTab(b.dataset.tab));
+
+function construirGlosario(){
+  const orden = [1,2,3,4,5,6,7,8,9,10];
+  let t = '<table class="g"><thead><tr><th>N.º</th><th>Indicador</th><th>Criterio</th>'+
+          '<th>Dimensión</th><th>Peso</th><th>Escala</th><th>Fuente que pide la norma</th></tr></thead><tbody>';
+  for(const i of orden){
+    const d = P.indicadores[i];
+    t += '<tr'+(d.bloque==="opcional"?' class="opc"':'')+'>'+
+         '<td class="n">'+i+'</td><td class="nom">'+esc(d.nombre)+'</td><td>'+esc(d.criterio)+'</td>'+
+         '<td>'+esc(d.dimension.replace("Sostenibilidad ",""))+'</td>'+
+         '<td class="w">'+(d.bloque==="opcional" ? "15 % ent. 9 y 10" : (P.pesos[i]*100).toFixed(0)+" %")+'</td>'+
+         '<td class="w">'+esc(d.escala_txt)+'</td><td>'+esc(d.fuente)+'</td></tr>';
+  }
+  t += '<tr><td></td><td class="nom">Bloque fijo · indicadores 1 a 8</td><td colspan="2"></td>'+
+       '<td class="w">85 %</td><td colspan="2"></td></tr></tbody></table>';
+  document.getElementById("gIndicadores").innerHTML = t;
+
+  let m = '<table class="g"><thead><tr><th>Macrozona</th><th>Departamentos</th>'+
+          '<th>Actividades con potencial consolidado</th><th>Rango ind. 6</th></tr></thead><tbody>';
+  for(const mz of ["MN","MC","MLC","MS"]){
+    const act = P.actividades.filter((a,k) => P.anexo5[mz][k]===1).map(a => P.actividades_nombre[a]);
+    m += '<tr><td class="nom">'+esc(P.macrozonas[mz])+'</td>'+
+         '<td>'+esc(P.anexo6[mz].map(d => P.deptos_nombre[d] || d).join(", "))+'</td>'+
+         '<td>'+esc(act.join(", "))+'</td>'+
+         '<td class="w">'+P.rango6[mz][0]+' a '+P.rango6[mz][1]+'</td></tr>';
+  }
+  document.getElementById("gMacrozonas").innerHTML = m + '</tbody></table>';
+
+  const demo = [.9,.55,.8,1,.35,0,.65,.45,0,0], clases = ["","","","","","na","","","pend","na"];
+  document.getElementById("gStrip").innerHTML = demo.map((v,k) =>
+    '<i class="'+clases[k]+'"><span style="height:'+Math.round(v*100)+'%"></span></i>').join("");
+}
 
 function sincronizar(){
   document.getElementById("selModo").value = cfg.modo;
@@ -1070,6 +1437,8 @@ document.getElementById("fuentes").innerHTML =
   "El ranking general es una extensión a la norma, que ordena y corta por sector. " +
   "Los indicadores marcados como proxy o pendientes usan supuestos de trabajo: la jerarquía es preliminar hasta que el equipo técnico complete la ficha de cada proyecto.";
 
+construirGlosario();
 sincronizar();
 render();
+mostrarTab(cfg.tab || "panel");
 </script>

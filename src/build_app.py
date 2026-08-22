@@ -22,8 +22,10 @@ def main():
 
     parametros = {
         "indicadores": {str(i): {"nombre": d["nombre"], "criterio": d["criterio"],
-                                 "dimension": d["dimension"], "bloque": d["bloque"]}
+                                 "dimension": d["dimension"], "bloque": d["bloque"],
+                                 "escala_txt": d["escala_txt"], "fuente": d["fuente"]}
                         for i, d in M.INDICADORES.items()},
+        "anexo6": M.ANEXO6,
         "pesos": {str(i): d["peso"] for i, d in M.INDICADORES.items()},
         "escalas": {str(i): (d["escala"] or [0, 1]) for i, d in M.INDICADORES.items()},
         "rangos": {"3": limpiar(M.RANGOS_IND3), "4": limpiar(M.RANGOS_IND4),
@@ -38,6 +40,8 @@ def main():
         "rango6": {k: list(v) for k, v in M.RANGO_IND6.items()},
         "macrozonas": M.MACROZONAS,
         "actividades": M.ACTIVIDADES,
+        "deptos_nombre": M.DEPARTAMENTOS_NOMBRE,
+        "actividades_nombre": M.ACTIVIDADES_NOMBRE,
         "uit": M.UIT_2026,
         "fecha_datos": datetime.date.today().strftime("%d/%m/%Y"),
     }
