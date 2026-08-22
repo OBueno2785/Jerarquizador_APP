@@ -5,3 +5,6 @@ data/inei_pobreza_2018.xlsx
 pdfs/txt/
 __pycache__/
 *.pyc
+diseno/node_modules/
+diseno/package-lock.json
+diseno/package.json
