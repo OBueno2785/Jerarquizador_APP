@@ -375,10 +375,12 @@ function calificar(p){
   c[1] = {pt:O(p,"i1", p.pni?1:0), origen:"auto", edit:editado(p,"i1"),
           nota: p.pni || "No identificado en el portafolio priorizado del PNI 2026-2031."};
 
+  // La escala distingue cofinanciada total (1) de parcial (2), pero ProInversión solo
+  // publica cofinanciada / autofinanciada: dar por total a las 66 cofinanciadas es un supuesto.
   const auto2 = p.modalidad==="Autofinanciada" ? 3 : 1;
-  c[2] = {pt:O(p,"i2",auto2), origen:"auto", edit:editado(p,"i2"),
-          nota: p.modalidad==="Autofinanciada" ? "Clasificación autofinanciada del portafolio."
-              : "Clasificación cofinanciada del portafolio; elevar a 2 si se acredita que el proyecto percibe tarifas o peajes."};
+  c[2] = {pt:O(p,"i2",auto2), origen: p.modalidad==="Autofinanciada" ? "auto" : "proxy", edit:editado(p,"i2"),
+          nota: p.modalidad==="Autofinanciada" ? "Clasificación autofinanciada del portafolio: la escala le asigna 3 sin ambigüedad."
+              : "El portafolio solo dice «cofinanciada»; se asume total. Elevar a 2 si el proyecto percibe tarifas o peajes de los usuarios."};
 
   const provSel = O(p,"i3_prov", null);
   let tasa = O(p,"i3_tasa", null);
@@ -414,8 +416,11 @@ function calificar(p){
     det.push(P.macrozonas[mz]+": "+bruto+" (rango "+lo+"–"+hi+")");
   }
   const v6 = vs.reduce((a,b)=>a+b,0)/vs.length;
-  c[6] = {pt:null, v:v6, origen:"auto", edit:editado(p,"i6"), mzs,
-          nota:"Anexo 4 ("+p.anexo4.sector+" / "+p.anexo4.subsector+") × Anexo 5 → "+det.join(" · ")+"."};
+  // Con varias macrozonas se promedian los valores normalizados: regla propia,
+  // la ficha del Anexo 2 asume una sola macrozona por proyecto.
+  c[6] = {pt:null, v:v6, origen: mzs.length===1 ? "auto" : "proxy", edit:editado(p,"i6"), mzs,
+          nota:"Anexo 4 ("+p.anexo4.sector+" / "+p.anexo4.subsector+") × Anexo 5 → "+det.join(" · ")+
+               (mzs.length>1 ? ". Promedio de las "+mzs.length+" macrozonas del ámbito." : ".")};
 
   const auto7 = p.modalidad==="Autofinanciada" ? 3 : 2;
   c[7] = {pt:O(p,"i7",auto7), origen:"proxy", edit:editado(p,"i7"),
@@ -764,8 +769,8 @@ function graficoCalidad(r){
     }).join("")+'</div>'+
     '<p class="note" style="margin:10px 0 0">'+
       '<b>'+cuenta.auto+'</b> de '+total+' calificaciones salen de fuente oficial sin supuestos. '+
-      (proxy.length ? 'Los indicadores <b>'+proxy.join(", ")+'</b> usan proxies documentados. ' : '')+
-      (pend.length ? 'Los indicadores <b>'+pend.join(", ")+'</b> requieren el estudio del proyecto.' : '')+
+      (proxy.length ? (proxy.length>1?'Los indicadores <b>':'El indicador <b>')+proxy.join(", ")+'</b> usa'+(proxy.length>1?'n':'')+' proxies documentados. ' : '')+
+      (pend.length ? (pend.length>1?'Los indicadores <b>':'El indicador <b>')+pend.join(", ")+'</b> requiere'+(pend.length>1?'n':'')+' el estudio del proyecto.' : '')+
     '</p>';
 }
 

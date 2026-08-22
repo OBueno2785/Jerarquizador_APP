@@ -30,11 +30,13 @@ def calificar(p):
     c[1] = {"p": 1 if p["pni"] else 0, "origen": "auto",
             "nota": p["pni"] or "No identificado en el portafolio priorizado del PNI 2026-2031"}
 
+    # La escala distingue cofinanciada total (1) de parcial (2), pero el portafolio
+    # solo publica cofinanciada / autofinanciada: la total es un supuesto.
     if p["modalidad"] == "Autofinanciada":
         c[2] = {"p": 3, "origen": "auto", "nota": "Autofinanciada"}
     else:
-        c[2] = {"p": 1, "origen": "auto",
-                "nota": "Cofinanciada; elevar a 2 si se acredita cofinanciamiento parcial"}
+        c[2] = {"p": 1, "origen": "proxy",
+                "nota": "Cofinanciada, asumida total; elevar a 2 si se acredita que percibe tarifas o peajes"}
 
     if p["tasa_pobreza"] is not None:
         c[3] = {"p": M.puntaje_por_rango(p["tasa_pobreza"], M.RANGOS_IND3), "origen": "proxy",
@@ -56,7 +58,9 @@ def calificar(p):
     else:
         c[5] = {"p": 1, "origen": "pendiente", "nota": "Monto de inversión no publicado"}
 
-    c[6] = {"p": None, "origen": "auto", "nota": ""}  # se calcula en normalizar_ind6
+    # Con varias macrozonas se promedian los valores normalizados: regla propia,
+    # la ficha del Anexo 2 asume una sola macrozona por proyecto.
+    c[6] = {"p": None, "origen": "auto" if len(p["macrozonas"]) == 1 else "proxy", "nota": ""}
 
     if p["modalidad"] == "Autofinanciada":
         c[7] = {"p": 3, "origen": "proxy", "nota": "Autofinanciada: demanda y financiamiento al privado"}
