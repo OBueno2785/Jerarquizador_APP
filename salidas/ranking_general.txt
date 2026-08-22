@@ -1,0 +1,81 @@
+
+=== RANKING GENERAL  (73 proyectos | corte P70 = 0.5451 | indicadores no aplicados: ninguno)
+  >>  1. Terminal Internacional de Chimbote             0.8534   US$ 463 MM  acum      463  Transporte
+  >>  2. Tercer Grupo de Aeropuertos                    0.8227   US$ 619 MM  acum     1082  Transporte
+  >>  3. Nuevo Terminal Portuario Pucallpa              0.7998   US$ 336 MM  acum     1418  Transporte
+  >>  4. Masificación del Gas Natural en Arequipa, Moqu 0.7278   US$ 349 MM  acum     1767  Hidrocarburos
+  >>  5. Desaladora Lima Norte                          0.6886   US$ 205 MM  acum     1972  Agua y saneamiento
+  >>  6. Terminal Portuario Almirante Miguel Grau de Ta 0.6413   US$ 400 MM  acum     2372  Transporte
+  >>  7. Vía de Evitamiento de Cusco                    0.6204   US$ 918 MM  acum     3290  Transporte
+  >>  8. Centro de Gestión y Monitoreo Tecnológico      0.6138       s/d MM  acum     3290  Tecnología
+  >>  9. PTAR Trujillo                                  0.6137   US$ 809 MM  acum     4098  Agua y saneamiento
+  >> 10. Corredor Vial 4                                0.5873   US$ 163 MM  acum     4261  Transporte
+  >> 11. Corredor Vial 5                                0.5873   US$ 151 MM  acum     4412  Transporte
+  >> 12. Corredor Vial 6                                0.5830   US$ 192 MM  acum     4605  Transporte
+  >> 13. Carretera Empalme 1B – Buenos Aires – Canchaqu 0.5784   US$ 297 MM  acum     4902  Transporte
+  ---------------- limite de financiamiento US$ 5000 MM ----------------
+  >> 14. Pte. Carrizales (Casma) – Pariacoto            0.5595   US$ 106 MM  acum     5007  Transporte
+  >> 15. PTAR Huancayo                                  0.5567   US$ 466 MM  acum     5474  Agua y saneamiento
+  >> 16. Nuevos terminales Portuarios de Loreto         0.5559   US$ 199 MM  acum     5672  Transporte
+  >> 17. Dv. Las Vegas – Mazamari – Pto. Ocopa          0.5537   US$ 353 MM  acum     6025  Transporte
+  >> 18. Kimbiri – Kepashiato                           0.5537   US$ 155 MM  acum     6180  Transporte
+  >> 19. Pte. Los Maestros – Huaytará                   0.5537   US$ 161 MM  acum     6341  Transporte
+  >> 20. Corredor Vial 2                                0.5537   US$ 241 MM  acum     6582  Transporte
+  >> 21. Proyecto Chavimochic - Tercera Etapa           0.5510   US$ 450 MM  acum     7032  Agricultura e irrigaci
+  >> 22. O&M Olmos                                      0.5471   US$ 156 MM  acum     7188  Agricultura e irrigaci
+  ---------------- linea de corte P70 = 0.5451 ----------------
+     23. Santa – Pte Chuquicara – Tauca – Dv. Sihuas    0.5438   US$ 145 MM  acum     7334  Transporte
+     24. Dv. Chiguata – Santa Lucía – Mañazo            0.5380   US$ 647 MM  acum     7981  Transporte
+     25. Majes Siguas - II Etapa                        0.5357   US$ 720 MM  acum     8701  Agricultura e irrigaci
+     26. Hospital Militar                               0.5353   US$ 800 MM  acum     9501  Salud
+     27. Atico – Dv. Quilca – Matarani – Ilo            0.5325   US$ 240 MM  acum     9741  Transporte
+     28. PTAP Cajamarca                                 0.5314   US$ 921 MM  acum    10662  Agua y saneamiento
+     29. Corredor Vial 7                                0.5302    US$ 92 MM  acum    10754  Transporte
+     30. Cusco – Pisac                                  0.5302   US$ 107 MM  acum    10861  Transporte
+     31. Sicuani – Pucará – Calapuja                    0.5302   US$ 110 MM  acum    10972  Transporte
+     32. Pto. Yoyato – Cubantia                         0.5302    US$ 85 MM  acum    11057  Transporte
+     33. Corredor Vial 1                                0.5276   US$ 211 MM  acum    11269  Transporte
+     34. Hospital de Iquitos                            0.5128   US$ 135 MM  acum    11404  Salud
+     35. Hospital de Yurimaguas                         0.5128   US$ 139 MM  acum    11542  Salud
+     36. Hospital Regional de Loreto                    0.5128   US$ 292 MM  acum    11835  Salud
+     37. Hospital PNP                                   0.5106   US$ 603 MM  acum    12438  Salud
+     38. Dv. Urcos – Sicuani                            0.4910   US$ 123 MM  acum    12561  Transporte
+     39. Colegios Cusco                                 0.4902   US$ 218 MM  acum    12779  Educación
+     40. Proyecto Chinecas                              0.4879  US$ 5046 MM  acum    17824  Agricultura e irrigaci
+     41. Zapallal – Ventanilla                          0.4878    US$ 88 MM  acum    17913  Transporte
+     42. SITGAS                                         0.4745  US$ 4321 MM  acum    22233  Hidrocarburos
+     43. Saneamiento Chanchamayo y Concepción           0.4743   US$ 190 MM  acum    22423  Agua y saneamiento
+     44. Sayari                                         0.4726   US$ 264 MM  acum    22687  Educación
+     45. PTAR Cañete                                    0.4690   US$ 281 MM  acum    22968  Agua y saneamiento
+     46. Nueva Concesión Olmos                          0.4686   US$ 424 MM  acum    23392  Agricultura e irrigaci
+     47. Servicios de Saneamiento Talara                0.4686   US$ 180 MM  acum    23572  Agua y saneamiento
+     48. PTAR Cusco                                     0.4667   US$ 129 MM  acum    23701  Agua y saneamiento
+     49. PTAR San Martín                                0.4524   US$ 239 MM  acum    23940  Agua y saneamiento
+     50. Canal de Navegación Amazónico                  0.4520   US$ 304 MM  acum    24244  Transporte
+     51. GIRSE                                          0.4478   US$ 220 MM  acum    24464  Salud
+     52. PTAR Iquitos                                   0.4344   US$ 415 MM  acum    24879  Agua y saneamiento
+     53. Hospital Unanue                                0.4322  US$ 1112 MM  acum    25991  Salud
+     54. Operación y Mantenimiento del Hospital de Caja 0.4294   US$ 198 MM  acum    26189  Salud
+     55. Sistema Hídrico Valle Chancay - Lambayeque     0.4286   US$ 619 MM  acum    26807  Agricultura e irrigaci
+     56. CER VMT                                        0.4243   US$ 128 MM  acum    26935  Educación
+     57. Saneamiento San Ignacio                        0.4216    US$ 25 MM  acum    26960  Agua y saneamiento
+     58. Teleférico Huascarán                           0.4144    US$ 75 MM  acum    27035  Turismo
+     59. Saneamiento Rural de Loreto                    0.4108    US$ 89 MM  acum    27124  Agua y saneamiento
+     60. Servicios de Saneamiento de Huara y Barranca   0.4063    US$ 80 MM  acum    27204  Agua y saneamiento
+     61. PTAR Lambayeque                                0.4051   US$ 144 MM  acum    27348  Agua y saneamiento
+     62. Hospital de Alta Complejidad de Lambayeque     0.4051   US$ 398 MM  acum    27746  Salud
+     63. Hospital Regional Lambayeque                   0.4051   US$ 186 MM  acum    27932  Salud
+     64. Teleférico Collpani Grande                     0.4039    US$ 57 MM  acum    27989  Turismo
+     65. Teleférico Querocancha                         0.4039    US$ 44 MM  acum    28033  Turismo
+     66. Teleférico Waqrapukara                         0.4039    US$ 48 MM  acum    28081  Turismo
+     67. Teleférico Cerro Azoguini – Lago Titicaca      0.4039    US$ 38 MM  acum    28119  Turismo
+     68. Desaladora Ilo                                 0.3875   US$ 232 MM  acum    28351  Agua y saneamiento
+     69. Agua y Saneamiento Tumbes y Contralmirante Vil 0.3863   US$ 653 MM  acum    29003  Agua y saneamiento
+     70. Desaladora Lambayeque                          0.3580    US$ 54 MM  acum    29057  Agua y saneamiento
+     71. Port Community System                          0.3550       s/d MM  acum    29057  Tecnología
+     72. Gasoducto Regional de Cusco                    0.3333       s/d MM  acum    29057  Hidrocarburos
+     73. Ferrocarril Tacna - Arica                      0.2860       s/d MM  acum    29057  Transporte
+
+Sobre la linea de corte general: 22 de 73  (US$ 7188 MM)
+Dentro del limite de financiamiento: 13 proyectos  (US$ 4902 MM)
+CSV: C:\Users\oscar\OneDrive\Claude Code\Jerarquizador_APP\salidas\ranking.csv

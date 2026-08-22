@@ -153,23 +153,41 @@ def jerarquizar(proyectos, opcionales=(), campo_sector="sector"):
 
     resultado = []
     for sector, grupo in sorted(sectores.items()):
-        w, constantes = reponderar_sector(w0, [p["_norm"] for p in grupo], list(opcionales))
-        for p in grupo:
-            p["_pesos"] = w
-            p["_excluidos"] = constantes
-            p["_puntaje"] = sum(w[i] * p["_norm"][i] for i in aplicados if i in w)
-        grupo.sort(key=lambda x: -x["_puntaje"])
-        corte = percentil([p["_puntaje"] for p in grupo], M.PERCENTIL_CORTE)
-        for n, p in enumerate(grupo, 1):
-            p["_rank_sector"] = n
-            p["_corte_sector"] = corte
-            p["_seleccionado"] = p["_puntaje"] >= corte
+        evaluar(grupo, w0, opcionales, aplicados, "")
         resultado.extend(grupo)
 
-    resultado.sort(key=lambda x: -x["_puntaje"])
-    for n, p in enumerate(resultado, 1):
-        p["_rank_global"] = n
+    # Ranking general: una sola bolsa de proyectos, con la regla de reponderación
+    # evaluada sobre todo el universo para que los puntajes sean comparables entre sectores.
+    evaluar(resultado, w0, opcionales, aplicados, "_gen")
+
+    resultado.sort(key=lambda x: -x["_puntaje_gen"])
     return resultado
+
+
+def evaluar(grupo, w0, opcionales, aplicados, suf):
+    """Aplica reponderación, puntaje, orden y línea de corte sobre un grupo de proyectos."""
+    w, constantes = reponderar_sector(w0, [p["_norm"] for p in grupo], list(opcionales))
+    for p in grupo:
+        p["_pesos" + suf] = w
+        p["_excluidos" + suf] = constantes
+        p["_puntaje" + suf] = sum(w[i] * p["_norm"][i] for i in aplicados if i in w)
+    grupo.sort(key=lambda x: -x["_puntaje" + suf])
+    corte = percentil([p["_puntaje" + suf] for p in grupo], M.PERCENTIL_CORTE)
+    for n, p in enumerate(grupo, 1):
+        p["_rank" + (suf or "_sector")] = n
+        p["_corte" + (suf or "_sector")] = corte
+        p["_seleccionado" + suf] = p["_puntaje" + suf] >= corte
+    return w, constantes, corte
+
+
+def acumular_presupuesto(res, tope):
+    """Marca hasta dónde alcanza el límite de capacidad de financiamiento recorriendo
+    el ranking general de mayor a menor puntaje."""
+    acum = 0.0
+    for p in sorted(res, key=lambda x: -x["_puntaje_gen"]):
+        acum += p["monto_usd_mm"] or 0
+        p["_acumulado"] = acum
+        p["_financiable"] = tope is None or acum <= tope
 
 
 def exportar(res, campo_sector="sector"):
@@ -177,15 +195,21 @@ def exportar(res, campo_sector="sector"):
     ruta = os.path.join(SALIDAS, "ranking.csv")
     with open(ruta, "w", newline="", encoding="utf-8-sig") as fh:
         wr = csv.writer(fh, delimiter=";")
-        wr.writerow(["Rank global", "Rank sector", "Sector", "Proyecto", "Fase", "Modalidad",
-                     "Ambito", "Monto US$ MM", "Puntaje total", "Corte P70 sector",
-                     "Seleccionado"] + ["Ind %d (pt)" % i for i in range(1, 11)]
+        wr.writerow(["Rank general", "Puntaje general", "Corte P70 general", "Sel. general",
+                     "Acumulado US$ MM", "Dentro del presupuesto",
+                     "Sector", "Rank sector", "Puntaje sector", "Corte P70 sector", "Sel. sector",
+                     "Proyecto", "Fase", "Modalidad", "Ambito", "Monto US$ MM"]
+                    + ["Ind %d (pt)" % i for i in range(1, 11)]
                     + ["Ind %d (norm)" % i for i in range(1, 11)])
-        for p in res:
-            wr.writerow([p["_rank_global"], p["_rank_sector"], p[campo_sector], p["nombre_corto"],
-                         p["fase"], p["modalidad"], p["ambito"], p["monto_usd_mm"] or "",
-                         round(p["_puntaje"], 4), round(p["_corte_sector"], 4),
-                         "Si" if p["_seleccionado"] else "No"]
+        for p in sorted(res, key=lambda x: x["_rank_gen"]):
+            wr.writerow([p["_rank_gen"], round(p["_puntaje_gen"], 4), round(p["_corte_gen"], 4),
+                         "Si" if p["_seleccionado_gen"] else "No",
+                         round(p.get("_acumulado", 0), 2),
+                         "Si" if p.get("_financiable") else "No",
+                         p[campo_sector], p["_rank_sector"], round(p["_puntaje"], 4),
+                         round(p["_corte_sector"], 4), "Si" if p["_seleccionado"] else "No",
+                         p["nombre_corto"], p["fase"], p["modalidad"], p["ambito"],
+                         p["monto_usd_mm"] or ""]
                         + [p["_calif"][i]["p"] for i in range(1, 11)]
                         + [round(p["_norm"][i], 4) for i in range(1, 11)])
     return ruta
@@ -196,11 +220,44 @@ def main():
     ap.add_argument("--opcionales", default="", help="indicadores opcionales a aplicar: 9, 10 o 9,10")
     ap.add_argument("--sector", default="sector", choices=["sector", "cartera"],
                     help="nivel del ranking sectorial")
+    ap.add_argument("--general", action="store_true",
+                    help="imprime el ranking general en lugar de los rankings sectoriales")
+    ap.add_argument("--presupuesto", type=float, default=None,
+                    help="limite de capacidad de financiamiento en US$ millones")
     args = ap.parse_args()
     opcionales = [int(x) for x in args.opcionales.split(",") if x.strip()]
 
     proyectos = json.load(open(os.path.join(SALIDAS, "proyectos.json"), encoding="utf-8"))
     res = jerarquizar(proyectos, opcionales, args.sector)
+    acumular_presupuesto(res, args.presupuesto)
+
+    if args.general:
+        print("\n=== RANKING GENERAL  (%d proyectos | corte P70 = %.4f | indicadores no aplicados: %s)"
+              % (len(res), res[0]["_corte_gen"], res[0]["_excluidos_gen"] or "ninguno"))
+        corte_marcado = presu_marcado = False
+        for p in sorted(res, key=lambda x: x["_rank_gen"]):
+            if not p["_seleccionado_gen"] and not corte_marcado:
+                print("  ---------------- linea de corte P70 = %.4f ----------------" % p["_corte_gen"])
+                corte_marcado = True
+            if args.presupuesto and not p["_financiable"] and not presu_marcado:
+                print("  ---------------- limite de financiamiento US$ %.0f MM ----------------"
+                      % args.presupuesto)
+                presu_marcado = True
+            print("  %s %2d. %-46s %.4f  %8s MM  acum %8.0f  %s" % (
+                ">>" if p["_seleccionado_gen"] else "  ", p["_rank_gen"], p["nombre_corto"][:46],
+                p["_puntaje_gen"],
+                ("US$ %.0f" % p["monto_usd_mm"]) if p["monto_usd_mm"] else "s/d",
+                p["_acumulado"], p[args.sector][:22]))
+        ruta = exportar(res, args.sector)
+        sel = [p for p in res if p["_seleccionado_gen"]]
+        print("\nSobre la linea de corte general: %d de %d  (US$ %.0f MM)"
+              % (len(sel), len(res), sum(p["monto_usd_mm"] or 0 for p in sel)))
+        if args.presupuesto:
+            fin = [p for p in res if p["_financiable"]]
+            print("Dentro del limite de financiamiento: %d proyectos  (US$ %.0f MM)"
+                  % (len(fin), sum(p["monto_usd_mm"] or 0 for p in fin)))
+        print("CSV:", ruta)
+        return
 
     grupos = {}
     for p in res:
