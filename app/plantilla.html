@@ -5,29 +5,29 @@
 
 <style>
 :root{
-  --ground:#F4F6F3; --surface:#FFFFFF; --surface-2:#EDF1EC; --line:#D9E0D8;
+  --ground:#F4F6F3; --surface:#FFFFFF; --surface-2:#EDF1EC; --line:#D9E0D8; --grid:#E4EAE3;
   --ink:#16211D; --ink-2:#4E5C56; --ink-3:#7C8A83;
   --accent:#0B6E4F; --accent-2:#0A5A41; --accent-soft:#DFEEE6; --on-accent:#FFFFFF;
   --warn:#9A5A0F; --warn-soft:#F6EBD7;
-  --strip:#0B6E4F;
+  --mark-sel:#0B6E4F; --mark-out:#9FADA6; --mark-lim:#9A5A0F;
   --shadow:0 1px 2px rgba(20,40,32,.06),0 8px 24px rgba(20,40,32,.06);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#0F1412; --surface:#161D1A; --surface-2:#1C2521; --line:#2B3631;
+    --ground:#0F1412; --surface:#161D1A; --surface-2:#1C2521; --line:#2B3631; --grid:#26302B;
     --ink:#E8EEEA; --ink-2:#A7B4AD; --ink-3:#77867F;
     --accent:#5CC79A; --accent-2:#7FD8B2; --accent-soft:#15291F; --on-accent:#08150F;
     --warn:#DFA85B; --warn-soft:#2A2114;
-    --strip:#5CC79A;
+    --mark-sel:#5CC79A; --mark-out:#6C7A73; --mark-lim:#DFA85B;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.32);
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0F1412; --surface:#161D1A; --surface-2:#1C2521; --line:#2B3631;
+  --ground:#0F1412; --surface:#161D1A; --surface-2:#1C2521; --line:#2B3631; --grid:#26302B;
   --ink:#E8EEEA; --ink-2:#A7B4AD; --ink-3:#77867F;
   --accent:#5CC79A; --accent-2:#7FD8B2; --accent-soft:#15291F; --on-accent:#08150F;
   --warn:#DFA85B; --warn-soft:#2A2114;
-  --strip:#5CC79A;
+  --mark-sel:#5CC79A; --mark-out:#6C7A73; --mark-lim:#DFA85B;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.32);
 }
 
@@ -41,99 +41,99 @@ h1,h2,h3{margin:0; text-wrap:balance; font-weight:600; letter-spacing:-.015em}
 button,input,select{font:inherit; color:inherit}
 a{color:var(--accent); text-underline-offset:2px}
 :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
-
-.eyebrow{
-  font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
-  color:var(--ink-3);
-}
+.eyebrow{font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3)}
 .num{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.note{font-family:"Source Serif 4",Georgia,serif; font-size:12.5px; line-height:1.55; color:var(--ink-3)}
+.note b{color:var(--ink-2); font-weight:600}
 
 /* ---------- cabecera ---------- */
 .top{
   border-bottom:1px solid var(--line); background:var(--surface);
-  padding:18px 24px 16px; display:flex; flex-wrap:wrap; gap:16px 28px; align-items:flex-end;
+  padding:16px 24px 14px; display:flex; flex-wrap:wrap; gap:14px 28px; align-items:flex-end;
 }
-.top h1{font-size:23px; line-height:1.15}
-.top .sub{
-  font-family:"Source Serif 4",Georgia,serif; font-size:14px; color:var(--ink-2);
-  max-width:62ch; margin-top:5px;
-}
+.top h1{font-size:22px; line-height:1.15}
+.top .sub{font-family:"Source Serif 4",Georgia,serif; font-size:13.5px; color:var(--ink-2); max-width:64ch; margin:4px 0 0}
 .top .right{margin-left:auto; display:flex; gap:8px; align-items:center}
-.ghost{
-  background:transparent; border:1px solid var(--line); border-radius:6px;
-  padding:7px 12px; font-size:13px; font-weight:500; cursor:pointer; color:var(--ink-2);
-}
+.ghost{background:transparent; border:1px solid var(--line); border-radius:6px; padding:7px 12px;
+  font-size:13px; font-weight:500; cursor:pointer; color:var(--ink-2)}
 .ghost:hover{border-color:var(--accent); color:var(--accent)}
-.solid{
-  background:var(--accent); color:var(--on-accent); border:1px solid var(--accent);
-  border-radius:6px; padding:7px 13px; font-size:13px; font-weight:600; cursor:pointer;
-}
+.solid{background:var(--accent); color:var(--on-accent); border:1px solid var(--accent); border-radius:6px;
+  padding:7px 13px; font-size:13px; font-weight:600; cursor:pointer}
 .solid:hover{background:var(--accent-2); border-color:var(--accent-2)}
 
-/* ---------- shell ---------- */
-.shell{display:grid; grid-template-columns:288px minmax(0,1fr); gap:0; align-items:start}
-.rail{
-  position:sticky; top:0; max-height:100vh; overflow-y:auto;
-  border-right:1px solid var(--line); background:var(--surface);
-  padding:20px 20px 40px; display:flex; flex-direction:column; gap:22px;
+/* ---------- barra de filtros ---------- */
+.filtros{
+  position:sticky; top:0; z-index:3; background:var(--surface); border-bottom:1px solid var(--line);
+  padding:10px 24px; display:flex; flex-wrap:wrap; gap:10px 16px; align-items:flex-end;
 }
-main{padding:24px 28px 80px; min-width:0}
-
-.block{display:flex; flex-direction:column; gap:9px}
-.block > .eyebrow{padding-bottom:2px; border-bottom:1px solid var(--line)}
-
-.kpis{display:grid; grid-template-columns:1fr 1fr; gap:8px}
-.kpi{background:var(--surface-2); border-radius:7px; padding:9px 11px}
-.kpi b{display:block; font-family:"IBM Plex Mono",monospace; font-size:19px; font-weight:600; letter-spacing:-.02em}
-.kpi span{font-size:11px; color:var(--ink-3); line-height:1.3; display:block; margin-top:1px}
-
-.field{display:flex; flex-direction:column; gap:5px}
-.field label{font-size:12px; color:var(--ink-2); font-weight:500}
-.field input,.field select{
-  background:var(--ground); border:1px solid var(--line); border-radius:6px;
-  padding:6px 9px; font-size:13px; width:100%;
-}
-.chips{display:flex; flex-wrap:wrap; gap:6px}
-.chip{
-  border:1px solid var(--line); background:var(--surface); border-radius:999px;
-  padding:5px 11px; font-size:12px; cursor:pointer; color:var(--ink-2); font-weight:500;
-}
+.f{display:flex; flex-direction:column; gap:3px}
+.f label{font-size:10.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
+.f select,.f input{background:var(--ground); border:1px solid var(--line); border-radius:6px;
+  padding:5px 8px; font-size:13px}
+.f.chips{gap:5px}
+.chips-row{display:flex; gap:5px}
+.chip{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:4px 10px;
+  font-size:12px; cursor:pointer; color:var(--ink-2); font-weight:500}
 .chip[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
 
-.wlist{display:flex; flex-direction:column; gap:5px}
-.wrow{display:grid; grid-template-columns:16px 1fr 44px; gap:8px; align-items:center; font-size:12px}
-.wrow .bar{height:5px; background:var(--surface-2); border-radius:3px; overflow:hidden}
-.wrow .bar i{display:block; height:100%; background:var(--strip); border-radius:3px}
-.wrow .n{color:var(--ink-3); font-family:"IBM Plex Mono",monospace; font-size:11px}
-.wrow .v{text-align:right; font-family:"IBM Plex Mono",monospace; color:var(--ink-2)}
-.wrow.off{opacity:.4}
-
-.note{font-family:"Source Serif 4",Georgia,serif; font-size:12.5px; line-height:1.55; color:var(--ink-3)}
-.note b{color:var(--ink-2); font-weight:600}
-
-/* ---------- secciones sectoriales ---------- */
-.sector{margin-bottom:34px}
-.sector-head{
-  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
-  padding-bottom:8px; margin-bottom:10px; border-bottom:2px solid var(--ink);
+/* ---------- rejilla del dashboard ---------- */
+.grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px; padding:16px 24px 64px; align-items:start}
+.panel{
+  grid-column:span 12; background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px 12px; min-width:0;
 }
-.sector-head h2{font-size:18px}
-.sector-head .meta{font-size:12px; color:var(--ink-3); margin-left:auto; text-align:right}
+.panel > header{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; margin-bottom:2px}
+.panel h3{font-size:14.5px}
+.panel .ph{margin:2px 0 10px; font-family:"Source Serif 4",Georgia,serif; font-size:12.5px; color:var(--ink-3); max-width:70ch}
+.c12{grid-column:span 12} .c8{grid-column:span 8} .c6{grid-column:span 6} .c4{grid-column:span 4}
+
+/* ---------- KPI ---------- */
+.kpis{grid-column:span 12; display:grid; grid-template-columns:repeat(5,1fr); gap:14px}
+.kpi{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+.kpi > b{display:block; font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600; letter-spacing:-.03em; line-height:1.15}
+.kpi .u{font-family:Archivo,sans-serif; font-size:12px; color:var(--ink-3); font-weight:500; letter-spacing:0}
+.kpi span.l{font-size:11.5px; color:var(--ink-3); display:block; margin-top:5px; line-height:1.4}
+.kpi span.l b{font-family:Archivo,sans-serif; font-size:12px; font-weight:600; color:var(--ink-2); letter-spacing:0}
+
+/* ---------- gráficos ---------- */
+.chart{width:100%; display:block; overflow:visible}
+.chart text{font-family:Archivo,sans-serif; font-size:11px; fill:var(--ink-3)}
+.chart text.val{font-family:"IBM Plex Mono",monospace; font-size:11px; fill:var(--ink-2); font-variant-numeric:tabular-nums}
+.chart text.cat{font-size:11.5px; fill:var(--ink-2)}
+.chart .grid-l{stroke:var(--grid); stroke-width:1}
+.chart .axis{stroke:var(--line); stroke-width:1}
+.chart .dot{stroke:var(--surface); stroke-width:2}
+.leyenda{display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:9px; font-size:11.5px; color:var(--ink-2)}
+.leyenda i{width:11px; height:11px; border-radius:3px; display:inline-block; margin-right:6px; vertical-align:-1px}
+.leyenda .ln{width:15px; height:0; border-top:2px dashed var(--mark-lim); display:inline-block; margin-right:6px; vertical-align:3px}
+.tip{
+  position:fixed; z-index:9; pointer-events:none; opacity:0; transition:opacity .1s;
+  background:var(--ink); color:var(--ground); border-radius:7px; padding:7px 10px; font-size:12px;
+  max-width:290px; box-shadow:var(--shadow); line-height:1.45;
+}
+.tip.on{opacity:1}
+.tip b{display:block; font-weight:600; margin-bottom:2px}
+.tip span{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+
+/* ---------- ranking ---------- */
+.sector{margin-bottom:26px}
+.sector:last-child{margin-bottom:0}
+.sector-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:5px 14px;
+  padding-bottom:7px; margin-bottom:9px; border-bottom:2px solid var(--ink)}
+.sector-head h4{margin:0; font-size:15px; font-weight:600; letter-spacing:-.01em}
+.sector-head .meta{font-size:11.5px; color:var(--ink-3); margin-left:auto; text-align:right}
 .sector-head .meta em{font-style:normal; color:var(--warn)}
 
-.row{
-  display:grid; grid-template-columns:34px minmax(0,1fr) 132px 108px 70px;
-  gap:12px; align-items:center; width:100%; text-align:left; cursor:pointer;
-  background:var(--surface); border:1px solid var(--line); border-radius:8px;
-  padding:9px 12px; margin-bottom:5px;
-}
+.row{display:grid; grid-template-columns:34px minmax(0,1fr) 132px 108px 70px; gap:12px; align-items:center;
+  width:100%; text-align:left; cursor:pointer; background:var(--surface); border:1px solid var(--line);
+  border-radius:8px; padding:8px 12px; margin-bottom:5px}
 .row:hover{border-color:var(--accent)}
 .row.bajo{background:transparent; border-color:transparent; opacity:.62}
 .row.bajo:hover{opacity:1; border-color:var(--line)}
 .row .rk{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink-3); text-align:right}
 .row.sel .rk{color:var(--accent); font-weight:600}
 .row .nm{min-width:0}
-.row .nm b{display:block; font-weight:600; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.row .nm b{display:block; font-weight:600; font-size:13.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .row .tags{display:flex; gap:5px; flex-wrap:wrap; margin-top:3px}
 .tag{font-size:10.5px; color:var(--ink-3); border:1px solid var(--line); border-radius:4px; padding:1px 5px; white-space:nowrap}
 .tag.auto{color:var(--accent); border-color:var(--accent)}
@@ -149,31 +149,25 @@ main{padding:24px 28px 80px; min-width:0}
 .strip i.na{background:repeating-linear-gradient(45deg,var(--surface-2),var(--surface-2) 2px,transparent 2px,transparent 4px)}
 .strip i.pend{box-shadow:inset 0 0 0 1px var(--warn)}
 
-.cutline{
-  display:flex; align-items:center; gap:10px; margin:10px 0 9px;
-  font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);
-}
+.cutline{display:flex; align-items:center; gap:10px; margin:9px 0 8px; font-size:11px; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
 .cutline::before,.cutline::after{content:""; height:1px; background:var(--accent); flex:1; opacity:.55}
 .cutline::before{flex:0 0 14px}
 .cutline.presu{color:var(--warn)}
 .cutline.presu::before,.cutline.presu::after{background:var(--warn)}
 
 /* ---------- panel de detalle ---------- */
-.scrim{position:fixed; inset:0; background:rgba(10,20,16,.44); opacity:0; pointer-events:none; transition:opacity .18s}
+.scrim{position:fixed; inset:0; background:rgba(10,20,16,.44); opacity:0; pointer-events:none; transition:opacity .18s; z-index:4}
 .scrim.on{opacity:1; pointer-events:auto}
-.drawer{
-  position:fixed; top:0; right:0; height:100vh; width:min(520px,100vw);
-  background:var(--surface); border-left:1px solid var(--line); box-shadow:var(--shadow);
-  transform:translateX(100%); transition:transform .22s cubic-bezier(.2,.7,.3,1);
-  display:flex; flex-direction:column; z-index:5;
-}
+.drawer{position:fixed; top:0; right:0; height:100vh; width:min(520px,100vw); background:var(--surface);
+  border-left:1px solid var(--line); box-shadow:var(--shadow); transform:translateX(100%);
+  transition:transform .22s cubic-bezier(.2,.7,.3,1); display:flex; flex-direction:column; z-index:5}
 .drawer.on{transform:none}
 .drawer-head{padding:18px 20px 14px; border-bottom:1px solid var(--line)}
 .drawer-head h3{font-size:17px; line-height:1.25}
 .drawer-head p{margin:7px 0 0; font-family:"Source Serif 4",Georgia,serif; font-size:13px; color:var(--ink-2)}
 .drawer-body{overflow-y:auto; padding:4px 20px 40px; flex:1}
 .close{position:absolute; top:14px; right:16px; background:none; border:0; cursor:pointer; color:var(--ink-3); font-size:20px; line-height:1}
-
 .ind{border-bottom:1px solid var(--line); padding:13px 0}
 .ind:last-child{border-bottom:0}
 .ind-top{display:flex; gap:10px; align-items:baseline}
@@ -181,44 +175,41 @@ main{padding:24px 28px 80px; min-width:0}
 .ind-top .ttl{font-size:13.5px; font-weight:600; flex:1}
 .ind-top .w{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-3)}
 .ind-ctl{display:flex; gap:8px; align-items:center; margin:8px 0 0 32px}
-.ind-ctl select,.ind-ctl input{
-  background:var(--ground); border:1px solid var(--line); border-radius:6px; padding:5px 8px;
-  font-size:12.5px; flex:1; min-width:0;
-}
-.ind-ctl .score{
-  font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
-  background:var(--accent-soft); color:var(--accent); border-radius:5px; padding:4px 8px; flex:none;
-}
+.ind-ctl select,.ind-ctl input{background:var(--ground); border:1px solid var(--line); border-radius:6px;
+  padding:5px 8px; font-size:12.5px; flex:1; min-width:0}
+.ind-ctl .score{font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+  background:var(--accent-soft); color:var(--accent); border-radius:5px; padding:4px 8px; flex:none}
 .ind-src{margin:6px 0 0 32px; font-family:"Source Serif 4",Georgia,serif; font-size:12px; color:var(--ink-3); line-height:1.5}
 .badge{font-size:9.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; border-radius:3px; padding:1px 5px; margin-right:6px}
 .badge.auto{background:var(--accent-soft); color:var(--accent)}
 .badge.proxy{background:var(--surface-2); color:var(--ink-2)}
 .badge.pendiente{background:var(--warn-soft); color:var(--warn)}
 .badge.edit{background:var(--warn); color:var(--surface)}
-
-.total{
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
-  background:var(--surface-2); border-radius:8px; padding:12px 14px; margin:14px 0 4px;
-}
+.total{display:flex; justify-content:space-between; align-items:center; gap:12px; background:var(--surface-2);
+  border-radius:8px; padding:12px 14px; margin:14px 0 4px}
 .total .v{font-family:"IBM Plex Mono",monospace; font-size:24px; font-weight:600; letter-spacing:-.02em}
 .total .lbl{font-size:12px; color:var(--ink-2)}
-
 .mzbox{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0 32px}
 .provbox{margin:8px 0 0 32px; max-height:132px; overflow-y:auto; border:1px solid var(--line); border-radius:6px}
 .provbox label{display:flex; gap:7px; align-items:center; padding:4px 9px; font-size:12px; cursor:pointer}
 .provbox label:hover{background:var(--surface-2)}
 .provbox .t{margin-left:auto; font-family:"IBM Plex Mono",monospace; color:var(--ink-3); font-size:11px}
 
-.foot{border-top:1px solid var(--line); padding:20px 28px 40px; color:var(--ink-3)}
-.foot .note{max-width:78ch}
+.foot{border-top:1px solid var(--line); padding:18px 24px 40px; color:var(--ink-3)}
+.foot .note{max-width:80ch}
 
-@media (max-width:900px){
-  .shell{grid-template-columns:1fr}
-  .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--line)}
-  main{padding:18px 16px 60px}
+@media (max-width:1180px){
+  .c8,.c6,.c4{grid-column:span 12}
+  .kpis{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:720px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid{padding:14px 14px 56px}
+  .filtros{padding:10px 14px}
   .row{grid-template-columns:28px minmax(0,1fr) 64px; row-gap:8px}
+  .row.gen{grid-template-columns:28px minmax(0,1fr) 64px}
   .row .strip{grid-column:1/-1}
-  .row .mto{display:none}
+  .row .mto,.row .acum{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
 </style>
@@ -228,100 +219,123 @@ main{padding:24px 28px 80px; min-width:0}
     <div class="eyebrow">Resolución Directoral N.° 002-2026-EF/68.01</div>
     <h1>Jerarquizador APP</h1>
     <p class="sub">Metodología multicriterio del MEF aplicada al portafolio de ProInversión: los
-      <b id="nProy">—</b> potenciales proyectos de Asociación Público Privada que hoy se encuentran en
-      fase de Formulación y Estructuración.</p>
+      <b id="nProy">—</b> potenciales proyectos de Asociación Público Privada en fase de Formulación y
+      Estructuración.</p>
   </div>
   <div class="right">
-    <button class="ghost" id="btnTema" title="Cambiar tema">Tema</button>
+    <button class="ghost" id="btnTema">Tema</button>
     <button class="ghost" id="btnReset">Restablecer</button>
     <button class="solid" id="btnCsv">Exportar CSV</button>
   </div>
 </header>
 
-<div class="shell">
-  <aside class="rail">
-    <div class="block">
-      <div class="eyebrow">Resultado</div>
-      <div class="kpis">
-        <div class="kpi"><b class="num" id="kSel">—</b><span>sobre la línea de corte</span></div>
-        <div class="kpi"><b class="num" id="kTot">—</b><span>proyectos evaluados</span></div>
-        <div class="kpi"><b class="num" id="kMonto">—</b><span>US$ MM seleccionados</span></div>
-        <div class="kpi"><b class="num" id="kSec">—</b><span id="lSec">rankings sectoriales</span></div>
-      </div>
+<div class="filtros">
+  <div class="f">
+    <label for="selModo">Jerarquía</label>
+    <select id="selModo">
+      <option value="sectorial">Sectorial · corte por sector</option>
+      <option value="general">General · lista única</option>
+    </select>
+  </div>
+  <div class="f">
+    <label for="selSector">Agrupación</label>
+    <select id="selSector">
+      <option value="sector">Sector</option>
+      <option value="cartera">Cartera / subsector</option>
+    </select>
+  </div>
+  <div class="f">
+    <label for="selFase">Fase</label>
+    <select id="selFase">
+      <option value="">Formulación y Estructuración</option>
+      <option value="Formulación">Solo Formulación</option>
+      <option value="Estructuración">Solo Estructuración</option>
+    </select>
+  </div>
+  <div class="f" id="fPresu" hidden>
+    <label for="inPresu">Límite de financiamiento (US$ MM)</label>
+    <input id="inPresu" type="number" min="0" step="100" placeholder="Sin límite" style="width:150px">
+  </div>
+  <div class="f chips">
+    <label>Bloque opcional · 15 %</label>
+    <div class="chips-row">
+      <button class="chip" id="ch9" aria-pressed="false">9 · Brecha</button>
+      <button class="chip" id="ch10" aria-pressed="false">10 · Viabilidad</button>
     </div>
-
-    <div class="block">
-      <div class="eyebrow">Bloque opcional · 15 %</div>
-      <div class="chips">
-        <button class="chip" id="ch9" aria-pressed="false">Ind. 9 · Brecha</button>
-        <button class="chip" id="ch10" aria-pressed="false">Ind. 10 · Viabilidad</button>
-      </div>
-      <p class="note" id="notaOpc"></p>
-    </div>
-
-    <div class="block">
-      <div class="eyebrow">Parámetros</div>
-      <div class="field">
-        <label for="selModo">Jerarquía</label>
-        <select id="selModo">
-          <option value="sectorial">Sectorial — corte P70 por sector</option>
-          <option value="general">General — una sola lista de prelación</option>
-        </select>
-      </div>
-      <div class="field" id="fSector">
-        <label for="selSector">Nivel del ranking sectorial</label>
-        <select id="selSector">
-          <option value="sector">Sector (8 rankings)</option>
-          <option value="cartera">Cartera / subsector (12 rankings)</option>
-        </select>
-      </div>
-      <div class="field" id="fPresu" hidden>
-        <label for="inPresu">Límite de capacidad de financiamiento (US$ MM)</label>
-        <input id="inPresu" type="number" min="0" step="100" placeholder="Sin límite">
-      </div>
-      <p class="note" id="notaModo"></p>
-      <div class="field">
-        <label for="selFase">Fase</label>
-        <select id="selFase">
-          <option value="">Formulación y Estructuración</option>
-          <option value="Formulación">Solo Formulación</option>
-          <option value="Estructuración">Solo Estructuración</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="inUit">Valor de la UIT (S/)</label>
-        <input id="inUit" type="number" step="50" min="1">
-      </div>
-      <div class="field">
-        <label for="inBuscar">Buscar proyecto</label>
-        <input id="inBuscar" type="search" placeholder="PTAR, corredor vial, hospital…">
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="eyebrow">Ponderaciones aplicadas</div>
-      <div class="wlist" id="wlist"></div>
-      <p class="note">Los ocho indicadores fijos suman 85 %. Sin bloque opcional el 15 % restante se
-        redistribuye entre ellos para preservar la escala 0–1.</p>
-    </div>
-
-    <div class="block">
-      <div class="eyebrow">Calidad del dato</div>
-      <p class="note">
-        <span class="badge auto">Auto</span> derivado de fuente oficial.<br>
-        <span class="badge proxy">Proxy</span> supuesto documentado, revisable.<br>
-        <span class="badge pendiente">Pend.</span> requiere el estudio del proyecto.
-      </p>
-    </div>
-  </aside>
-
-  <main id="main"></main>
+  </div>
+  <div class="f">
+    <label for="inUit">UIT (S/)</label>
+    <input id="inUit" type="number" step="50" min="1" style="width:92px">
+  </div>
+  <div class="f" style="margin-left:auto">
+    <label for="inBuscar">Buscar</label>
+    <input id="inBuscar" type="search" placeholder="PTAR, corredor vial, hospital…" style="width:210px">
+  </div>
 </div>
 
-<footer class="foot">
-  <p class="note" id="fuentes"></p>
-</footer>
+<div class="grid">
+  <div class="kpis" id="kpis"></div>
 
+  <section class="panel c8">
+    <header><h3 id="tCurva">Asignación presupuestal por orden de prelación</h3></header>
+    <p class="ph" id="pCurva"></p>
+    <div id="curva"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-sel)"></i>Inversión acumulada</span>
+      <span><i style="background:var(--mark-sel);opacity:.5;height:2px;border-radius:0"></i>Línea de corte P70</span>
+      <span id="legLim" hidden><span class="ln"></span>Límite de capacidad de financiamiento</span>
+    </div>
+  </section>
+
+  <section class="panel c4">
+    <header><h3>Calidad del dato</h3></header>
+    <p class="ph">Origen de las calificaciones que sostienen el ranking. Mientras haya proxies y
+      pendientes, la jerarquía es preliminar.</p>
+    <div id="calidad"></div>
+  </section>
+
+  <section class="panel c12">
+    <header><h3 id="tDisp">Distribución de puntajes y líneas de corte</h3></header>
+    <p class="ph" id="pDisp"></p>
+    <div id="dispersion"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-sel)"></i>Sobre la línea de corte</span>
+      <span><i style="background:var(--mark-out)"></i>Bajo la línea de corte</span>
+    </div>
+  </section>
+
+  <section class="panel c6">
+    <header><h3>Inversión por sector</h3></header>
+    <p class="ph">Monto total del portafolio y porción que queda sobre la línea de corte.</p>
+    <div id="barras"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-sel)"></i>Seleccionado</span>
+      <span><i style="background:var(--mark-out)"></i>Bajo el corte</span>
+    </div>
+  </section>
+
+  <section class="panel c6">
+    <header><h3>Qué separa a los seleccionados</h3></header>
+    <p class="ph">Valor normalizado promedio de cada indicador. Cuanto más se abren las dos barras,
+      más pesa ese indicador en la selección.</p>
+    <div id="perfil"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-sel)"></i>Sobre el corte</span>
+      <span><i style="background:var(--mark-out)"></i>Bajo el corte</span>
+    </div>
+  </section>
+
+  <section class="panel c12">
+    <header><h3 id="tRank">Ranking</h3><span class="eyebrow" id="subRank"></span></header>
+    <p class="ph">Cada barra vertical de la franja es un indicador (1 a 10); la altura es su valor
+      normalizado. Abre un proyecto para revisar y corregir sus supuestos.</p>
+    <div id="ranking"></div>
+  </section>
+</div>
+
+<footer class="foot"><p class="note" id="fuentes"></p></footer>
+
+<div class="tip" id="tip"></div>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-head">
@@ -337,7 +351,7 @@ main{padding:24px 28px 80px; min-width:0}
 const DATOS = /*__DATOS__*/;
 const P = DATOS.parametros, PROY = DATOS.proyectos;
 const FIJOS = [1,2,3,4,5,6,7,8];
-const LS = "jerarquizador-app-v1";
+const LS = "jerarquizador-app-v2";
 
 let cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:""};
 let ov = {};
@@ -348,15 +362,16 @@ try{
 }catch(e){}
 const guardar = () => { try{ localStorage.setItem(LS, JSON.stringify({cfg,ov})); }catch(e){} };
 
-/* ---------- calificación ---------- */
+/* ================= calificación ================= */
 const rango = (v, tabla) => { for(const [lim,pt] of tabla){ if(v<=lim) return pt; } return tabla[tabla.length-1][1]; };
 const norm = (pt,[lo,hi]) => hi===lo ? 0 : (pt-lo)/(hi-lo);
 const O = (p,k,d) => { const o = ov[p.id]; return (o && o[k]!==undefined && o[k]!==null) ? o[k] : d; };
 const editado = (p,k) => { const o = ov[p.id]; return !!(o && o[k]!==undefined && o[k]!==null); };
+const fmt = n => (n===null||n===undefined) ? "—" : n.toLocaleString("es-PE");
+const fmt0 = n => Math.round(n).toLocaleString("es-PE");
 
 function calificar(p){
   const c = {};
-
   c[1] = {pt:O(p,"i1", p.pni?1:0), origen:"auto", edit:editado(p,"i1"),
           nota: p.pni || "No identificado en el portafolio priorizado del PNI 2026-2031."};
 
@@ -386,8 +401,8 @@ function calificar(p){
   let soles = O(p,"i5", null);
   if(soles===null && p.monto_usd_mm) soles = p.monto_usd_mm * p.tipo_cambio;
   const uits = soles ? soles*1e6/cfg.uit : null;
-  c[5] = uits ? {pt:rango(uits,P.rangos[5]), origen: editado(p,"i5")?"auto":"auto", edit:editado(p,"i5"), soles, uits,
-                 nota:"CTI/CTP ≈ S/ "+fmt(Math.round(soles))+" MM = "+fmt(Math.round(uits))+" UIT (UIT = S/ "+fmt(cfg.uit)+")."}
+  c[5] = uits ? {pt:rango(uits,P.rangos[5]), origen:"auto", edit:editado(p,"i5"), soles, uits,
+                 nota:"CTI/CTP ≈ S/ "+fmt0(soles)+" MM = "+fmt0(uits)+" UIT (UIT = S/ "+fmt(cfg.uit)+")."}
                : {pt:1, origen:"pendiente", edit:false, nota:"El portafolio no publica monto de inversión para este proyecto."};
 
   const mzs = O(p,"i6", p.macrozonas.length ? p.macrozonas : ["MLC"]);
@@ -423,9 +438,8 @@ function calificar(p){
   for(const i of [1,2,3,4,5,7,8,9,10]) c[i].v = norm(c[i].pt, P.escalas[i]);
   return c;
 }
-const fmt = n => (n===null||n===undefined) ? "—" : n.toLocaleString("es-PE");
 
-/* ---------- ponderación y ranking ---------- */
+/* ================= ponderación y ranking ================= */
 function pesosBase(){
   const w = {};
   for(const i of FIJOS) w[i] = P.pesos[i];
@@ -458,7 +472,6 @@ function evaluar(g, base, s){
   g.forEach((p,n)=>{ p["_rk"+s]=n+1; p["_corte"+s]=corte; p["_sel"+s] = p["_pt"+s] >= corte - 1e-9; });
   return {corte, excl, w};
 }
-
 function jerarquizar(){
   const base = pesosBase();
   const universo = PROY.filter(p => !cfg.fase || p.fase===cfg.fase);
@@ -477,8 +490,6 @@ function jerarquizar(){
   }
   secciones.sort((a,b)=>a.sector.localeCompare(b.sector,"es"));
 
-  // Ranking general: la regla de reponderación se evalúa sobre todo el universo,
-  // de modo que un único juego de pesos hace comparables los puntajes entre sectores.
   const todos = universo.slice();
   const rg = evaluar(todos, base, "g");
   let acum = 0;
@@ -487,11 +498,8 @@ function jerarquizar(){
     p._acum = acum;
     p._fin = !cfg.presu || acum <= cfg.presu;
   }
-  return {secciones, general:{sector:"Ranking general", grupo:todos, corte:rg.corte, excl:rg.excl}};
+  return {secciones, general:{sector:"Ranking general", grupo:todos, corte:rg.corte, excl:rg.excl}, universo};
 }
-
-/* ---------- render ---------- */
-const esc = s => (s||"").replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 
 const GEN = () => cfg.modo==="general";
 const W  = p => GEN() ? p._wg : p._w;
@@ -499,86 +507,337 @@ const PT = p => GEN() ? p._ptg : p._pt;
 const RK = p => GEN() ? p._rkg : p._rk;
 const SEL = p => GEN() ? p._selg : p._sel;
 const CORTE = p => GEN() ? p._corteg : p._corte;
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 
-function render(){
-  const r = jerarquizar();
+/* ================= utilidades de gráfico ================= */
+const tip = document.getElementById("tip");
+function mostrarTip(e, html){
+  tip.innerHTML = html;
+  tip.classList.add("on");
+  const r = tip.getBoundingClientRect();
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if(x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+  if(y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+  tip.style.left = x+"px"; tip.style.top = y+"px";
+}
+const ocultarTip = () => tip.classList.remove("on");
+function ticks(max, n){
+  const bruto = max/n, mag = Math.pow(10, Math.floor(Math.log10(bruto)));
+  const paso = [1,2,2.5,5,10].map(m=>m*mag).find(v=>v>=bruto) || 10*mag;
+  const out = [];
+  for(let v=0; v<=max*1.0001; v+=paso) out.push(v);
+  return out;
+}
+function svgEl(html, w, h){
+  return '<svg class="chart" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img">'+html+'</svg>';
+}
+const ancho = id => Math.max(320, document.getElementById(id).clientWidth);
+
+/* ---- 1. curva de acumulación ---- */
+function graficoCurva(r){
+  const g = r.general.grupo;
+  const w = ancho("curva"), h = 232;
+  const m = {t:12, r:14, b:26, l:56};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const maxY = Math.max(1, g[g.length-1]._acum);
+  const X = i => m.l + (g.length<2 ? iw/2 : i/(g.length-1)*iw);
+  const Y = v => m.t + ih - v/maxY*ih;
+
+  let s = "";
+  for(const t of ticks(maxY,4)){
+    s += '<line class="grid-l" x1="'+m.l+'" y1="'+Y(t).toFixed(1)+'" x2="'+(w-m.r)+'" y2="'+Y(t).toFixed(1)+'"/>'
+      +  '<text class="val" x="'+(m.l-8)+'" y="'+(Y(t)+4).toFixed(1)+'" text-anchor="end">'+fmt0(t)+'</text>';
+  }
+  const pts = g.map((p,i)=>X(i).toFixed(1)+","+Y(p._acum).toFixed(1)).join(" ");
+  s += '<polygon points="'+m.l+','+(m.t+ih)+' '+pts+' '+X(g.length-1).toFixed(1)+','+(m.t+ih)+'" fill="var(--mark-sel)" opacity=".1"/>';
+  s += '<polyline points="'+pts+'" fill="none" stroke="var(--mark-sel)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+
+  const nSel = g.filter(p=>p._selg).length;
+  if(nSel && nSel<g.length){
+    const xc = X(nSel-1);
+    s += '<line x1="'+xc.toFixed(1)+'" y1="'+m.t+'" x2="'+xc.toFixed(1)+'" y2="'+(m.t+ih)+'" stroke="var(--mark-sel)" stroke-width="2" opacity=".5"/>';
+    const anchor = xc > w*0.62 ? "end" : "start", dx = anchor==="end" ? -7 : 7;
+    s += '<text class="val" x="'+(xc+dx).toFixed(1)+'" y="'+(m.t+13)+'" text-anchor="'+anchor+'">Corte P70 · '+nSel+' proyectos · US$ '+fmt0(g[nSel-1]._acum)+' MM</text>';
+  }
+  if(cfg.presu && cfg.presu<=maxY){
+    const yl = Y(cfg.presu);
+    s += '<line x1="'+m.l+'" y1="'+yl.toFixed(1)+'" x2="'+(w-m.r)+'" y2="'+yl.toFixed(1)+'" stroke="var(--mark-lim)" stroke-width="2" stroke-dasharray="6 4"/>';
+    s += '<text class="val" x="'+(w-m.r-6)+'" y="'+(yl-7).toFixed(1)+'" text-anchor="end" style="fill:var(--warn)">Límite US$ '+fmt0(cfg.presu)+' MM</text>';
+  }
+  s += '<line class="axis" x1="'+m.l+'" y1="'+(m.t+ih)+'" x2="'+(w-m.r)+'" y2="'+(m.t+ih)+'"/>';
+  s += '<text x="'+m.l+'" y="'+(h-6)+'">Puesto 1</text>'
+    +  '<text x="'+(w-m.r)+'" y="'+(h-6)+'" text-anchor="end">Puesto '+g.length+'</text>'
+    +  '<text class="val" x="'+(m.l-8)+'" y="'+(m.t+8)+'" text-anchor="end">US$ MM</text>';
+  s += '<line id="cross" x1="0" y1="'+m.t+'" x2="0" y2="'+(m.t+ih)+'" stroke="var(--ink-3)" stroke-width="1" opacity="0"/>'
+    +  '<circle id="crossDot" class="dot" r="4.5" fill="var(--mark-sel)" opacity="0"/>';
+  s += '<rect id="curvaHit" x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent"/>';
+
+  document.getElementById("curva").innerHTML = svgEl(s, w, h);
+  const hit = document.getElementById("curvaHit"), cr = document.getElementById("cross"), cd = document.getElementById("crossDot");
+  hit.addEventListener("mousemove", e => {
+    const box = hit.getBoundingClientRect();
+    const i = Math.max(0, Math.min(g.length-1, Math.round((e.clientX-box.left)/box.width*(g.length-1))));
+    const p = g[i];
+    cr.setAttribute("x1", X(i)); cr.setAttribute("x2", X(i)); cr.setAttribute("opacity",".55");
+    cd.setAttribute("cx", X(i)); cd.setAttribute("cy", Y(p._acum)); cd.setAttribute("opacity","1");
+    mostrarTip(e, "<b>"+esc(p.nombre_corto)+"</b>Puesto general <span>"+p._rkg+"</span> · "+esc(p[cfg.sector])+
+      "<br>Puntaje <span>"+p._ptg.toFixed(3)+"</span>"+
+      "<br>Inversión <span>US$ "+(p.monto_usd_mm?fmt0(p.monto_usd_mm):"s/d")+" MM</span>"+
+      "<br>Acumulado <span>US$ "+fmt0(p._acum)+" MM</span>");
+  });
+  hit.addEventListener("mouseleave", () => { ocultarTip(); cr.setAttribute("opacity","0"); cd.setAttribute("opacity","0"); });
+}
+
+/* ---- 2. dispersión de puntajes ---- */
+function graficoDispersion(r){
+  const filas = r.secciones;
+  const w = ancho("dispersion"), fh = 50;
+  const m = {t:10, r:22, b:26, l:Math.min(170, Math.max(110, w*0.16))};
+  const ih = filas.length*fh, h = m.t+ih+m.b, iw = w-m.l-m.r;
+  const todos = r.universo.map(p=>PT(p));
+  const lo = Math.max(0, Math.min(...todos)-0.03), hi = Math.min(1, Math.max(...todos)+0.03);
+  const X = v => m.l + (v-lo)/(hi-lo)*iw;
+
+  let s = "";
+  for(let t=Math.ceil(lo*10)/10; t<=hi; t+=0.1){
+    s += '<line class="grid-l" x1="'+X(t).toFixed(1)+'" y1="'+m.t+'" x2="'+X(t).toFixed(1)+'" y2="'+(m.t+ih)+'"/>'
+      +  '<text class="val" x="'+X(t).toFixed(1)+'" y="'+(m.t+ih+16)+'" text-anchor="middle">'+t.toFixed(1)+'</text>';
+  }
+  filas.forEach((f,k) => {
+    const cy = m.t + k*fh + fh/2;
+    s += '<text class="cat" x="'+(m.l-10)+'" y="'+(cy+4)+'" text-anchor="end">'+esc(f.sector.length>24?f.sector.slice(0,22)+"…":f.sector)+'</text>';
+    if(!GEN()){
+      const xc = X(f.corte);
+      s += '<line x1="'+xc.toFixed(1)+'" y1="'+(cy-21)+'" x2="'+xc.toFixed(1)+'" y2="'+(cy+21)+'" stroke="var(--mark-sel)" stroke-width="2" opacity=".45"/>';
+    }
+    // Enjambre: desplaza el punto en vertical cuando choca con uno ya colocado,
+    // para que los sectores densos no se conviertan en una mancha.
+    const puestos = [];
+    for(const p of f.grupo.slice().sort((a,b)=>PT(a)-PT(b))){
+      const px = X(PT(p));
+      let dy = 0;
+      for(const cand of [0,-10,10,-20,20]){
+        if(!puestos.some(q => Math.abs(q.x-px)<9.5 && q.dy===cand)){ dy = cand; break; }
+        dy = cand;
+      }
+      puestos.push({x:px, dy});
+      s += '<circle class="dot" data-id="'+p.id+'" cx="'+px.toFixed(1)+'" cy="'+(cy+dy)+'" r="4.5" fill="var(--mark-'+(SEL(p)?"sel":"out")+')">'
+        +  '<title>'+esc(p.nombre_corto)+' — '+PT(p).toFixed(3)+'</title></circle>';
+    }
+  });
+  if(GEN()){
+    const xc = X(r.general.corte);
+    s += '<line x1="'+xc.toFixed(1)+'" y1="'+m.t+'" x2="'+xc.toFixed(1)+'" y2="'+(m.t+ih)+'" stroke="var(--mark-sel)" stroke-width="2" opacity=".5"/>'
+      +  '<text class="val" x="'+(xc+6).toFixed(1)+'" y="'+(m.t+11)+'">Corte general '+r.general.corte.toFixed(3)+'</text>';
+  }
+  s += '<line class="axis" x1="'+m.l+'" y1="'+(m.t+ih)+'" x2="'+(w-m.r)+'" y2="'+(m.t+ih)+'"/>';
+
+  document.getElementById("dispersion").innerHTML = svgEl(s, w, h);
+  document.querySelectorAll("#dispersion circle[data-id]").forEach(el => {
+    const p = PROY.find(x=>x.id===+el.dataset.id);
+    el.style.cursor = "pointer";
+    el.addEventListener("mousemove", e => mostrarTip(e, "<b>"+esc(p.nombre_corto)+"</b>"+esc(p[cfg.sector])+
+      " · puesto <span>"+RK(p)+"</span><br>Puntaje <span>"+PT(p).toFixed(3)+"</span> vs. corte <span>"+CORTE(p).toFixed(3)+"</span>"+
+      "<br>"+esc(p.fase)+" · "+esc(p.modalidad)));
+    el.addEventListener("mouseleave", ocultarTip);
+    el.addEventListener("click", () => abrir(p));
+  });
+}
+
+/* ---- 3. inversión por sector ---- */
+function graficoBarras(r){
+  const filas = r.secciones.map(f => ({
+    sector: f.sector,
+    total: f.grupo.reduce((a,p)=>a+(p.monto_usd_mm||0), 0),
+    sel:   f.grupo.filter(p=>SEL(p)).reduce((a,p)=>a+(p.monto_usd_mm||0), 0),
+    n: f.grupo.length, nsel: f.grupo.filter(p=>SEL(p)).length,
+  })).sort((a,b)=>b.total-a.total);
+  const w = ancho("barras"), fh = 30, bh = 16;
+  const m = {t:8, r:74, b:22, l:Math.min(150, Math.max(100, w*0.28))};
+  const ih = filas.length*fh, h = m.t+ih+m.b, iw = w-m.l-m.r;
+  const max = Math.max(1, ...filas.map(f=>f.total));
+  const X = v => v/max*iw;
+
+  let s = "";
+  for(const t of ticks(max,3)){
+    s += '<line class="grid-l" x1="'+(m.l+X(t)).toFixed(1)+'" y1="'+m.t+'" x2="'+(m.l+X(t)).toFixed(1)+'" y2="'+(m.t+ih)+'"/>'
+      +  '<text class="val" x="'+(m.l+X(t)).toFixed(1)+'" y="'+(m.t+ih+15)+'" text-anchor="middle">'+fmt0(t)+'</text>';
+  }
+  filas.forEach((f,k) => {
+    const y = m.t + k*fh + (fh-bh)/2;
+    const wsel = X(f.sel), wtot = X(f.total);
+    const wres = Math.max(0, wtot - wsel - (wsel>0 && wtot>wsel ? 2 : 0));
+    s += '<text class="cat" x="'+(m.l-10)+'" y="'+(y+bh/2+4)+'" text-anchor="end">'+esc(f.sector.length>20?f.sector.slice(0,18)+"…":f.sector)+'</text>';
+    if(wres > 0)
+      s += '<rect x="'+(m.l+wtot-wres).toFixed(1)+'" y="'+y+'" width="'+wres.toFixed(1)+'" height="'+bh+'" rx="4" fill="var(--mark-out)"/>';
+    if(wsel > 0)
+      s += '<rect x="'+m.l+'" y="'+y+'" width="'+wsel.toFixed(1)+'" height="'+bh+'" rx="4" fill="var(--mark-sel)"/>';
+    s += '<text class="val" x="'+(m.l+wtot+8).toFixed(1)+'" y="'+(y+bh/2+4)+'">'+fmt0(f.total)+'</text>';
+    s += '<rect data-sec="'+esc(f.sector)+'" x="'+m.l+'" y="'+(m.t+k*fh)+'" width="'+iw+'" height="'+fh+'" fill="transparent"/>';
+  });
+  s += '<text class="val" x="'+(w-m.r+8)+'" y="'+(m.t+ih+15)+'" text-anchor="start">US$ MM</text>';
+  document.getElementById("barras").innerHTML = svgEl(s, w, h);
+  document.querySelectorAll("#barras rect[data-sec]").forEach(el => {
+    const f = filas.find(x=>x.sector===el.dataset.sec);
+    el.addEventListener("mousemove", e => mostrarTip(e, "<b>"+esc(f.sector)+"</b>"+
+      "Seleccionados <span>"+f.nsel+" de "+f.n+"</span><br>"+
+      "Inversión seleccionada <span>US$ "+fmt0(f.sel)+" MM</span><br>"+
+      "Inversión total <span>US$ "+fmt0(f.total)+" MM</span>"));
+    el.addEventListener("mouseleave", ocultarTip);
+  });
+}
+
+/* ---- 4. perfil de indicadores ---- */
+function graficoPerfil(r){
+  const u = r.universo;
+  if(!u.length){ document.getElementById("perfil").innerHTML = ""; return; }
+  const sel = u.filter(p=>SEL(p)), res = u.filter(p=>!SEL(p));
+  const prom = (arr,i) => arr.length ? arr.reduce((a,p)=>a+p._c[i].v,0)/arr.length : 0;
+  // Pesos nominales: este panel mira todo el universo, no un sector, así que no
+  // aplica la reponderación sectorial (que descarta indicadores distintos en cada sector).
+  const wb = pesosBase();
+  const filas = [];
+  for(let i=1;i<=10;i++){
+    if(wb[i]===undefined) continue;
+    filas.push({i, a:prom(sel,i), b:prom(res,i), nombre:P.indicadores[i].nombre, w:wb[i]});
+  }
+  filas.sort((x,y)=>(y.a-y.b)-(x.a-x.b));
+  const w = ancho("perfil"), fh = 30, bh = 8;
+  const m = {t:8, r:44, b:22, l:Math.min(210, Math.max(130, w*0.42))};
+  const ih = filas.length*fh, h = m.t+ih+m.b, iw = w-m.l-m.r;
+
+  let s = "";
+  for(const t of [0,0.25,0.5,0.75,1]){
+    s += '<line class="grid-l" x1="'+(m.l+t*iw).toFixed(1)+'" y1="'+m.t+'" x2="'+(m.l+t*iw).toFixed(1)+'" y2="'+(m.t+ih)+'"/>'
+      +  '<text class="val" x="'+(m.l+t*iw).toFixed(1)+'" y="'+(m.t+ih+15)+'" text-anchor="middle">'+t+'</text>';
+  }
+  filas.forEach((f,k) => {
+    const y0 = m.t + k*fh + (fh-(bh*2+2))/2;
+    const corto = f.nombre.length>34 ? f.nombre.slice(0,32)+"…" : f.nombre;
+    s += '<text class="cat" x="'+(m.l-10)+'" y="'+(y0+bh+3)+'" text-anchor="end">'+f.i+'. '+esc(corto)+'</text>';
+    s += '<rect x="'+m.l+'" y="'+y0+'" width="'+Math.max(1,f.a*iw).toFixed(1)+'" height="'+bh+'" rx="3" fill="var(--mark-sel)"/>';
+    s += '<rect x="'+m.l+'" y="'+(y0+bh+2)+'" width="'+Math.max(1,f.b*iw).toFixed(1)+'" height="'+bh+'" rx="3" fill="var(--mark-out)"/>';
+    if(k===0) s += '<text class="val" x="'+(m.l+Math.max(f.a,f.b)*iw+8).toFixed(1)+'" y="'+(y0+bh+3)+'">Δ '+(f.a-f.b).toFixed(2)+'</text>';
+    s += '<rect data-ind="'+f.i+'" x="'+m.l+'" y="'+(m.t+k*fh)+'" width="'+iw+'" height="'+fh+'" fill="transparent"/>';
+  });
+  document.getElementById("perfil").innerHTML = svgEl(s, w, h);
+  document.querySelectorAll("#perfil rect[data-ind]").forEach(el => {
+    const f = filas.find(x=>x.i===+el.dataset.ind);
+    el.addEventListener("mousemove", e => mostrarTip(e, "<b>"+f.i+". "+esc(f.nombre)+"</b>"+
+      "Peso nominal <span>"+(f.w*100).toFixed(1)+" %</span><br>"+
+      "Promedio sobre el corte <span>"+f.a.toFixed(3)+"</span><br>"+
+      "Promedio bajo el corte <span>"+f.b.toFixed(3)+"</span><br>Diferencia <span>"+(f.a-f.b).toFixed(3)+"</span>"));
+    el.addEventListener("mouseleave", ocultarTip);
+  });
+}
+
+/* ---- 5. calidad del dato ---- */
+function graficoCalidad(r){
+  const u = r.universo;
+  const cuenta = {auto:0, proxy:0, pendiente:0};
+  const porInd = {};
+  for(const p of u) for(let i=1;i<=10;i++){
+    if(W(p)[i]===undefined) continue;
+    const o = p._c[i].edit ? "auto" : p._c[i].origen;
+    cuenta[o]++;
+    porInd[i] = porInd[i] || {auto:0,proxy:0,pendiente:0};
+    porInd[i][o]++;
+  }
+  const total = cuenta.auto+cuenta.proxy+cuenta.pendiente || 1;
+  const w = ancho("calidad"), bh = 26, h = bh + 8;
+  const segs = [["auto","Auto","var(--mark-sel)"],["proxy","Proxy","var(--mark-out)"],["pendiente","Pendiente","var(--mark-lim)"]];
+  let x = 0, s = "";
+  for(const [k,lbl,col] of segs){
+    const anchoSeg = cuenta[k]/total*w;
+    if(anchoSeg <= 0) continue;
+    const real = Math.max(0, anchoSeg - (x+anchoSeg < w-0.5 ? 2 : 0));
+    s += '<rect x="'+x.toFixed(1)+'" y="0" width="'+real.toFixed(1)+'" height="'+bh+'" rx="4" fill="'+col+'"><title>'+lbl+': '+cuenta[k]+'</title></rect>';
+    x += anchoSeg;
+  }
+  const pend = Object.keys(porInd).filter(i=>porInd[i].pendiente>0);
+  const proxy = Object.keys(porInd).filter(i=>porInd[i].proxy>0);
+  document.getElementById("calidad").innerHTML = svgEl(s, w, h) +
+    '<div class="leyenda">'+segs.map(([k,lbl,col]) => {
+      const pc = cuenta[k]/total*100;
+      return '<span><i style="background:'+col+'"></i>'+lbl+' <b class="num">'+cuenta[k]+'</b> · '+
+             (pc>0 && pc<1 ? "&lt;1" : Math.round(pc))+' %</span>';
+    }).join("")+'</div>'+
+    '<p class="note" style="margin:10px 0 0">'+
+      '<b>'+cuenta.auto+'</b> de '+total+' calificaciones salen de fuente oficial sin supuestos. '+
+      (proxy.length ? 'Los indicadores <b>'+proxy.join(", ")+'</b> usan proxies documentados. ' : '')+
+      (pend.length ? 'Los indicadores <b>'+pend.join(", ")+'</b> requieren el estudio del proyecto.' : '')+
+    '</p>';
+}
+
+/* ---- KPI ---- */
+function kpis(r){
+  const sec = GEN() ? [r.general] : r.secciones;
+  const u = r.universo;
+  const sel = u.filter(p=>SEL(p));
+  const montoSel = sel.reduce((a,p)=>a+(p.monto_usd_mm||0),0);
+  const montoTot = u.reduce((a,p)=>a+(p.monto_usd_mm||0),0);
+  const fin = cfg.presu ? r.general.grupo.filter(p=>p._fin) : null;
+  const tiles = [
+    [u.length, "", "proyectos evaluados", "en Formulación y Estructuración"],
+    [sel.length, "", "sobre la línea de corte", GEN() ? "percentil 70 del portafolio" : "percentil 70 de cada sector"],
+    [fmt0(montoSel), "US$ MM", "inversión seleccionada", Math.round(montoSel/montoTot*100)+" % de los US$ "+fmt0(montoTot)+" MM del portafolio"],
+    GEN() && fin
+      ? [fin.length, "", "caben en el presupuesto", "US$ "+fmt0(fin.reduce((a,p)=>a+(p.monto_usd_mm||0),0))+" MM de US$ "+fmt0(cfg.presu)+" MM"]
+      : [sec.length, "", GEN() ? "lista de prelación" : "rankings sectoriales", GEN() ? "un solo juego de pesos" : "un corte P70 por sector"],
+    [u.filter(p=>p.pni).length, "", "en el PNI 2026-2031", "portafolio priorizado del DS 039-2026-EF"],
+  ];
+  document.getElementById("kpis").innerHTML = tiles.map(([v,u2,l,sub]) =>
+    '<div class="kpi"><b>'+v+(u2?' <span class="u">'+u2+'</span>':'')+'</b><span class="l"><b>'+esc(l)+'</b><br>'+esc(sub)+'</span></div>').join("");
+}
+
+/* ================= ranking ================= */
+function renderRanking(r){
   const secciones = GEN() ? [r.general] : r.secciones;
   const q = cfg.q.trim().toLowerCase();
-  const main = document.getElementById("main");
-  main.innerHTML = "";
-  let nSel=0, nTot=0, monto=0, nFin=0, montoFin=0;
-
+  const cont = document.getElementById("ranking");
+  cont.innerHTML = "";
   for(const s of secciones){
-    for(const p of s.grupo){
-      nTot++;
-      if(SEL(p)){ nSel++; monto += p.monto_usd_mm||0; }
-      if(GEN() && cfg.presu && p._fin){ nFin++; montoFin += p.monto_usd_mm||0; }
-    }
     const visibles = q ? s.grupo.filter(p => (p.nombre_corto+" "+p.nombre+" "+p.ambito+" "+p.sector).toLowerCase().includes(q)) : s.grupo;
     if(!visibles.length) continue;
-
-    const sec = document.createElement("section");
+    const sec = document.createElement("div");
     sec.className = "sector";
     const alerta = (!GEN() && s.grupo.length<4) ? "<em>· muestra pequeña, poder de discriminación limitado</em>" : "";
-    const aviso = GEN() ? "<em>· extensión a la norma: la RD 002-2026 fija el corte por sector</em>" : "";
-    sec.innerHTML =
-      '<div class="sector-head"><h2>'+esc(s.sector)+'</h2>'+
+    sec.innerHTML = '<div class="sector-head"><h4>'+esc(s.sector)+'</h4>'+
       '<span class="eyebrow">'+s.grupo.length+' proyectos</span>'+
-      '<div class="meta">Línea de corte P70 = <span class="num">'+s.corte.toFixed(4)+'</span>'+
-      (s.excl.length ? '<br>Indicadores sin variación, no aplicados: '+s.excl.join(", ") : '')+
-      '<br>'+alerta+aviso+'</div></div>';
-
+      '<div class="meta">Corte P70 = <span class="num">'+s.corte.toFixed(4)+'</span>'+
+      (s.excl.length ? '<br>Sin variación, no aplicados: '+s.excl.join(", ") : '')+
+      (alerta ? '<br>'+alerta : '')+'</div></div>';
     let cortado = false, tope = false;
     for(const p of visibles){
       if(GEN() && cfg.presu && !p._fin && !tope && !q){
-        const cl = document.createElement("div");
-        cl.className = "cutline presu";
-        cl.textContent = "Límite de capacidad de financiamiento — US$ "+cfg.presu.toLocaleString("es-PE")+" MM";
-        sec.appendChild(cl);
+        sec.insertAdjacentHTML("beforeend", '<div class="cutline presu">Límite de capacidad de financiamiento — US$ '+fmt(cfg.presu)+' MM</div>');
         tope = true;
       }
       if(!SEL(p) && !cortado && !q){
-        const cl = document.createElement("div");
-        cl.className = "cutline";
-        cl.textContent = GEN() ? "Percentil 70 — tercio superior del portafolio"
-                               : "Percentil 70 — tercio superior del sector";
-        sec.appendChild(cl);
+        sec.insertAdjacentHTML("beforeend", '<div class="cutline">Percentil 70 — tercio superior '+(GEN()?"del portafolio":"del sector")+'</div>');
         cortado = true;
       }
       sec.appendChild(fila(p));
     }
-    main.appendChild(sec);
+    cont.appendChild(sec);
   }
-  if(!main.children.length) main.innerHTML = '<p class="note">Ningún proyecto coincide con la búsqueda.</p>';
-
-  document.getElementById("kSel").textContent = nSel;
-  document.getElementById("kTot").textContent = nTot;
-  document.getElementById("kMonto").textContent = Math.round(monto).toLocaleString("es-PE");
-  document.getElementById("kSec").textContent = GEN() ? (cfg.presu ? nFin : "1") : secciones.length;
-  document.getElementById("lSec").textContent = GEN()
-    ? (cfg.presu ? "proyectos financiables" : "lista de prelación")
-    : "rankings sectoriales";
-  document.getElementById("nProy").textContent = PROY.length;
-  renderPesos(secciones);
+  if(!cont.children.length) cont.innerHTML = '<p class="note">Ningún proyecto coincide con la búsqueda.</p>';
+  document.getElementById("subRank").textContent = GEN() ? "lista general de prelación" : "un ranking por sector";
 }
-
 function fila(p){
   const el = document.createElement("button");
-  el.className = "row" + (SEL(p) ? " sel" : " bajo") + (GEN() ? " gen" : "") +
-                 (GEN() && cfg.presu && !p._fin ? " nofin" : "");
+  el.className = "row" + (SEL(p) ? " sel" : " bajo") + (GEN() ? " gen" : "") + (GEN() && cfg.presu && !p._fin ? " nofin" : "");
   el.onclick = () => abrir(p);
   const tags = [];
   if(GEN()) tags.push('<span class="tag">'+esc(p[cfg.sector])+' · n.º '+p._rk+'</span>');
-  tags.push('<span class="tag">'+esc(p.fase)+'</span>',
-            '<span class="tag">'+esc(p.modalidad)+'</span>',
+  tags.push('<span class="tag">'+esc(p.fase)+'</span>','<span class="tag">'+esc(p.modalidad)+'</span>',
             '<span class="tag">'+esc(p.ambito.length>34?p.ambito.slice(0,32)+"…":p.ambito)+'</span>');
   if(p.pni) tags.push('<span class="tag auto">PNI 2026-2031</span>');
-  el.innerHTML =
-    '<span class="rk">'+RK(p)+'</span>'+
+  el.innerHTML = '<span class="rk">'+RK(p)+'</span>'+
     '<span class="nm"><b>'+esc(p.nombre_corto)+'</b><span class="tags">'+tags.join("")+'</span></span>'+
     '<span class="strip">'+strip(p)+'</span>'+
-    '<span class="mto">'+(p.monto_usd_mm ? "US$ "+p.monto_usd_mm.toLocaleString("es-PE",{maximumFractionDigits:0})+" MM" : "—")+'</span>'+
-    (GEN() ? '<span class="acum">acumulado<b>US$ '+Math.round(p._acum).toLocaleString("es-PE")+' MM</b></span>' : '')+
+    '<span class="mto">'+(p.monto_usd_mm ? "US$ "+fmt0(p.monto_usd_mm)+" MM" : "—")+'</span>'+
+    (GEN() ? '<span class="acum">acumulado<b>US$ '+fmt0(p._acum)+' MM</b></span>' : '')+
     '<span class="pt">'+PT(p).toFixed(3)+'</span>';
   return el;
 }
@@ -587,30 +846,42 @@ function strip(p){
   for(let i=1;i<=10;i++){
     const c = p._c[i], aplicado = W(p)[i]!==undefined;
     const cls = !aplicado ? "na" : (c.origen==="pendiente" ? "pend" : "");
-    const alto = Math.round((c.v||0)*100);
-    h += '<i class="'+cls+'" title="'+esc(i+". "+P.indicadores[i].nombre)+' — normalizado '+(c.v||0).toFixed(2)+
-         (aplicado?"":" (no aplicado)")+'"><span style="position:absolute;inset:auto 0 0 0;height:'+alto+'%;background:var(--strip)"></span></i>';
+    h += '<i class="'+cls+'" title="'+esc(i+". "+P.indicadores[i].nombre)+' — normalizado '+(c.v||0).toFixed(2)+(aplicado?"":" (no aplicado)")+'">'+
+         '<span style="position:absolute;inset:auto 0 0 0;height:'+Math.round((c.v||0)*100)+'%;background:var(--mark-sel)"></span></i>';
   }
   return h;
 }
-function renderPesos(secciones){
-  const w = pesosBase();
-  const el = document.getElementById("wlist");
-  el.innerHTML = "";
-  for(let i=1;i<=10;i++){
-    const on = w[i]!==undefined;
-    const v = on ? w[i] : 0;
-    el.insertAdjacentHTML("beforeend",
-      '<div class="wrow'+(on?"":" off")+'" title="'+esc(P.indicadores[i].nombre)+'">'+
-      '<span class="n">'+i+'</span><span class="bar"><i style="width:'+(v/0.20*100)+'%"></i></span>'+
-      '<span class="v">'+(on ? (v*100).toFixed(1)+"%" : "—")+'</span></div>');
-  }
-  document.getElementById("notaOpc").innerHTML = cfg.opc.length
-    ? "El bloque opcional aporta "+(15/cfg.opc.length).toFixed(1)+" % por indicador seleccionado."
-    : "Sin indicadores opcionales seleccionados. La norma prevé que PROINVERSIÓN elija al menos uno según la evidencia disponible.";
+
+/* ================= render maestro ================= */
+let ultimo = null;
+function render(){
+  const r = jerarquizar();
+  ultimo = r;
+  kpis(r);
+  graficoCurva(r);
+  graficoCalidad(r);
+  graficoDispersion(r);
+  graficoBarras(r);
+  graficoPerfil(r);
+  renderRanking(r);
+  document.getElementById("nProy").textContent = PROY.length;
+  document.getElementById("tCurva").textContent = GEN()
+    ? "Asignación presupuestal por orden de prelación general"
+    : "Asignación presupuestal si se financia por puntaje general";
+  document.getElementById("pCurva").innerHTML = GEN()
+    ? "Inversión acumulada recorriendo la lista general de mayor a menor puntaje. Donde la curva cruza el límite se agota el presupuesto."
+    : "Referencia: la curva usa el ranking general aunque el corte activo sea sectorial, porque el presupuesto se asigna sobre una sola bolsa.";
+  document.getElementById("tDisp").textContent = GEN()
+    ? "Distribución de puntajes y corte general"
+    : "Distribución de puntajes y línea de corte de cada sector";
+  document.getElementById("pDisp").innerHTML = GEN()
+    ? "Un punto por proyecto, agrupado por sector para ver a quién deja fuera un corte único. <b>Extensión a la norma:</b> la RD 002-2026 corta por sector."
+    : "Un punto por proyecto. La marca vertical de cada fila es el percentil 70 de ese sector, calculado solo con sus proyectos.";
+  document.getElementById("tRank").textContent = GEN() ? "Ranking general" : "Rankings sectoriales";
+  document.getElementById("legLim").hidden = !cfg.presu;
 }
 
-/* ---------- panel de detalle ---------- */
+/* ================= panel de detalle ================= */
 let actual = null;
 function abrir(p){
   actual = p;
@@ -630,16 +901,13 @@ function cerrar(){
   actual = null;
 }
 function detalle(){
-  const p = actual, b = document.getElementById("dBody");
-  const c = p._c;
+  const p = actual, b = document.getElementById("dBody"), c = p._c;
   const etq = GEN() ? "corte general" : "corte sectorial";
   let h = '<div class="total"><span class="lbl">Puntaje total ponderado<br><span class="num">'+
           PT(p).toFixed(4)+'</span> vs. '+etq+' <span class="num">'+CORTE(p).toFixed(4)+'</span>'+
-          (GEN() ? '<br>Puesto '+p._rk+' en '+esc(p[cfg.sector])+' · acumulado US$ '+
-                   Math.round(p._acum).toLocaleString("es-PE")+' MM'
+          (GEN() ? '<br>Puesto '+p._rk+' en '+esc(p[cfg.sector])+' · acumulado US$ '+fmt0(p._acum)+' MM'
                  : '<br>Puesto '+p._rkg+' en el ranking general')+
           '</span><span class="v">'+(SEL(p)?"↑":"↓")+' '+RK(p)+'</span></div>';
-
   for(let i=1;i<=10;i++){
     const ind = P.indicadores[i], on = W(p)[i]!==undefined;
     const badge = c[i].edit ? '<span class="badge edit">Editado</span>'
@@ -647,52 +915,49 @@ function detalle(){
     h += '<div class="ind"'+(on?"":' style="opacity:.5"')+'>'+
          '<div class="ind-top"><span class="id">'+i+'</span><span class="ttl">'+esc(ind.nombre)+'</span>'+
          '<span class="w">'+(on ? (W(p)[i]*100).toFixed(1)+"%" : "no aplicado")+'</span></div>'+
-         control(p,i,c[i])+
-         '<div class="ind-src">'+badge+esc(c[i].nota)+'</div></div>';
+         control(p,i,c[i])+'<div class="ind-src">'+badge+esc(c[i].nota)+'</div></div>';
   }
   b.innerHTML = h;
+  const refrescar = () => { guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle(); };
   b.querySelectorAll("[data-set]").forEach(el => {
     el.onchange = () => {
       const k = el.dataset.set;
       let v = el.type==="number" ? (el.value===""?null:parseFloat(el.value)) : el.value;
-      if(k==="i3_prov"){ return; }
       if(v!==null && el.tagName==="SELECT") v = parseInt(v,10);
-      ov[p.id] = ov[p.id] || {};
-      ov[p.id][k] = v;
-      guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle();
+      ov[p.id] = ov[p.id] || {}; ov[p.id][k] = v;
+      refrescar();
     };
   });
   b.querySelectorAll("[data-mz]").forEach(el => {
     el.onclick = () => {
-      const set = new Set(c[6].mzs);
-      const mz = el.dataset.mz;
+      const set = new Set(c[6].mzs), mz = el.dataset.mz;
       set.has(mz) ? set.delete(mz) : set.add(mz);
       if(!set.size) return;
       ov[p.id] = ov[p.id]||{}; ov[p.id].i6 = [...set];
-      guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle();
+      refrescar();
     };
   });
   b.querySelectorAll("[data-prov]").forEach(el => {
     el.onchange = () => {
-      const sel = [...b.querySelectorAll("[data-prov]")].filter(x=>x.checked).map(x=>x.dataset.prov);
+      const s = [...b.querySelectorAll("[data-prov]")].filter(x=>x.checked).map(x=>x.dataset.prov);
       ov[p.id] = ov[p.id]||{};
-      ov[p.id].i3_prov = sel.length ? sel : null;
+      ov[p.id].i3_prov = s.length ? s : null;
       ov[p.id].i3_tasa = null;
-      guardar(); render(); actual = PROY.find(x=>x.id===p.id); detalle();
+      refrescar();
     };
   });
 }
-function sel(k, opciones, valor){
+function selc(k, opciones, valor){
   return '<select data-set="'+k+'">'+opciones.map(([t,v]) =>
     '<option value="'+v+'"'+(v===valor?" selected":"")+'>'+esc(t)+' · '+v+' pt</option>').join("")+'</select>';
 }
 function control(p,i,c){
   const pts = c.pt===null ? c.v.toFixed(2) : c.pt;
   const marco = inner => '<div class="ind-ctl">'+inner+'<span class="score">'+pts+' → '+c.v.toFixed(3)+'</span></div>';
-  if(i===1) return marco(sel("i1",[["No incluido en el PNI vigente",0],["Incluido en el portafolio priorizado del PNI",1]], c.pt));
-  if(i===2) return marco(sel("i2",P.escala2, c.pt));
+  if(i===1) return marco(selc("i1",[["No incluido en el PNI vigente",0],["Incluido en el portafolio priorizado del PNI",1]], c.pt));
+  if(i===2) return marco(selc("i2",P.escala2, c.pt));
   if(i===3){
-    let h = marco('<input type="number" step="0.01" min="0" max="100" data-set="i3_tasa" value="'+(c.tasa!==undefined&&c.tasa!==null?c.tasa:"")+'" placeholder="Tasa de pobreza provincial %">');
+    let h = marco('<input type="number" step="0.01" min="0" max="100" data-set="i3_tasa" value="'+(c.tasa??"")+'" placeholder="Tasa de pobreza provincial %">');
     if(p.provincias_ambito.length){
       const selP = O(p,"i3_prov",null);
       h += '<div class="provbox">'+p.provincias_ambito.slice(0,60).map(x =>
@@ -703,23 +968,20 @@ function control(p,i,c){
   }
   if(i===4) return marco('<input type="number" min="0" step="1000" data-set="i4" value="'+(c.ben||"")+'" placeholder="Beneficiarios directos">');
   if(i===5) return marco('<input type="number" min="0" step="1" data-set="i5" value="'+(c.soles?Math.round(c.soles):"")+'" placeholder="CTI o CTP en S/ millones">');
-  if(i===6){
-    return '<div class="mzbox">'+Object.keys(P.macrozonas).map(mz =>
+  if(i===6) return '<div class="mzbox">'+Object.keys(P.macrozonas).map(mz =>
       '<button class="chip" data-mz="'+mz+'" aria-pressed="'+(c.mzs.includes(mz))+'">'+esc(P.macrozonas[mz])+'</button>').join("")+
       '<span class="score">'+c.v.toFixed(3)+'</span></div>';
-  }
-  if(i===7) return marco(sel("i7",P.escala7, c.pt));
-  if(i===8) return marco(sel("i8", c.oym ? P.escala8oym : P.escala8ing, c.pt));
-  if(i===9) return marco('<input type="number" min="0" step="0.01" data-set="i9" value="'+(c.bre!==undefined?c.bre:"")+'" placeholder="% de la brecha sectorial cubierta">');
-  if(i===10) return marco(sel("i10",P.escala10, c.pt));
+  if(i===7) return marco(selc("i7",P.escala7, c.pt));
+  if(i===8) return marco(selc("i8", c.oym ? P.escala8oym : P.escala8ing, c.pt));
+  if(i===9) return marco('<input type="number" min="0" step="0.01" data-set="i9" value="'+(c.bre??"")+'" placeholder="% de la brecha sectorial cubierta">');
+  if(i===10) return marco(selc("i10",P.escala10, c.pt));
   return "";
 }
 
-/* ---------- exportación ---------- */
+/* ================= exportación ================= */
 function csv(){
   const r = jerarquizar();
-  const cab = ["Rank general","Puntaje general","Corte P70 general","Sel. general",
-               "Acumulado US$ MM","Dentro del presupuesto",
+  const cab = ["Rank general","Puntaje general","Corte P70 general","Sel. general","Acumulado US$ MM","Dentro del presupuesto",
                "Sector","Rank sector","Puntaje sector","Corte P70 sector","Sel. sector",
                "Proyecto","Fase","Modalidad","Ambito","Monto US$ MM"];
   for(let i=1;i<=10;i++) cab.push("Ind"+i+" pt","Ind"+i+" norm","Ind"+i+" peso general","Ind"+i+" peso sector");
@@ -730,14 +992,13 @@ function csv(){
                p[cfg.sector],p._rk,p._pt.toFixed(6),p._corte.toFixed(6),p._sel?"Si":"No",
                p.nombre_corto,p.fase,p.modalidad,p.ambito,p.monto_usd_mm||""];
     for(let i=1;i<=10;i++) f.push(p._c[i].pt===null?"":p._c[i].pt, p._c[i].v.toFixed(6),
-                                  p._wg[i]!==undefined?p._wg[i].toFixed(6):"",
-                                  p._w[i]!==undefined?p._w[i].toFixed(6):"");
+                                  p._wg[i]!==undefined?p._wg[i].toFixed(6):"", p._w[i]!==undefined?p._w[i].toFixed(6):"");
     filas.push(f);
   }
-  const txt = "﻿"+filas.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(";")).join("\r\n");
+  const txt = "﻿"+filas.map(x=>x.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).join("\r\n");
   navigator.clipboard.writeText(txt).then(
     ()=>toast("Ranking copiado al portapapeles en formato CSV. Pégalo en Excel y usa Datos → Texto en columnas con separador «;»."),
-    ()=>toast("No se pudo copiar. Selecciona el ranking manualmente."));
+    ()=>toast("No se pudo copiar. Exporta desde el CSV del repositorio."));
 }
 function toast(m){
   const t = document.createElement("div");
@@ -747,26 +1008,25 @@ function toast(m){
   setTimeout(()=>t.remove(), 5200);
 }
 
-/* ---------- controles ---------- */
-document.getElementById("ch9").onclick = e => toggleOpc(9,e.currentTarget);
-document.getElementById("ch10").onclick = e => toggleOpc(10,e.currentTarget);
-function toggleOpc(i,el){
+/* ================= controles ================= */
+const rerender = () => { guardar(); render(); if(actual) detalle(); };
+document.getElementById("ch9").onclick  = e => toggleOpc(9, e.currentTarget);
+document.getElementById("ch10").onclick = e => toggleOpc(10, e.currentTarget);
+function toggleOpc(i, el){
   cfg.opc = cfg.opc.includes(i) ? cfg.opc.filter(x=>x!==i) : cfg.opc.concat(i);
   el.setAttribute("aria-pressed", cfg.opc.includes(i));
-  guardar(); render(); if(actual) detalle();
+  rerender();
 }
-document.getElementById("selModo").onchange = e => {
-  cfg.modo = e.target.value; guardar(); sincronizar(); render(); if(actual) detalle();
-};
+document.getElementById("selModo").onchange = e => { cfg.modo = e.target.value; sincronizar(); rerender(); };
+document.getElementById("selSector").onchange = e => { cfg.sector = e.target.value; rerender(); };
+document.getElementById("selFase").onchange = e => { cfg.fase = e.target.value; rerender(); };
+document.getElementById("inUit").onchange = e => { cfg.uit = parseFloat(e.target.value)||P.uit; rerender(); };
 document.getElementById("inPresu").onchange = e => {
   const v = parseFloat(e.target.value);
   cfg.presu = (isFinite(v) && v>0) ? v : null;
-  guardar(); render(); if(actual) detalle();
+  rerender();
 };
-document.getElementById("selSector").onchange = e => { cfg.sector = e.target.value; guardar(); render(); };
-document.getElementById("selFase").onchange = e => { cfg.fase = e.target.value; guardar(); render(); };
-document.getElementById("inUit").onchange = e => { cfg.uit = parseFloat(e.target.value)||P.uit; guardar(); render(); if(actual) detalle(); };
-document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; render(); };
+document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; renderRanking(ultimo); };
 document.getElementById("btnCsv").onclick = csv;
 document.getElementById("btnReset").onclick = () => {
   if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
@@ -778,26 +1038,22 @@ document.getElementById("btnTema").onclick = () => {
   const oscuro = r.getAttribute("data-theme")==="dark" ||
     (!r.getAttribute("data-theme") && matchMedia("(prefers-color-scheme:dark)").matches);
   r.setAttribute("data-theme", oscuro ? "light" : "dark");
+  render();
 };
 document.getElementById("btnClose").onclick = cerrar;
 document.getElementById("scrim").onclick = cerrar;
 addEventListener("keydown", e => { if(e.key==="Escape") cerrar(); });
+let tRes;
+addEventListener("resize", () => { clearTimeout(tRes); tRes = setTimeout(() => ultimo && render(), 160); });
 
 function sincronizar(){
   document.getElementById("selModo").value = cfg.modo;
   document.getElementById("selSector").value = cfg.sector;
-  document.getElementById("inPresu").value = cfg.presu ?? "";
-  document.getElementById("fPresu").hidden = cfg.modo!=="general";
-  document.getElementById("fSector").querySelector("label").textContent =
-    cfg.modo==="general" ? "Sector de referencia mostrado en cada fila" : "Nivel del ranking sectorial";
-  document.getElementById("notaModo").innerHTML = cfg.modo==="general"
-    ? "<b>Extensión a la norma.</b> La RD 002-2026 ordena y corta por sector. Para asignar presupuesto a "+
-      "nivel general se usa un único juego de pesos sobre los 73 proyectos, de modo que los puntajes sean "+
-      "comparables entre sectores. El acumulado recorre la lista de mayor a menor puntaje."
-    : "Ordenamiento y corte por sector, tal como lo establece el numeral 4 de los Lineamientos.";
   document.getElementById("selFase").value = cfg.fase;
   document.getElementById("inUit").value = cfg.uit;
+  document.getElementById("inPresu").value = cfg.presu ?? "";
   document.getElementById("inBuscar").value = cfg.q;
+  document.getElementById("fPresu").hidden = cfg.modo!=="general";
   document.getElementById("ch9").setAttribute("aria-pressed", cfg.opc.includes(9));
   document.getElementById("ch10").setAttribute("aria-pressed", cfg.opc.includes(10));
 }
@@ -805,8 +1061,8 @@ document.getElementById("fuentes").innerHTML =
   "<b>Fuentes.</b> Metodología, ponderaciones y escalas: Resolución Directoral N.° 002-2026-EF/68.01 y Anexos 1 a 6 (MEF · DGPPIP, 8 de julio de 2026). " +
   "Cartera de proyectos: portafolio APP de ProInversión, consultado el "+P.fecha_datos+" (fases de Formulación y Estructuración). " +
   "Pobreza monetaria provincial y población: INEI, Mapa de Pobreza Monetaria Provincial y Distrital 2018. " +
-  "Portafolio priorizado del PNI 2026-2031: Decreto Supremo N.° 039-2026-EF, tablas 24 a 27. " +
-  "UIT 2026: Decreto Supremo N.° 301-2025-EF. " +
+  "Portafolio priorizado del PNI 2026-2031: Decreto Supremo N.° 039-2026-EF, tablas 24 a 27. UIT 2026: Decreto Supremo N.° 301-2025-EF. " +
+  "El ranking general es una extensión a la norma, que ordena y corta por sector. " +
   "Los indicadores marcados como proxy o pendientes usan supuestos de trabajo: la jerarquía es preliminar hasta que el equipo técnico complete la ficha de cada proyecto.";
 
 sincronizar();
