@@ -1,0 +1,18 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",          "x": 0,    "y": 0,   "w": 760,  "h": 1280, "title": "Diagnóstico" },
+    { "file": "Cabecera.dc.html",      "x": 860,  "y": 0,   "w": 1160, "h": 370 },
+    { "file": "Movimiento.dc.html",    "x": 860,  "y": 440, "w": 1160, "h": 800 },
+    { "file": "Concentracion.dc.html", "x": 2120, "y": 0,   "w": 880,  "h": 580, "title": "Concentración" },
+    { "file": "Pendientes.dc.html",    "x": 2120, "y": 650, "w": 880,  "h": 780 }
+  ],
+  "annotations": [
+    { "id": "arranque", "x": 0, "y": -170, "w": 300,
+      "text": "Revisión del dashboard, agosto 2026.\n\nEmpieza por Diagnóstico: seis hallazgos ordenados por prioridad. Los cuatro artboards de la derecha muestran los tres primeros resueltos." },
+    { "id": "mayor-valor", "x": 860, "y": -170, "w": 340,
+      "text": "Si solo se implementa una cosa, que sea Movimiento.\n\nEl escenario del artboard es real, calculado con el motor: tres ediciones sacan de la selección a dos proyectos que nadie tocó." },
+    { "id": "hallazgo-nuevo", "x": 2120, "y": -170, "w": 340,
+      "text": "Este panel destapó algo que la conversación no había visto: con el corte general, Salud, Turismo y Educación se quedan en cero. Son 18 proyectos, la cuarta parte del portafolio." }
+  ],
+  "launch": { "view": "canvas" }
+}

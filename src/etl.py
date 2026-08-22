@@ -83,6 +83,10 @@ def cargar_portafolio():
 
 
 def main():
+    # Estado de capacidad presupuestal por proyecto, del dashboard APP-PA-OxI de
+    # ProInversión (modelo Power BI, tabla Dim_Proyecto). El id cruza con el portafolio.
+    capacidad = dict(json.load(open(os.path.join(DATA, "capacidad_presupuestal.json"), encoding="utf-8")))
+
     pobreza = json.load(open(os.path.join(DATA, "pobreza_provincial_2018.json"), encoding="utf-8"))
     poblacion = json.load(open(os.path.join(DATA, "poblacion_departamental_2020.json"), encoding="utf-8"))
     poblacion = {sinacento(k): v for k, v in poblacion.items()}
@@ -153,6 +157,7 @@ def main():
             "url": "https://www.investinperu.pe/portafolio-app/detalle/?" + p["Slug"],
             "enunciado": re.sub(r"<[^>]+>", " ", p.get("Enunciado_PrimerParrafo") or "").strip(),
             "es_oym": es_oym,
+            "capacidad_presupuestal": capacidad.get(str(p["Id"])),
             "pni": PNI_2026_2031.get(p["NombreCorto"]),
             "tasa_pobreza": tasa,
             "poblacion_ambito": pob,

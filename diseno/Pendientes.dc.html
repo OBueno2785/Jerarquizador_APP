@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+  <style>
+    body { margin: 0; background: #F4F6F3; color: #16211D;
+           font-family: Archivo, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    a { color: #0B6E4F; } a:hover { color: #0A5A41; }
+    .item { display: grid; grid-template-columns: 22px minmax(0, 1fr) 58px 92px 128px;
+            gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid #D9E0D8; }
+    .id { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #7C8A83; text-align: right; }
+    .nm { font-size: 13px; font-weight: 500; }
+    .nm span { display: block; font-family: 'Source Serif 4', Georgia, serif; font-size: 11.5px;
+               font-weight: 400; color: #7C8A83; margin-top: 2px; line-height: 1.45; }
+    .peso { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4E5C56; text-align: right; }
+    .cuenta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right; color: #16211D; }
+    .cuenta em { font-style: normal; font-family: Archivo, sans-serif; font-size: 10.5px; color: #7C8A83; display: block; }
+    .accion { border: 1px solid #D9E0D8; background: transparent; color: #4E5C56; border-radius: 6px;
+              padding: 5px 10px; font-size: 12px; font-weight: 500; font-family: inherit; cursor: pointer;
+              width: 100%; text-align: center; }
+    .accion.on { border-color: #0B6E4F; color: #0B6E4F; background: #DFEEE6; }
+    .grupo { font-size: 10.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+             color: #7C8A83; margin: 16px 0 2px; }
+  </style>
+</helmet>
+
+<div style="width: 880px; padding: 22px 24px 26px; box-sizing: border-box">
+  <div style="background: #FFFFFF; border: 1px solid #D9E0D8; border-radius: 10px; padding: 14px 16px 16px">
+
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px">
+      <h3 style="margin: 0; font-size: 14.5px; font-weight: 600; letter-spacing: -0.015em">Qué falta completar</h3>
+      <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: #7C8A83">302 de 489 calificaciones</span>
+    </div>
+    <p style="margin: 3px 0 12px; font-family: 'Source Serif 4', Georgia, serif; font-size: 12.5px; line-height: 1.55; color: #7C8A83; max-width: 72ch">
+      Ordenado por cómo se cierra cada uno, no por cuántos son. Lo de arriba se resuelve hoy;
+      lo de abajo depende de que alguien abra el estudio del proyecto.
+    </p>
+
+    <div style="display: flex; gap: 10px; background: #EDF1EC; border-radius: 8px; padding: 11px 13px; margin-bottom: 4px">
+      <div style="flex: 1">
+        <b style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; color: #0B6E4F">78</b>
+        <span style="font-size: 11.5px; color: #4E5C56">se cierran sin salir de la app</span>
+      </div>
+      <div style="flex: 1; border-left: 1px solid #D9E0D8; padding-left: 13px">
+        <b style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1">44</b>
+        <span style="font-size: 11.5px; color: #4E5C56">necesitan el contrato o la ficha</span>
+      </div>
+      <div style="flex: 1; border-left: 1px solid #D9E0D8; padding-left: 13px">
+        <b style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; color: #9A5A0F">180</b>
+        <span style="font-size: 11.5px; color: #4E5C56">requieren el estudio técnico</span>
+      </div>
+    </div>
+
+    <div class="grupo">Se cierra en la app</div>
+
+    <div class="item">
+      <span class="id">3</span>
+      <span class="nm">Nivel de pobreza en el ámbito<span>Marcar las provincias reales del proyecto sobre la tabla INEI que ya está cargada</span></span>
+      <span class="peso">9 %</span>
+      <span class="cuenta">71<em>proyectos</em></span>
+      <button class="accion on">Completar provincias</button>
+    </div>
+
+    <div class="item">
+      <span class="id">6</span>
+      <span class="nm">Impulso territorial<span>Elegir la macrozona que manda cuando el ámbito abarca varias</span></span>
+      <span class="peso">9 %</span>
+      <span class="cuenta">7<em>proyectos</em></span>
+      <button class="accion on">Revisar macrozona</button>
+    </div>
+
+    <div class="grupo">Necesita el contrato o la ficha del proyecto</div>
+
+    <div class="item">
+      <span class="id">2</span>
+      <span class="nm">Capacidad de generar ingresos<span>Distinguir cofinanciada total de parcial: ¿el proyecto cobra tarifa o peaje?</span></span>
+      <span class="peso">16 %</span>
+      <span class="cuenta">42<em>proyectos</em></span>
+      <button class="accion">Ver los 42</button>
+    </div>
+
+    <div class="item">
+      <span class="id">5</span>
+      <span class="nm">Monto de inversión<span>ProInversión no publica el CTI de estos proyectos</span></span>
+      <span class="peso">12 %</span>
+      <span class="cuenta" style="color: #9A5A0F">2<em>pendientes</em></span>
+      <button class="accion">Ver los 2</button>
+    </div>
+
+    <div class="grupo">Requiere el estudio técnico</div>
+
+    <div class="item">
+      <span class="id">8</span>
+      <span class="nm">Avance de los estudios de ingeniería<span>Hoy se infiere de la fase del proceso, que no es un nivel de ingeniería</span></span>
+      <span class="peso">10 %</span>
+      <span class="cuenta">66<em>proyectos</em></span>
+      <button class="accion">Ver los 66</button>
+    </div>
+
+    <div class="item">
+      <span class="id">4</span>
+      <span class="nm">Población beneficiada<span>Hoy se usa la población del departamento entero como aproximación</span></span>
+      <span class="peso">10 %</span>
+      <span class="cuenta">65<em>proyectos</em></span>
+      <button class="accion">Ver los 65</button>
+    </div>
+
+    <div class="item" style="border-bottom: 1px solid #D9E0D8">
+      <span class="id">7</span>
+      <span class="nm">Transferencia de riesgos<span>Hoy se infiere de la modalidad, no de la matriz de riesgos preliminar</span></span>
+      <span class="peso">12 %</span>
+      <span class="cuenta">49<em>proyectos</em></span>
+      <button class="accion">Ver los 49</button>
+    </div>
+
+    <p style="margin: 14px 0 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 12.5px; line-height: 1.6; color: #7C8A83; max-width: 72ch">
+      Cada botón filtra el ranking a esos proyectos. El orden importa: el indicador 2 pesa 16 % y
+      es el que más separa la selección, así que 42 fichas de contrato mueven la jerarquía más que
+      los 180 datos que dependen de estudios que hoy nadie tiene.
+    </p>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":880,"height":600}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

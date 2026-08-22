@@ -138,7 +138,25 @@ table.g tr.opc td{background:var(--surface-2)}
 .c12{grid-column:span 12} .c8{grid-column:span 8} .c6{grid-column:span 6} .c4{grid-column:span 4}
 
 /* ---------- KPI ---------- */
-.kpis{grid-column:span 12; display:grid; grid-template-columns:repeat(5,1fr); gap:14px}
+.kpis{grid-column:span 12; display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:14px; align-items:stretch}
+.kpi.hero{border-color:var(--accent); display:flex; flex-direction:column; gap:8px}
+.kpi.hero .eyebrow{color:var(--accent)}
+.kpi.hero .cifra{display:flex; align-items:baseline; gap:9px}
+.kpi.hero .cifra b{font-family:"IBM Plex Mono",monospace; font-size:44px; font-weight:600; letter-spacing:-.04em; line-height:1}
+.kpi.hero .cifra span{font-size:15px; color:var(--ink-2)}
+.kpi.hero .prop{display:flex; height:7px; border-radius:4px; overflow:hidden; background:var(--surface-2)}
+.kpi.hero .prop i{background:var(--accent); display:block}
+.kpi.hero .pie{font-size:12.5px; color:var(--ink-2)}
+.kpi.hero .pie strong{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink)}
+.activos{background:var(--surface); border-bottom:1px solid var(--line); padding:8px 24px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; font-size:12.5px; color:var(--ink-2)}
+.activos b{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink)}
+.quita{display:inline-flex; align-items:center; gap:5px; background:var(--accent-soft);
+  border:1px solid var(--accent); color:var(--accent); border-radius:999px; padding:3px 5px 3px 10px;
+  font-size:12px; font-weight:500; cursor:pointer; font-family:inherit}
+.quita:hover{background:var(--surface)}
+.limpiar{background:none; border:0; color:var(--accent); font-size:12.5px; font-weight:500;
+  cursor:pointer; font-family:inherit; text-decoration:underline; text-underline-offset:2px}
 .kpi{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
 .kpi > b{display:block; font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600; letter-spacing:-.03em; line-height:1.15}
 .kpi .u{font-family:Archivo,sans-serif; font-size:12px; color:var(--ink-3); font-weight:500; letter-spacing:0}
@@ -165,6 +183,39 @@ table.g tr.opc td{background:var(--surface-2)}
 .tip b{display:block; font-weight:600; margin-bottom:2px}
 .tip span{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
 
+/* ---------- concentracion ---------- */
+.conc{display:grid; grid-template-columns:150px minmax(0,1fr) 92px; gap:14px; align-items:center}
+.conc .cat{font-size:11.5px; color:var(--ink-2); text-align:right}
+.conc .pista{display:flex; flex-direction:column; gap:2px}
+.conc .bar{height:9px; border-radius:3px}
+.conc .cero{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--mark-out); line-height:9px}
+.conc .delta{font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-align:right; color:var(--ink-2)}
+.conc .delta em{font-style:normal; font-family:Archivo,sans-serif; font-size:10.5px; color:var(--ink-3); display:block}
+.destac{display:flex; flex-wrap:wrap; gap:10px; background:var(--surface-2); border-radius:8px;
+  padding:11px 13px; margin-bottom:16px}
+.destac > div{flex:1 1 150px}
+.destac b{display:block; font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600;
+  letter-spacing:-.03em; line-height:1.1}
+.destac span{font-size:11.5px; color:var(--ink-2); display:block; margin-top:2px}
+.destac > div + div{border-left:1px solid var(--line); padding-left:13px}
+
+/* ---------- cola de pendientes ---------- */
+.cola{display:grid; grid-template-columns:20px minmax(0,1fr) 50px 74px 116px; gap:11px;
+  align-items:center; padding:9px 0; border-top:1px solid var(--line)}
+.cola .id{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-3); text-align:right}
+.cola .nm{font-size:12.5px; font-weight:500}
+.cola .nm span{display:block; font-family:"Source Serif 4",Georgia,serif; font-size:11.5px;
+  font-weight:400; color:var(--ink-3); margin-top:2px; line-height:1.45}
+.cola .peso{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-2); text-align:right}
+.cola .cuenta{font-family:"IBM Plex Mono",monospace; font-size:12px; text-align:right; color:var(--ink)}
+.cola .cuenta em{font-style:normal; font-family:Archivo,sans-serif; font-size:10.5px; color:var(--ink-3); display:block}
+.cola .accion{border:1px solid var(--line); background:transparent; color:var(--ink-2); border-radius:6px;
+  padding:5px 9px; font-size:12px; font-weight:500; font-family:inherit; cursor:pointer; width:100%}
+.cola .accion:hover{border-color:var(--accent); color:var(--accent)}
+.cola .accion.on{border-color:var(--accent); color:var(--accent); background:var(--accent-soft)}
+.grupo-cola{font-size:10.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-3); margin:15px 0 1px}
+
 /* ---------- ranking ---------- */
 .sector{margin-bottom:26px}
 .sector:last-child{margin-bottom:0}
@@ -190,6 +241,17 @@ table.g tr.opc td{background:var(--surface-2)}
 .row .mto{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-2); text-align:right}
 .row .pt{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600; text-align:right}
 .row.gen{grid-template-columns:38px minmax(0,1fr) 132px 98px 104px 70px}
+.row.mv{grid-template-columns:30px 40px minmax(0,1fr) 128px 96px 76px}
+.row.gen.mv{grid-template-columns:30px 40px minmax(0,1fr) 118px 88px 96px 76px}
+.row .mov{display:flex; align-items:center; justify-content:flex-end; gap:3px;
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-2)}
+.row .mov .nada{color:var(--mark-out)}
+.row .dpt{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--warn);
+  display:block; margin-top:1px; font-weight:500}
+.tag.entro{color:var(--accent); border-color:var(--accent); background:var(--accent-soft); font-weight:600}
+.tag.salio{color:var(--ink); border-color:var(--ink-3); background:var(--surface-2); font-weight:600}
+.tag.cap{color:var(--warn); border-color:var(--warn)}
+.tag.ed{color:var(--warn); border-color:var(--warn)}
 .row .acum{font-family:"IBM Plex Mono",monospace; font-size:12px; text-align:right; color:var(--ink-3)}
 .row .acum b{display:block; font-weight:600; color:var(--ink-2)}
 .row.nofin .acum b{color:var(--warn)}
@@ -199,6 +261,12 @@ table.g tr.opc td{background:var(--surface-2)}
 .strip i.na{background:repeating-linear-gradient(45deg,var(--surface-2),var(--surface-2) 2px,transparent 2px,transparent 4px)}
 .strip i.pend{box-shadow:inset 0 0 0 1px var(--warn)}
 
+.cambios{display:flex; flex-wrap:wrap; align-items:center; gap:9px 16px; background:var(--accent-soft);
+  border-radius:8px; padding:9px 12px; margin:0 0 14px}
+.cambios .txt{font-size:12.5px; color:var(--ink)}
+.cambios .txt b{font-weight:600}
+.cambios .sec{font-size:12.5px; color:var(--ink-2)}
+.cambios .acc{display:flex; gap:7px; margin-left:auto}
 .cutline{display:flex; align-items:center; gap:10px; margin:9px 0 8px; font-size:11px; font-weight:600;
   letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
 .cutline::before,.cutline::after{content:""; height:1px; background:var(--accent); flex:1; opacity:.55}
@@ -235,6 +303,8 @@ table.g tr.opc td{background:var(--surface-2)}
 .badge.proxy{background:var(--surface-2); color:var(--ink-2)}
 .badge.pendiente{background:var(--warn-soft); color:var(--warn)}
 .badge.edit{background:var(--warn); color:var(--surface)}
+.deshacer{background:none; border:0; color:var(--accent); font-size:11px; font-weight:600; cursor:pointer;
+  font-family:inherit; text-decoration:underline; text-underline-offset:2px; padding:0; margin-right:6px}
 .total{display:flex; justify-content:space-between; align-items:center; gap:12px; background:var(--surface-2);
   border-radius:8px; padding:12px 14px; margin:14px 0 4px}
 .total .v{font-family:"IBM Plex Mono",monospace; font-size:24px; font-weight:600; letter-spacing:-.02em}
@@ -258,13 +328,19 @@ table.g tr.opc td{background:var(--surface-2)}
   .gidx a{border-left:0; border:1px solid var(--line); border-radius:999px; padding:4px 10px}
 }
 @media (max-width:720px){
-  .kpis{grid-template-columns:repeat(2,1fr)}
   .grid{padding:14px 14px 56px}
   .filtros{padding:10px 14px}
-  .row{grid-template-columns:28px minmax(0,1fr) 64px; row-gap:8px}
-  .row.gen{grid-template-columns:28px minmax(0,1fr) 64px}
-  .row .strip{grid-column:1/-1}
-  .row .mto,.row .acum{display:none}
+  .row,.row.gen,.row.mv,.row.gen.mv{grid-template-columns:28px minmax(0,1fr) 66px; row-gap:6px}
+  .row .strip{display:none}
+  .row .mto{grid-column:2/3; text-align:left; font-size:11.5px}
+  .row .acum{grid-column:3/4; text-align:right}
+  .row .acum b{display:inline}
+  .row .mov{grid-column:1/2; justify-content:flex-start}
+  .kpis{grid-template-columns:1fr}
+  .conc{grid-template-columns:96px minmax(0,1fr) 74px; gap:9px}
+  .cola{grid-template-columns:20px minmax(0,1fr) 74px; row-gap:6px}
+  .cola .peso{display:none}
+  .cola .accion{grid-column:2/4}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
 </style>
@@ -333,6 +409,8 @@ table.g tr.opc td{background:var(--surface-2)}
   </div>
 </div>
 
+<div class="activos" id="activos" hidden></div>
+
 <div class="grid" id="vistaPanel">
   <div class="kpis" id="kpis"></div>
 
@@ -340,6 +418,7 @@ table.g tr.opc td{background:var(--surface-2)}
     <header><h3 id="tCurva">Asignación presupuestal por orden de prelación</h3></header>
     <p class="ph" id="pCurva"></p>
     <div id="curva"></div>
+    <p class="note" id="avisoCurva" style="margin:8px 0 0"></p>
     <div class="leyenda">
       <span><i style="background:var(--mark-sel)"></i>Inversión acumulada</span>
       <span><i style="background:var(--mark-sel);opacity:.5;height:2px;border-radius:0"></i>Línea de corte P70</span>
@@ -352,6 +431,24 @@ table.g tr.opc td{background:var(--surface-2)}
     <p class="ph">Origen de las calificaciones que sostienen el ranking. Mientras haya proxies y
       pendientes, la jerarquía es preliminar.</p>
     <div id="calidad"></div>
+  </section>
+
+  <section class="panel c6">
+    <header><h3>Concentración sectorial de la selección</h3><span class="eyebrow" id="subConc"></span></header>
+    <p class="ph">Peso de cada sector en el portafolio frente a su peso entre los seleccionados.
+      El corte sectorial existe justamente para que estas dos columnas no se separen.</p>
+    <div id="concentracion"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-out)"></i>Portafolio</span>
+      <span><i style="background:var(--mark-sel)"></i>Selección</span>
+    </div>
+  </section>
+
+  <section class="panel c6">
+    <header><h3>Qué falta completar</h3><span class="eyebrow" id="subCola"></span></header>
+    <p class="ph">Ordenado por cómo se cierra cada indicador, no por cuántos son. Cada botón filtra
+      el ranking a los proyectos afectados.</p>
+    <div id="cola"></div>
   </section>
 
   <section class="panel c12">
@@ -441,6 +538,21 @@ table.g tr.opc td{background:var(--surface-2)}
         <dd>La posición dentro del grupo activo. En modo general cada fila muestra además su puesto
           dentro de su sector, y la ficha de cada proyecto muestra siempre los dos.</dd>
 
+        <dt>Línea base</dt>
+        <dd>La misma metodología corrida sobre la calificación automática, sin ninguna de tus
+          ediciones. Es contra ella que el ranking mide el movimiento: mientras no edites nada, la
+          línea base y el ranking activo son idénticos y las columnas de movimiento no aparecen.</dd>
+
+        <dt>Movimiento <span class="en">▲ ▼ —</span></dt>
+        <dd>Cuántos puestos ganó o perdió el proyecto frente a la línea base. La flecha lleva la
+          dirección; el color no significa nada, porque bajar no es «malo». Un proyecto puede moverse
+          <em>sin que nadie toque sus supuestos</em>: lo desplazan los demás, y eso también corre el
+          percentil 70 del sector.</dd>
+
+        <dt>Entró / Salió</dt>
+        <dd>El proyecto cruzó la línea de corte respecto de la línea base. Son los dos únicos cambios
+          que alteran la decisión, por eso son los únicos que llevan color.</dd>
+
         <dt>Muestra pequeña</dt>
         <dd>Aviso que aparece en sectores con menos de 4 proyectos. Con tan pocos casos la regla de
           reponderación descarta casi todos los indicadores y el orden resultante dice poco: en
@@ -462,6 +574,14 @@ table.g tr.opc td{background:var(--surface-2)}
           lo aplica <em>después</em> del corte, junto con la capacidad operativa, para decidir cuáles
           de los proyectos seleccionados puede efectivamente desarrollar. En el dashboard escribes el
           monto y la lista se corta donde el acumulado lo supera.</dd>
+
+        <dt>Capacidad presupuestal</dt>
+        <dd>Estado de la verificación de fondos públicos para el proyecto, tomado del dashboard
+          APP-PA-OxI de ProInversión. La norma la exige antes de incluir un proyecto en la propuesta
+          —vía la DURP—, pero <em>no forma parte del puntaje</em>: es una condición de entrada
+          posterior al corte. Los valores «Por solicitar al Sector», «Solicitado al Sector» y
+          «No tiene Cap. Presupuestal» marcan al proyecto en el ranking, porque un proyecto bien
+          rankeado sin fondos verificados no es proponible todavía.</dd>
 
         <dt>Monto de inversión</dt>
         <dd>Lo que publica ProInversión para cada proyecto, en millones de dólares. Según el proyecto
@@ -557,6 +677,12 @@ table.g tr.opc td{background:var(--surface-2)}
           <em>horizontal</em>. El desplazamiento vertical existe únicamente para que los puntos no se
           tapen entre sí: una columna de puntos apilados significa varios proyectos con el mismo
           puntaje, no una jerarquía dentro de la fila.</dd>
+
+        <dt>Concentración sectorial</dt>
+        <dd>Compara el peso de cada sector en el portafolio con su peso entre los seleccionados. Si
+          las dos barras coinciden, el corte reparte igual que la cartera; si se separan, el método
+          está favoreciendo a unos sectores sobre otros. Un sector marcado «sin seleccionados» se
+          quedó en cero: ninguno de sus proyectos pasó.</dd>
 
         <dt>Δ (delta)</dt>
         <dd>En «Qué separa a los seleccionados», la diferencia entre el promedio de los que están sobre
@@ -676,7 +802,8 @@ const P = DATOS.parametros, PROY = DATOS.proyectos;
 const FIJOS = [1,2,3,4,5,6,7,8];
 const LS = "jerarquizador-app-v2";
 
-let cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"", tab:"panel"};
+let cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"",
+           tab:"panel", soloMov:false, pend:null};
 let ov = {};
 try{
   const g = JSON.parse(localStorage.getItem(LS)||"{}");
@@ -781,8 +908,9 @@ function percentil(arr,q){
   const k = (d.length-1)*q/100, f = Math.floor(k), c = Math.min(f+1,d.length-1);
   return d[f] + (d[c]-d[f])*(k-f);
 }
-function evaluar(g, base, s){
-  const constantes = FIJOS.filter(i => new Set(g.map(p=>Math.round(p._c[i].v*1e6))).size===1);
+function evaluar(g, base, s, campo){
+  const c = campo || "_c";
+  const constantes = FIJOS.filter(i => new Set(g.map(p=>Math.round(p[c][i].v*1e6))).size===1);
   let w = Object.assign({}, base), excl = [];
   if(constantes.length && constantes.length<FIJOS.length){
     excl = constantes;
@@ -793,16 +921,25 @@ function evaluar(g, base, s){
   }
   for(const p of g){
     p["_w"+s] = w; p["_excl"+s] = excl;
-    p["_pt"+s] = Object.keys(w).reduce((a,i)=>a + w[i]*p._c[i].v, 0);
+    p["_pt"+s] = Object.keys(w).reduce((a,i)=>a + w[i]*p[c][i].v, 0);
   }
   g.sort((a,b)=>b["_pt"+s]-a["_pt"+s]);
   const corte = percentil(g.map(p=>p["_pt"+s]), 70);
   g.forEach((p,n)=>{ p["_rk"+s]=n+1; p["_corte"+s]=corte; p["_sel"+s] = p["_pt"+s] >= corte - 1e-9; });
   return {corte, excl, w};
 }
+const hayEdiciones = () => Object.values(ov).some(o => o && Object.values(o).some(v => v!==undefined && v!==null));
+
 function jerarquizar(){
   const base = pesosBase();
   const universo = PROY.filter(p => !cfg.fase || p.fase===cfg.fase);
+
+  // Linea base: la misma metodologia sobre la calificacion automatica, sin ediciones.
+  // Es lo que permite decir que se movio y quien cruzo la linea por culpa de un supuesto.
+  const guardado = ov;
+  ov = {};
+  universo.forEach(p => { p._cB = calificar(p); });
+  ov = guardado;
   universo.forEach(p => { p._c = calificar(p); });
 
   const grupos = new Map();
@@ -813,12 +950,14 @@ function jerarquizar(){
   }
   const secciones = [];
   for(const [sector,g] of grupos){
+    evaluar(g, base, "B", "_cB");
     const r = evaluar(g, base, "");
-    secciones.push({sector, grupo:g, corte:r.corte, excl:r.excl});
+    secciones.push({sector, grupo:g, corte:r.corte, corteB:g[0]._corteB, excl:r.excl});
   }
   secciones.sort((a,b)=>a.sector.localeCompare(b.sector,"es"));
 
   const todos = universo.slice();
+  evaluar(todos, base, "gB", "_cB");
   const rg = evaluar(todos, base, "g");
   let acum = 0;
   for(const p of todos){
@@ -826,7 +965,8 @@ function jerarquizar(){
     p._acum = acum;
     p._fin = !cfg.presu || acum <= cfg.presu;
   }
-  return {secciones, general:{sector:"Ranking general", grupo:todos, corte:rg.corte, excl:rg.excl}, universo};
+  return {secciones, general:{sector:"Ranking general", grupo:todos, corte:rg.corte,
+          corteB:todos[0]._cortegB, excl:rg.excl}, universo};
 }
 
 const GEN = () => cfg.modo==="general";
@@ -835,6 +975,12 @@ const PT = p => GEN() ? p._ptg : p._pt;
 const RK = p => GEN() ? p._rkg : p._rk;
 const SEL = p => GEN() ? p._selg : p._sel;
 const CORTE = p => GEN() ? p._corteg : p._corte;
+const PTB = p => GEN() ? p._ptgB : p._ptB;
+const RKB = p => GEN() ? p._rkgB : p._rkB;
+const SELB = p => GEN() ? p._selgB : p._selB;
+const MOV = p => RKB(p) - RK(p);
+const DPT = p => PT(p) - PTB(p);
+const EDIT = p => { const o = ov[p.id]; return !!(o && Object.values(o).some(v => v!==undefined && v!==null)); };
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 
 /* ================= utilidades de gráfico ================= */
@@ -892,15 +1038,19 @@ function graficoCurva(r){
     s += '<line x1="'+m.l+'" y1="'+yl.toFixed(1)+'" x2="'+(w-m.r)+'" y2="'+yl.toFixed(1)+'" stroke="var(--mark-lim)" stroke-width="2" stroke-dasharray="6 4"/>';
     s += '<text class="val" x="'+(w-m.r-6)+'" y="'+(yl-7).toFixed(1)+'" text-anchor="end" style="fill:var(--warn)">Límite US$ '+fmt0(cfg.presu)+' MM</text>';
   }
+  const sinM = g.filter(p=>!p.monto_usd_mm).length;
   s += '<line class="axis" x1="'+m.l+'" y1="'+(m.t+ih)+'" x2="'+(w-m.r)+'" y2="'+(m.t+ih)+'"/>';
   s += '<text x="'+m.l+'" y="'+(h-6)+'">Puesto 1</text>'
-    +  '<text x="'+(w-m.r)+'" y="'+(h-6)+'" text-anchor="end">Puesto '+g.length+'</text>'
+    +  '<text x="'+(w-m.r)+'" y="'+(h-6)+'" text-anchor="end">Puesto '+g.length+'</text>' 
     +  '<text class="val" x="'+(m.l-8)+'" y="'+(m.t+8)+'" text-anchor="end">US$ MM</text>';
   s += '<line id="cross" x1="0" y1="'+m.t+'" x2="0" y2="'+(m.t+ih)+'" stroke="var(--ink-3)" stroke-width="1" opacity="0"/>'
     +  '<circle id="crossDot" class="dot" r="4.5" fill="var(--mark-sel)" opacity="0"/>';
   s += '<rect id="curvaHit" x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent"/>';
 
   document.getElementById("curva").innerHTML = svgEl(s, w, h);
+  document.getElementById("avisoCurva").innerHTML = sinM
+    ? '<b>'+sinM+' proyectos sin monto publicado:</b> la curva se queda plana en ellos y su inversión no entra en el acumulado.'
+    : "";
   const hit = document.getElementById("curvaHit"), cr = document.getElementById("cross"), cd = document.getElementById("crossDot");
   hit.addEventListener("mousemove", e => {
     const box = hit.getBoundingClientRect();
@@ -979,6 +1129,7 @@ function graficoBarras(r){
     total: f.grupo.reduce((a,p)=>a+(p.monto_usd_mm||0), 0),
     sel:   f.grupo.filter(p=>SEL(p)).reduce((a,p)=>a+(p.monto_usd_mm||0), 0),
     n: f.grupo.length, nsel: f.grupo.filter(p=>SEL(p)).length,
+    sinMonto: f.grupo.filter(p=>!p.monto_usd_mm).length,
   })).sort((a,b)=>b.total-a.total);
   const w = ancho("barras"), fh = 30, bh = 16;
   const m = {t:8, r:74, b:22, l:Math.min(150, Math.max(100, w*0.28))};
@@ -1000,7 +1151,12 @@ function graficoBarras(r){
       s += '<rect x="'+(m.l+wtot-wres).toFixed(1)+'" y="'+y+'" width="'+wres.toFixed(1)+'" height="'+bh+'" rx="4" fill="var(--mark-out)"/>';
     if(wsel > 0)
       s += '<rect x="'+m.l+'" y="'+y+'" width="'+wsel.toFixed(1)+'" height="'+bh+'" rx="4" fill="var(--mark-sel)"/>';
-    s += '<text class="val" x="'+(m.l+wtot+8).toFixed(1)+'" y="'+(y+bh/2+4)+'">'+fmt0(f.total)+'</text>';
+    s += '<text class="val" x="'+(m.l+wtot+8).toFixed(1)+'" y="'+(y+bh/2+4)+'"'+
+         (f.sinMonto===f.n ? ' style="fill:var(--warn)"' : '')+'>'+
+         (f.sinMonto===f.n ? "s/d" : fmt0(f.total))+'</text>';
+    if(f.sinMonto === f.n)
+      s += '<rect x="'+m.l+'" y="'+y+'" width="26" height="'+bh+'" rx="4" fill="none" '+
+           'stroke="var(--mark-lim)" stroke-width="1" stroke-dasharray="3 3"/>';
     s += '<rect data-sec="'+esc(f.sector)+'" x="'+m.l+'" y="'+(m.t+k*fh)+'" width="'+iw+'" height="'+fh+'" fill="transparent"/>';
   });
   s += '<text class="val" x="'+(w-m.r+8)+'" y="'+(m.t+ih+15)+'" text-anchor="start">US$ MM</text>';
@@ -1010,7 +1166,8 @@ function graficoBarras(r){
     el.addEventListener("mousemove", e => mostrarTip(e, "<b>"+esc(f.sector)+"</b>"+
       "Seleccionados <span>"+f.nsel+" de "+f.n+"</span><br>"+
       "Inversión seleccionada <span>US$ "+fmt0(f.sel)+" MM</span><br>"+
-      "Inversión total <span>US$ "+fmt0(f.total)+" MM</span>"));
+      "Inversión total <span>US$ "+fmt0(f.total)+" MM</span>"+
+      (f.sinMonto ? "<br><span>"+f.sinMonto+"</span> sin monto publicado" : "")));
     el.addEventListener("mouseleave", ocultarTip);
   });
 }
@@ -1060,62 +1217,194 @@ function graficoPerfil(r){
 }
 
 /* ---- 5. calidad del dato ---- */
-function graficoCalidad(r){
-  const u = r.universo;
-  const cuenta = {auto:0, proxy:0, pendiente:0};
-  const porInd = {};
-  for(const p of u) for(let i=1;i<=10;i++){
+function calidad(r){
+  const c = {auto:0, proxy:0, pendiente:0};
+  for(const p of r.universo) for(let i=1;i<=10;i++){
     if(W(p)[i]===undefined) continue;
-    const o = p._c[i].edit ? "auto" : p._c[i].origen;
-    cuenta[o]++;
-    porInd[i] = porInd[i] || {auto:0,proxy:0,pendiente:0};
-    porInd[i][o]++;
+    c[p._c[i].edit ? "auto" : p._c[i].origen]++;
   }
-  const total = cuenta.auto+cuenta.proxy+cuenta.pendiente || 1;
-  const w = ancho("calidad"), bh = 26, h = bh + 8;
-  const segs = [["auto","Auto","var(--mark-sel)"],["proxy","Proxy","var(--mark-out)"],["pendiente","Pendiente","var(--mark-lim)"]];
-  let x = 0, s = "";
-  for(const [k,lbl,col] of segs){
-    const anchoSeg = cuenta[k]/total*w;
-    if(anchoSeg <= 0) continue;
-    const real = Math.max(0, anchoSeg - (x+anchoSeg < w-0.5 ? 2 : 0));
-    s += '<rect x="'+x.toFixed(1)+'" y="0" width="'+real.toFixed(1)+'" height="'+bh+'" rx="4" fill="'+col+'"><title>'+lbl+': '+cuenta[k]+'</title></rect>';
-    x += anchoSeg;
+  c.total = (c.auto + c.proxy + c.pendiente) || 1;
+  return c;
+}
+function graficoCalidad(r){
+  const c = calidad(r);
+  const w = ancho("calidad"), bh = 26;
+  const segs = [["auto","Auto","var(--mark-sel)"],["proxy","Proxy","var(--mark-out)"],
+                ["pendiente","Pendiente","var(--mark-lim)"]];
+  let x = 0, sv = "";
+  for(const seg of segs){
+    const an = c[seg[0]]/c.total*w;
+    if(an <= 0) continue;
+    const real = Math.max(0, an - (x+an < w-0.5 ? 2 : 0));
+    sv += '<rect x="'+x.toFixed(1)+'" y="0" width="'+real.toFixed(1)+'" height="'+bh+
+          '" rx="4" fill="'+seg[2]+'"><title>'+seg[1]+': '+c[seg[0]]+'</title></rect>';
+    x += an;
   }
-  const pend = Object.keys(porInd).filter(i=>porInd[i].pendiente>0);
-  const proxy = Object.keys(porInd).filter(i=>porInd[i].proxy>0);
-  document.getElementById("calidad").innerHTML = svgEl(s, w, h) +
-    '<div class="leyenda">'+segs.map(([k,lbl,col]) => {
-      const pc = cuenta[k]/total*100;
-      return '<span><i style="background:'+col+'"></i>'+lbl+' <b class="num">'+cuenta[k]+'</b> · '+
-             (pc>0 && pc<1 ? "&lt;1" : Math.round(pc))+' %</span>';
+  document.getElementById("calidad").innerHTML = svgEl(sv, w, bh+8) +
+    '<div class="leyenda">'+segs.map(function(seg){
+      const pc = c[seg[0]]/c.total*100;
+      return '<span><i style="background:'+seg[2]+'"></i>'+seg[1]+' <b class="num">'+c[seg[0]]+
+             '</b> \u00b7 '+(pc>0 && pc<1 ? "&lt;1" : Math.round(pc))+' %</span>';
     }).join("")+'</div>'+
-    '<p class="note" style="margin:10px 0 0">'+
-      '<b>'+cuenta.auto+'</b> de '+total+' calificaciones salen de fuente oficial sin supuestos. '+
-      (proxy.length ? (proxy.length>1?'Los indicadores <b>':'El indicador <b>')+proxy.join(", ")+'</b> usa'+(proxy.length>1?'n':'')+' proxies documentados. ' : '')+
-      (pend.length ? (pend.length>1?'Los indicadores <b>':'El indicador <b>')+pend.join(", ")+'</b> requiere'+(pend.length>1?'n':'')+' el estudio del proyecto.' : '')+
-    '</p>';
+    '<p class="note" style="margin:10px 0 0"><b>'+c.auto+'</b> de '+c.total+
+    ' calificaciones salen de fuente oficial sin supuestos. El detalle de lo que falta, y c\u00f3mo se cierra, '+
+    'est\u00e1 en el panel <b>Qu\u00e9 falta completar</b>.</p>';
 }
 
 /* ---- KPI ---- */
 function kpis(r){
-  const sec = GEN() ? [r.general] : r.secciones;
-  const u = r.universo;
-  const sel = u.filter(p=>SEL(p));
+  const u = r.universo, sel = u.filter(p=>SEL(p));
   const montoSel = sel.reduce((a,p)=>a+(p.monto_usd_mm||0),0);
   const montoTot = u.reduce((a,p)=>a+(p.monto_usd_mm||0),0);
   const fin = cfg.presu ? r.general.grupo.filter(p=>p._fin) : null;
-  const tiles = [
-    [u.length, "", "proyectos evaluados", "en Formulación y Estructuración"],
-    [sel.length, "", "sobre la línea de corte", GEN() ? "percentil 70 del portafolio" : "percentil 70 de cada sector"],
-    [fmt0(montoSel), "US$ MM", "inversión seleccionada", Math.round(montoSel/montoTot*100)+" % de los US$ "+fmt0(montoTot)+" MM del portafolio"],
-    GEN() && fin
-      ? [fin.length, "", "caben en el presupuesto", "US$ "+fmt0(fin.reduce((a,p)=>a+(p.monto_usd_mm||0),0))+" MM de US$ "+fmt0(cfg.presu)+" MM"]
-      : [sec.length, "", GEN() ? "lista de prelación" : "rankings sectoriales", GEN() ? "un solo juego de pesos" : "un corte P70 por sector"],
-    [u.filter(p=>p.pni).length, "", "en el PNI 2026-2031", "portafolio priorizado del DS 039-2026-EF"],
-  ];
-  document.getElementById("kpis").innerHTML = tiles.map(([v,u2,l,sub]) =>
-    '<div class="kpi"><b>'+v+(u2?' <span class="u">'+u2+'</span>':'')+'</b><span class="l"><b>'+esc(l)+'</b><br>'+esc(sub)+'</span></div>').join("");
+  const sinCap = sel.filter(p=>CAP_ALERTA[p.capacidad_presupuestal]).length;
+  const cal = calidad(r);
+
+  const sec = [];
+  if(GEN() && fin)
+    sec.push([fin.length, "caben en el presupuesto",
+      "US$ "+fmt0(fin.reduce((a,p)=>a+(p.monto_usd_mm||0),0))+" MM de US$ "+fmt0(cfg.presu)+" MM"]);
+  else
+    sec.push([GEN() ? "1" : r.secciones.length, GEN() ? "lista de prelación" : "rankings sectoriales",
+      GEN() ? "un solo juego de pesos" : "un corte P70 por sector"]);
+  sec.push([sinCap, "sin capacidad presupuestal",
+    "de los "+sel.length+" seleccionados, según el dashboard de ProInversión"]);
+  sec.push([Math.round(cal.auto/cal.total*100)+' <span class="u">%</span>', "calificaciones automáticas",
+    cal.auto+" de "+cal.total+" sin supuestos"]);
+
+  document.getElementById("kpis").innerHTML =
+    '<div class="kpi hero"><div class="eyebrow">Sobre la línea de corte</div>'+
+    '<div class="cifra"><b>'+sel.length+'</b><span>de '+u.length+' proyectos</span></div>'+
+    '<div class="prop"><i style="width:'+(sel.length/Math.max(1,u.length)*100).toFixed(1)+'%"></i></div>'+
+    '<div class="pie"><strong>US$ '+fmt0(montoSel)+' MM</strong> comprometidos · '+
+      Math.round(montoSel/Math.max(1,montoTot)*100)+' % de los US$ '+fmt0(montoTot)+' MM del universo'+
+      (cfg.fase||cfg.pend||cfg.soloMov ? " filtrado" : "")+'</div></div>'+
+    sec.map(function(t){ return '<div class="kpi"><b>'+t[0]+'</b><span class="l"><b>'+esc(t[1])+
+      '</b><br>'+esc(t[2])+'</span></div>'; }).join("");
+}
+
+/* ---- filtros activos ---- */
+function filtrosActivos(){
+  const el = document.getElementById("activos"), chips = [];
+  if(cfg.fase) chips.push(["fase", "Fase \u00b7 "+cfg.fase]);
+  if(cfg.q.trim()) chips.push(["q", "Busca \u00b7 "+cfg.q.trim()]);
+  if(cfg.soloMov) chips.push(["soloMov", "Solo los que se movieron"]);
+  if(cfg.pend) chips.push(["pend", "Indicador "+cfg.pend+" por completar"]);
+  if(cfg.presu && GEN()) chips.push(["presu", "Límite US$ "+fmt(cfg.presu)+" MM"]);
+  if(!chips.length){ el.hidden = true; return; }
+  el.hidden = false;
+  const visto = document.querySelectorAll("#ranking .row").length;
+  el.innerHTML = '<span>Mostrando <b>'+visto+'</b> de '+PROY.length+' proyectos</span>'+
+    chips.map(function(c){ return '<button class="quita" data-q="'+c[0]+'">'+esc(c[1])+
+      '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" '+
+      'stroke-linecap="round" aria-hidden="true"><path d="M4 4l6 6M10 4l-6 6"></path></svg></button>'; }).join("")+
+    '<button class="limpiar" id="btnLimpiar">Limpiar filtros</button>';
+  el.querySelectorAll("[data-q]").forEach(function(b){ b.onclick = function(){
+    const k = b.dataset.q;
+    if(k==="fase") cfg.fase = ""; else if(k==="q") cfg.q = "";
+    else if(k==="soloMov") cfg.soloMov = false; else if(k==="pend") cfg.pend = null;
+    else if(k==="presu") cfg.presu = null;
+    guardar(); sincronizar(); render();
+  };});
+  document.getElementById("btnLimpiar").onclick = function(){
+    cfg.fase = ""; cfg.q = ""; cfg.soloMov = false; cfg.pend = null; cfg.presu = null;
+    guardar(); sincronizar(); render();
+  };
+}
+
+/* ---- concentracion sectorial ---- */
+function graficoConcentracion(r){
+  const u = r.universo, selN = u.filter(p=>SEL(p)).length || 1, n = u.length || 1;
+  const filas = r.secciones.map(function(f){
+    const s2 = f.grupo.filter(p=>SEL(p)).length;
+    return {sector:f.sector, n:f.grupo.length, s:s2, pc:f.grupo.length/n*100, ps:s2/selN*100};
+  }).sort(function(a,b){ return (b.ps-a.ps) || (b.pc-a.pc); });
+  const max = Math.max.apply(null, filas.map(f=>Math.max(f.pc,f.ps)).concat([10]));
+  const top = filas[0];
+  const ceros = filas.filter(f=>f.s===0);
+  const nCeros = ceros.reduce(function(a,f){ return a+f.n; }, 0);
+
+  let h = '<div class="destac"><div><b>'+Math.round(top.ps)+' %</b>'+
+    '<span>de la selección es '+esc(top.sector)+', contra <span class="num">'+Math.round(top.pc)+
+    ' %</span> del portafolio</span></div>';
+  if(nCeros) h += '<div><b style="color:var(--warn)">'+nCeros+'</b><span>proyectos de '+
+    esc(ceros.map(f=>f.sector).join(", "))+': ninguno pasa el corte</span></div>';
+  h += '</div><div style="display:flex;flex-direction:column;gap:13px">';
+  for(const f of filas){
+    const d = f.ps - f.pc;
+    h += '<div class="conc" title="'+esc(f.sector)+': '+f.s+' de '+f.n+'">'+
+      '<span class="cat">'+esc(f.sector.length>22?f.sector.slice(0,20)+"\u2026":f.sector)+'</span><div class="pista">'+
+      '<div class="bar" style="width:'+(f.pc/max*100).toFixed(1)+'%;background:var(--mark-out)"></div>'+
+      (f.s ? '<div class="bar" style="width:'+(f.ps/max*100).toFixed(1)+'%;background:var(--mark-sel)"></div>'
+           : '<div class="cero">sin seleccionados</div>')+
+      '</div><span class="delta"'+(f.s?'':' style="color:var(--warn);font-weight:600"')+'>'+
+      (d>=0?"+":"\u2212")+Math.abs(d).toFixed(1)+'<em>'+f.s+' de '+f.n+'</em></span></div>';
+  }
+  document.getElementById("concentracion").innerHTML = h + '</div>';
+  document.getElementById("subConc").textContent = GEN() ? "jerarquía general" : "jerarquía sectorial";
+}
+
+/* ---- cola de pendientes ---- */
+const COMO_SE_CIERRA = {
+  3:  [1, "Marcar las provincias reales del proyecto sobre la tabla INEI que ya está cargada"],
+  6:  [1, "Elegir la macrozona que manda cuando el ámbito abarca varias"],
+  2:  [2, "Distinguir cofinanciada total de parcial: ¿el proyecto cobra tarifa o peaje?"],
+  5:  [2, "ProInversión no publica el monto de inversión de estos proyectos"],
+  1:  [2, "Verificar la inclusión en el portafolio priorizado del PNI vigente"],
+  9:  [2, "Requiere la brecha de acceso básico sectorial del PNIC 2019"],
+  10: [2, "Requiere consulta al Banco de Inversiones del MEF"],
+  8:  [3, "Hoy se infiere de la fase del proceso, que no es un nivel de ingeniería"],
+  4:  [3, "Hoy se usa la población del ámbito entero como aproximación"],
+  7:  [3, "Hoy se infiere de la modalidad, no de la matriz de riesgos preliminar"]
+};
+const GRUPOS_COLA = {1:"Se cierra en la app", 2:"Necesita el contrato o la ficha del proyecto",
+                     3:"Requiere el estudio técnico"};
+const RESUMEN_COLA = {1:"se cierran sin salir de la app", 2:"necesitan el contrato o la ficha",
+                      3:"requieren el estudio técnico"};
+
+function colaPendientes(r){
+  const u = r.universo, porInd = {};
+  for(const p of u) for(let i=1;i<=10;i++){
+    if(W(p)[i]===undefined) continue;
+    const o = p._c[i].edit ? "auto" : p._c[i].origen;
+    porInd[i] = porInd[i] || {auto:0, proxy:0, pendiente:0};
+    porInd[i][o]++;
+  }
+  const items = Object.keys(porInd).map(Number)
+    .filter(function(i){ return porInd[i].proxy + porInd[i].pendiente > 0; })
+    .map(function(i){ return {i:i, n:porInd[i].proxy + porInd[i].pendiente, pend:porInd[i].pendiente,
+      g:(COMO_SE_CIERRA[i]||[3,""])[0], txt:(COMO_SE_CIERRA[i]||[3,""])[1]}; })
+    .sort(function(a,b){ return (a.g-b.g) || (b.n-a.n); });
+  if(!items.length){
+    document.getElementById("cola").innerHTML =
+      '<p class="note">No queda ningun supuesto por cerrar en el universo filtrado.</p>';
+    document.getElementById("subCola").textContent = "";
+    return;
+  }
+  const tot = {1:0,2:0,3:0};
+  for(const it of items) tot[it.g] += it.n;
+  let h = '<div class="destac">'+[1,2,3].filter(g=>tot[g]).map(function(g){
+    return '<div><b'+(g===3?' style="color:var(--warn)"':(g===1?' style="color:var(--accent)"':''))+'>'+
+      tot[g]+'</b><span>'+esc(RESUMEN_COLA[g])+'</span></div>'; }).join("")+'</div>';
+  let gActual = 0;
+  for(const it of items){
+    if(it.g !== gActual){ gActual = it.g; h += '<div class="grupo-cola">'+esc(GRUPOS_COLA[gActual])+'</div>'; }
+    h += '<div class="cola"><span class="id">'+it.i+'</span>'+
+      '<span class="nm">'+esc(P.indicadores[it.i].nombre)+'<span>'+esc(it.txt)+'</span></span>'+
+      '<span class="peso">'+(P.pesos[it.i]*100).toFixed(0)+' %</span>'+
+      '<span class="cuenta"'+(it.pend===it.n?' style="color:var(--warn)"':'')+'>'+it.n+
+      '<em>'+(it.pend===it.n?"pendientes":"proyectos")+'</em></span>'+
+      '<button class="accion'+(cfg.pend===it.i?" on":"")+'" data-ind="'+it.i+'">'+
+      (cfg.pend===it.i ? "Quitar filtro" : "Ver los "+it.n)+'</button></div>';
+  }
+  document.getElementById("cola").innerHTML = h;
+  document.getElementById("subCola").textContent = items.reduce(function(a,x){ return a+x.n; },0)+" calificaciones";
+  document.querySelectorAll("#cola [data-ind]").forEach(function(b){ b.onclick = function(){
+    const i = +b.dataset.ind;
+    cfg.pend = cfg.pend===i ? null : i;
+    guardar(); render();
+    document.getElementById("ranking").scrollIntoView({block:"start", behavior:"smooth"});
+  };});
 }
 
 /* ================= ranking ================= */
@@ -1124,24 +1413,49 @@ function renderRanking(r){
   const q = cfg.q.trim().toLowerCase();
   const cont = document.getElementById("ranking");
   cont.innerHTML = "";
-  for(const s of secciones){
-    const visibles = q ? s.grupo.filter(p => (p.nombre_corto+" "+p.nombre+" "+p.ambito+" "+p.sector).toLowerCase().includes(q)) : s.grupo;
-    if(!visibles.length) continue;
+
+  if(hayEdiciones()){
+    const u = r.universo;
+    const nEd = u.filter(EDIT).length;
+    const nSup = u.reduce((a,p)=>a + (ov[p.id] ? Object.values(ov[p.id]).filter(v=>v!==undefined&&v!==null).length : 0), 0);
+    const nMov = u.filter(p=>MOV(p)!==0).length;
+    const nIn = u.filter(p=>SEL(p)&&!SELB(p)).length, nOut = u.filter(p=>!SEL(p)&&SELB(p)).length;
+    cont.insertAdjacentHTML("beforeend",
+      '<div class="cambios">'+
+      '<span class="txt"><b>'+nSup+' supuesto'+(nSup===1?"":"s")+' editado'+(nSup===1?"":"s")+'</b> en '+nEd+' proyecto'+(nEd===1?"":"s")+'</span>'+
+      '<span class="sec">'+nMov+' cambiaron de puesto</span>'+
+      (nIn||nOut ? '<span class="txt"><b>'+nIn+' entr'+(nIn===1?"ó":"aron")+' y '+nOut+' sali'+(nOut===1?"ó":"eron")+'</b> de la selección</span>' : '')+
+      '<span class="acc">'+
+        '<button class="chip" id="btnSoloMov" aria-pressed="'+!!cfg.soloMov+'">Solo los que se movieron</button>'+
+        '<button class="ghost" id="btnAuto" style="padding:4px 11px;font-size:12px">Volver al automático</button>'+
+      '</span></div>');
+  }
+
+  for(const sec0 of secciones){
+    let grupo = sec0.grupo;
+    if(q) grupo = grupo.filter(p => (p.nombre_corto+" "+p.nombre+" "+p.ambito+" "+p.sector).toLowerCase().includes(q));
+    if(cfg.soloMov) grupo = grupo.filter(p => MOV(p)!==0 || EDIT(p));
+    if(cfg.pend) grupo = grupo.filter(p => W(p)[cfg.pend]!==undefined && p._c[cfg.pend].origen!=="auto");
+    if(!grupo.length) continue;
+    const filtrado = q || cfg.soloMov || cfg.pend;
+
     const sec = document.createElement("div");
     sec.className = "sector";
-    const alerta = (!GEN() && s.grupo.length<4) ? "<em>· muestra pequeña, poder de discriminación limitado</em>" : "";
-    sec.innerHTML = '<div class="sector-head"><h4>'+esc(s.sector)+'</h4>'+
-      '<span class="eyebrow">'+s.grupo.length+' proyectos</span>'+
-      '<div class="meta">Corte P70 = <span class="num">'+s.corte.toFixed(4)+'</span>'+
-      (s.excl.length ? '<br>Sin variación, no aplicados: '+s.excl.join(", ") : '')+
+    const alerta = (!GEN() && sec0.grupo.length<4) ? "<em>· muestra pequeña, poder de discriminación limitado</em>" : "";
+    const movio = Math.abs(sec0.corte - sec0.corteB) > 1e-9;
+    sec.innerHTML = '<div class="sector-head"><h4>'+esc(sec0.sector)+'</h4>'+
+      '<span class="eyebrow">'+sec0.grupo.length+' proyectos</span>'+
+      '<div class="meta">Corte P70 = <span class="num">'+sec0.corte.toFixed(4)+'</span>'+
+      (movio ? '<br><span style="color:var(--warn)">antes '+sec0.corteB.toFixed(4)+' — el corte también se mueve</span>' : '')+
+      (sec0.excl.length ? '<br>Sin variación, no aplicados: '+sec0.excl.join(", ") : '')+
       (alerta ? '<br>'+alerta : '')+'</div></div>';
     let cortado = false, tope = false;
-    for(const p of visibles){
-      if(GEN() && cfg.presu && !p._fin && !tope && !q){
+    for(const p of grupo){
+      if(GEN() && cfg.presu && !p._fin && !tope && !filtrado){
         sec.insertAdjacentHTML("beforeend", '<div class="cutline presu">Límite de capacidad de financiamiento — US$ '+fmt(cfg.presu)+' MM</div>');
         tope = true;
       }
-      if(!SEL(p) && !cortado && !q){
+      if(!SEL(p) && !cortado && !filtrado){
         sec.insertAdjacentHTML("beforeend", '<div class="cutline">Percentil 70 — tercio superior '+(GEN()?"del portafolio":"del sector")+'</div>');
         cortado = true;
       }
@@ -1149,26 +1463,46 @@ function renderRanking(r){
     }
     cont.appendChild(sec);
   }
-  if(!cont.children.length) cont.innerHTML = '<p class="note">Ningún proyecto coincide con la búsqueda.</p>';
+  if(!cont.querySelector(".sector")) cont.insertAdjacentHTML("beforeend", '<p class="note">Ningún proyecto coincide con los filtros activos.</p>');
   document.getElementById("subRank").textContent = GEN() ? "lista general de prelación" : "un ranking por sector";
+  const bs = document.getElementById("btnSoloMov"), ba = document.getElementById("btnAuto");
+  if(bs) bs.onclick = () => { cfg.soloMov = !cfg.soloMov; guardar(); render(); };
+  if(ba) ba.onclick = () => {
+    if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
+    ov = {}; cfg.soloMov = false; guardar(); render(); if(actual) detalle();
+  };
 }
 function fila(p){
+  const mv = hayEdiciones(), m = MOV(p), d = DPT(p);
   const el = document.createElement("button");
-  el.className = "row" + (SEL(p) ? " sel" : " bajo") + (GEN() ? " gen" : "") + (GEN() && cfg.presu && !p._fin ? " nofin" : "");
+  el.className = "row" + (SEL(p) ? " sel" : " bajo") + (GEN() ? " gen" : "") +
+                 (mv ? " mv" : "") + (GEN() && cfg.presu && !p._fin ? " nofin" : "");
   el.onclick = () => abrir(p);
   const tags = [];
   if(GEN()) tags.push('<span class="tag">'+esc(p[cfg.sector])+' · n.º '+p._rk+'</span>');
   tags.push('<span class="tag">'+esc(p.fase)+'</span>','<span class="tag">'+esc(p.modalidad)+'</span>',
-            '<span class="tag">'+esc(p.ambito.length>34?p.ambito.slice(0,32)+"…":p.ambito)+'</span>');
+            '<span class="tag">'+esc(p.ambito.length>30?p.ambito.slice(0,28)+"…":p.ambito)+'</span>');
   if(p.pni) tags.push('<span class="tag auto">PNI 2026-2031</span>');
+  if(SEL(p) && CAP_ALERTA[p.capacidad_presupuestal])
+    tags.push('<span class="tag cap" title="Capacidad presupuestal: '+esc(p.capacidad_presupuestal)+'">Sin cap. presupuestal</span>');
+  if(mv && EDIT(p)) tags.push('<span class="tag ed">Editado</span>');
+  if(mv && SEL(p) && !SELB(p)) tags.push('<span class="tag entro">Entró</span>');
+  if(mv && !SEL(p) && SELB(p)) tags.push('<span class="tag salio">Salió</span>');
   el.innerHTML = '<span class="rk">'+RK(p)+'</span>'+
+    (mv ? '<span class="mov" title="'+(m>0?"Sube "+m+" puesto(s)":m<0?"Baja "+(-m)+" puesto(s)":"Sin cambio")+'">'+
+      (m===0 ? '<span class="nada">—</span>' : flecha(m>0)+Math.abs(m)) + '</span>' : '')+
     '<span class="nm"><b>'+esc(p.nombre_corto)+'</b><span class="tags">'+tags.join("")+'</span></span>'+
     '<span class="strip">'+strip(p)+'</span>'+
-    '<span class="mto">'+(p.monto_usd_mm ? "US$ "+fmt0(p.monto_usd_mm)+" MM" : "—")+'</span>'+
+    '<span class="mto">'+(p.monto_usd_mm ? "US$ "+fmt0(p.monto_usd_mm)+" MM" : "sin monto publicado")+'</span>'+
     (GEN() ? '<span class="acum">acumulado<b>US$ '+fmt0(p._acum)+' MM</b></span>' : '')+
-    '<span class="pt">'+PT(p).toFixed(3)+'</span>';
+    '<span class="pt">'+PT(p).toFixed(3)+
+      (mv && Math.abs(d)>1e-9 ? '<span class="dpt">'+(d>0?"+":"")+d.toFixed(3)+'</span>' : '')+'</span>';
   return el;
 }
+const flecha = sube => '<svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" '+
+  'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+
+  (sube ? "M5 8.5V1.8M2 4.8 5 1.6l3 3.2" : "M5 1.5v6.7M2 5.2 5 8.4l3-3.2")+'"></path></svg>';
+const CAP_ALERTA = {"No tiene Cap. Presupuestal":1, "Por solicitar al Sector":1, "Solicitado al Sector":1};
 function strip(p){
   let h = "";
   for(let i=1;i<=10;i++){
@@ -1185,13 +1519,16 @@ let ultimo = null;
 function render(){
   const r = jerarquizar();
   ultimo = r;
-  kpis(r);
   graficoCurva(r);
   graficoCalidad(r);
   graficoDispersion(r);
   graficoBarras(r);
   graficoPerfil(r);
+  graficoConcentracion(r);
+  colaPendientes(r);
   renderRanking(r);
+  kpis(r);
+  filtrosActivos();
   document.getElementById("nProy").textContent = PROY.length;
   document.getElementById("tCurva").textContent = GEN()
     ? "Asignación presupuestal por orden de prelación general"
@@ -1231,15 +1568,27 @@ function cerrar(){
 function detalle(){
   const p = actual, b = document.getElementById("dBody"), c = p._c;
   const etq = GEN() ? "corte general" : "corte sectorial";
+  const m = MOV(p), d = DPT(p);
   let h = '<div class="total"><span class="lbl">Puntaje total ponderado<br><span class="num">'+
           PT(p).toFixed(4)+'</span> vs. '+etq+' <span class="num">'+CORTE(p).toFixed(4)+'</span>'+
           (GEN() ? '<br>Puesto '+p._rk+' en '+esc(p[cfg.sector])+' · acumulado US$ '+fmt0(p._acum)+' MM'
                  : '<br>Puesto '+p._rkg+' en el ranking general')+
-          '</span><span class="v">'+(SEL(p)?"↑":"↓")+' '+RK(p)+'</span></div>';
+          (hayEdiciones() && (m!==0 || Math.abs(d)>1e-9)
+            ? '<br><span style="color:var(--warn)">Antes de tus ediciones: puesto '+RKB(p)+
+              ' con '+PTB(p).toFixed(4)+(m!==0 ? ' ('+(m>0?"subió ":"bajó ")+Math.abs(m)+')' : '')+'</span>'
+            : '')+
+          '</span><span class="v">'+(SEL(p)?"↑":"↓")+' '+RK(p)+'</span></div>'+
+          (p.capacidad_presupuestal
+            ? '<p class="note" style="margin:0 0 4px"><b>Capacidad presupuestal:</b> '+
+              esc(p.capacidad_presupuestal)+'. Dato del dashboard APP-PA-OxI de ProInversión; la norma '+
+              'la exige antes de incluir el proyecto en la propuesta, no forma parte del puntaje.</p>'
+            : '');
   for(let i=1;i<=10;i++){
     const ind = P.indicadores[i], on = W(p)[i]!==undefined;
-    const badge = c[i].edit ? '<span class="badge edit">Editado</span>'
-                : '<span class="badge '+c[i].origen+'">'+({auto:"Auto",proxy:"Proxy",pendiente:"Pend."})[c[i].origen]+'</span>';
+    const badge = c[i].edit
+      ? '<span class="badge edit">Editado</span><button class="deshacer" data-rev="'+i+'" '+
+        'title="Volver al valor automático">volver al automático</button>'
+      : '<span class="badge '+c[i].origen+'">'+({auto:"Auto",proxy:"Proxy",pendiente:"Pend."})[c[i].origen]+'</span>';
     h += '<div class="ind"'+(on?"":' style="opacity:.5"')+'>'+
          '<div class="ind-top"><span class="id">'+i+'</span><span class="ttl">'+esc(ind.nombre)+'</span>'+
          '<span class="w">'+(on ? (W(p)[i]*100).toFixed(1)+"%" : "no aplicado")+'</span></div>'+
@@ -1265,6 +1614,14 @@ function detalle(){
       refrescar();
     };
   });
+  b.querySelectorAll("[data-rev]").forEach(el => {
+    el.onclick = () => {
+      const claves = CLAVES_OV[+el.dataset.rev] || [];
+      if(ov[p.id]) for(const k of claves) delete ov[p.id][k];
+      if(ov[p.id] && !Object.keys(ov[p.id]).length) delete ov[p.id];
+      refrescar();
+    };
+  });
   b.querySelectorAll("[data-prov]").forEach(el => {
     el.onchange = () => {
       const s = [...b.querySelectorAll("[data-prov]")].filter(x=>x.checked).map(x=>x.dataset.prov);
@@ -1275,6 +1632,8 @@ function detalle(){
     };
   });
 }
+const CLAVES_OV = {1:["i1"], 2:["i2"], 3:["i3_tasa","i3_prov"], 4:["i4"], 5:["i5"],
+                   6:["i6"], 7:["i7"], 8:["i8"], 9:["i9"], 10:["i10"]};
 function selc(k, opciones, valor){
   return '<select data-set="'+k+'">'+opciones.map(([t,v]) =>
     '<option value="'+v+'"'+(v===valor?" selected":"")+'>'+esc(t)+' · '+v+' pt</option>').join("")+'</select>';
@@ -1358,7 +1717,8 @@ document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; ren
 document.getElementById("btnCsv").onclick = csv;
 document.getElementById("btnReset").onclick = () => {
   if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
-  ov = {}; cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"", tab:cfg.tab};
+  ov = {}; cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"",
+                  tab:cfg.tab, soloMov:false, pend:null};
   guardar(); sincronizar(); render(); cerrar();
 };
 document.getElementById("btnTema").onclick = () => {
