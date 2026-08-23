@@ -363,6 +363,7 @@ table.g tr.opc td{background:var(--surface-2)}
 <nav class="tabs" role="tablist">
   <button role="tab" data-tab="panel" aria-selected="true">Dashboard</button>
   <button role="tab" data-tab="general" aria-selected="false">Ranking general</button>
+  <button role="tab" data-tab="calidad" aria-selected="false">Calidad del dato</button>
   <button role="tab" data-tab="glosario" aria-selected="false">Glosario</button>
 </nav>
 
@@ -397,7 +398,7 @@ table.g tr.opc td{background:var(--surface-2)}
     <label for="inUit">UIT (S/)</label>
     <input id="inUit" type="number" step="50" min="1" style="width:92px">
   </div>
-  <div class="f" style="margin-left:auto">
+  <div class="f" id="fBuscar" style="margin-left:auto">
     <label for="inBuscar">Buscar</label>
     <input id="inBuscar" type="search" placeholder="PTAR, corredor vial, hospital…" style="width:210px">
   </div>
@@ -407,31 +408,6 @@ table.g tr.opc td{background:var(--surface-2)}
 
 <div class="grid" id="vistaPanel">
   <div class="kpis" id="kpis"></div>
-
-  <section class="panel c6">
-    <header><h3>Calidad del dato</h3></header>
-    <p class="ph">Origen de las calificaciones que sostienen el ranking. Mientras haya proxies y
-      pendientes, la jerarquía es preliminar.</p>
-    <div id="calidad"></div>
-  </section>
-
-  <section class="panel c6">
-    <header><h3>Concentración sectorial de la selección</h3><span class="eyebrow" id="subConc"></span></header>
-    <p class="ph">Peso de cada sector en el portafolio frente a su peso entre los seleccionados.
-      El corte sectorial existe justamente para que estas dos columnas no se separen.</p>
-    <div id="concentracion"></div>
-    <div class="leyenda">
-      <span><i style="background:var(--mark-out)"></i>Portafolio</span>
-      <span><i style="background:var(--mark-sel)"></i>Selección</span>
-    </div>
-  </section>
-
-  <section class="panel c6">
-    <header><h3>Qué falta completar</h3><span class="eyebrow" id="subCola"></span></header>
-    <p class="ph">Ordenado por cómo se cierra cada indicador, no por cuántos son. Cada botón filtra
-      el ranking a los proyectos afectados.</p>
-    <div id="cola"></div>
-  </section>
 
   <section class="panel c12">
     <header><h3 id="tDisp">Distribución de puntajes y líneas de corte</h3></header>
@@ -465,10 +441,37 @@ table.g tr.opc td{background:var(--surface-2)}
   </section>
 
   <section class="panel c12">
+    <header><h3>Concentración sectorial de la selección</h3><span class="eyebrow" id="subConc"></span></header>
+    <p class="ph">Peso de cada sector en el portafolio frente a su peso entre los seleccionados.
+      El corte sectorial existe justamente para que estas dos columnas no se separen.</p>
+    <div id="concentracion"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-out)"></i>Portafolio</span>
+      <span><i style="background:var(--mark-sel)"></i>Selección</span>
+    </div>
+  </section>
+
+  <section class="panel c12">
     <header><h3>Rankings sectoriales</h3><span class="eyebrow" id="subRank"></span></header>
     <p class="ph">Cada barra vertical de la franja es un indicador (1 a 10); la altura es su valor
       normalizado. Abre un proyecto para revisar y corregir sus supuestos.</p>
     <div id="ranking"></div>
+  </section>
+</div>
+
+<div class="grid" id="vistaCalidad" hidden>
+  <section class="panel c4">
+    <header><h3>De dónde sale cada calificación</h3></header>
+    <p class="ph">Reparto de las calificaciones que sostienen el ranking. Mientras haya proxies y
+      pendientes, la jerarquía es preliminar.</p>
+    <div id="calidad"></div>
+  </section>
+
+  <section class="panel c8">
+    <header><h3>Qué falta completar</h3><span class="eyebrow" id="subCola"></span></header>
+    <p class="ph">Ordenado por cómo se cierra cada indicador, no por cuántos son. Cada botón lleva al
+      ranking sectorial filtrado a los proyectos afectados.</p>
+    <div id="cola"></div>
   </section>
 </div>
 
@@ -1307,7 +1310,7 @@ function kpis(r, dest){
 }
 
 /* ---- filtros activos ---- */
-function filtrosActivos(){
+function filtrosActivos(visto){
   const el = document.getElementById("activos"), chips = [];
   if(cfg.fase) chips.push(["fase", "Fase \u00b7 "+cfg.fase]);
   if(cfg.q.trim()) chips.push(["q", "Busca \u00b7 "+cfg.q.trim()]);
@@ -1316,8 +1319,8 @@ function filtrosActivos(){
   if(cfg.presu && GEN()) chips.push(["presu", "Límite US$ "+fmt(cfg.presu)+" MM"]);
   if(!chips.length){ el.hidden = true; return; }
   el.hidden = false;
-  const visto = document.querySelectorAll((GEN()?"#rankingG":"#ranking")+" .row").length;
-  el.innerHTML = '<span>Mostrando <b>'+visto+'</b> de '+PROY.length+' proyectos</span>'+
+  el.innerHTML = '<span>'+(cfg.tab==="calidad" ? 'Calculado sobre <b>' : 'Mostrando <b>')+visto+
+    '</b> de '+PROY.length+' proyectos</span>'+
     chips.map(function(c){ return '<button class="quita" data-q="'+c[0]+'">'+esc(c[1])+
       '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" '+
       'stroke-linecap="round" aria-hidden="true"><path d="M4 4l6 6M10 4l-6 6"></path></svg></button>'; }).join("")+
@@ -1426,7 +1429,8 @@ function colaPendientes(r){
   document.querySelectorAll("#cola [data-ind]").forEach(function(b){ b.onclick = function(){
     const i = +b.dataset.ind;
     cfg.pend = cfg.pend===i ? null : i;
-    guardar(); render();
+    guardar();
+    mostrarTab("panel");
     document.getElementById("ranking").scrollIntoView({block:"start", behavior:"smooth"});
   };});
 }
@@ -1547,25 +1551,26 @@ function render(){
   ultimo = r;
   document.getElementById("nProy").textContent = PROY.length;
 
-  if(GEN()){
+  if(cfg.tab==="general"){
     graficoCurva(r, "curvaG");
     graficoConcentracion(r, "concentracionG");
     renderRanking(r, "rankingG");
     kpis(r, "kpisG");
     document.getElementById("legLimG").hidden = !cfg.presu;
-  } else {
+    filtrosActivos(document.querySelectorAll("#rankingG .row").length);
+  } else if(cfg.tab==="calidad"){
     graficoCalidad(r);
+    colaPendientes(r);
+    filtrosActivos(r.universo.length);
+  } else {
     graficoDispersion(r);
     graficoBarras(r);
     graficoPerfil(r);
     graficoConcentracion(r, "concentracion");
-    colaPendientes(r);
     renderRanking(r, "ranking");
     kpis(r, "kpis");
-    document.getElementById("tDisp").textContent = "Distribución de puntajes y línea de corte de cada sector";
-    document.getElementById("pDisp").innerHTML = "Un punto por proyecto. La marca vertical de cada fila es el percentil 70 de ese sector, calculado solo con sus proyectos.";
+    filtrosActivos(document.querySelectorAll("#ranking .row").length);
   }
-  filtrosActivos();
 }
 
 /* ================= panel de detalle ================= */
@@ -1734,7 +1739,12 @@ document.getElementById("inPresu").onchange = e => {
   cfg.presu = (isFinite(v) && v>0) ? v : null;
   rerender();
 };
-document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; renderRanking(ultimo, GEN()?"rankingG":"ranking"); filtrosActivos(); };
+document.getElementById("inBuscar").oninput = e => {
+  cfg.q = e.target.value;
+  const dest = GEN() ? "rankingG" : "ranking";
+  renderRanking(ultimo, dest);
+  filtrosActivos(document.querySelectorAll("#"+dest+" .row").length);
+};
 document.getElementById("btnCsv").onclick = csv;
 document.getElementById("btnReset").onclick = () => {
   if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
@@ -1759,12 +1769,14 @@ addEventListener("resize", () => { clearTimeout(tRes); tRes = setTimeout(() => u
 function mostrarTab(t){
   cfg.tab = t;
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab===t));
-  document.getElementById("vistaPanel").hidden = t!=="panel";
+  document.getElementById("vistaPanel").hidden   = t!=="panel";
   document.getElementById("vistaGeneral").hidden = t!=="general";
+  document.getElementById("vistaCalidad").hidden = t!=="calidad";
   document.getElementById("vistaGlosario").hidden = t!=="glosario";
   document.getElementById("barraFiltros").hidden = t==="glosario";
-  document.getElementById("fPresu").hidden = t!=="general";
-  document.getElementById("fSector").hidden = t==="general";
+  document.getElementById("fPresu").hidden  = t!=="general";
+  document.getElementById("fSector").hidden = t!=="panel";
+  document.getElementById("fBuscar").hidden = t==="calidad";
   if(t!=="glosario") render();
   guardar();
 }
