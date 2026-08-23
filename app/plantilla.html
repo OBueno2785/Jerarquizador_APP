@@ -159,7 +159,8 @@ table.g tr.opc td{background:var(--surface-2)}
   cursor:pointer; font-family:inherit; text-decoration:underline; text-underline-offset:2px}
 .kpi{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
 .kpi > b{display:block; font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600; letter-spacing:-.03em; line-height:1.15}
-.kpi .u{font-family:Archivo,sans-serif; font-size:12px; color:var(--ink-3); font-weight:500; letter-spacing:0}
+.kpi .u{font-family:Archivo,sans-serif; font-size:13px; color:var(--ink-3); font-weight:500;
+  letter-spacing:0; margin-left:2px}
 .kpi span.l{font-size:11.5px; color:var(--ink-3); display:block; margin-top:5px; line-height:1.4}
 .kpi span.l b{font-family:Archivo,sans-serif; font-size:12px; font-weight:600; color:var(--ink-2); letter-spacing:0}
 
@@ -196,6 +197,9 @@ table.g tr.opc td{background:var(--surface-2)}
 .destac > div{flex:1 1 150px}
 .destac b{display:block; font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600;
   letter-spacing:-.03em; line-height:1.1}
+.destac b .u{font-family:Archivo,sans-serif; font-size:14px; font-weight:500; color:var(--ink-3);
+  letter-spacing:0; margin-left:2px}
+.destac span .cifra{font-weight:600; color:var(--ink); white-space:nowrap}
 .destac span{font-size:11.5px; color:var(--ink-2); display:block; margin-top:2px}
 .destac > div + div{border-left:1px solid var(--line); padding-left:13px}
 
@@ -1232,7 +1236,7 @@ function graficoPerfil(r){
   document.querySelectorAll("#perfil rect[data-ind]").forEach(el => {
     const f = filas.find(x=>x.i===+el.dataset.ind);
     el.addEventListener("mousemove", e => mostrarTip(e, "<b>"+f.i+". "+esc(f.nombre)+"</b>"+
-      "Peso nominal <span>"+(f.w*100).toFixed(1)+" %</span><br>"+
+      "Peso nominal <span>"+(f.w*100).toFixed(1)+"\u00a0%</span><br>"+
       "Promedio sobre el corte <span>"+f.a.toFixed(3)+"</span><br>"+
       "Promedio bajo el corte <span>"+f.b.toFixed(3)+"</span><br>Diferencia <span>"+(f.a-f.b).toFixed(3)+"</span>"));
     el.addEventListener("mouseleave", ocultarTip);
@@ -1267,7 +1271,7 @@ function graficoCalidad(r){
     '<div class="leyenda">'+segs.map(function(seg){
       const pc = c[seg[0]]/c.total*100;
       return '<span><i style="background:'+seg[2]+'"></i>'+seg[1]+' <b class="num">'+c[seg[0]]+
-             '</b> \u00b7 '+(pc>0 && pc<1 ? "&lt;1" : Math.round(pc))+' %</span>';
+             '</b> \u00b7 '+(pc>0 && pc<1 ? "&lt;1" : Math.round(pc))+'\u00a0%</span>';
     }).join("")+'</div>'+
     '<p class="note" style="margin:10px 0 0"><b>'+c.auto+'</b> de '+c.total+
     ' calificaciones salen de fuente oficial sin supuestos. El detalle de lo que falta, y c\u00f3mo se cierra, '+
@@ -1295,7 +1299,7 @@ function kpis(r, dest){
     sec.push([r.secciones.length, "rankings sectoriales", "un corte P70 por sector"]);
   sec.push([sinCap, "sin capacidad presupuestal",
     "de los "+sel.length+" seleccionados, según el dashboard de ProInversión"]);
-  sec.push([Math.round(cal.auto/cal.total*100)+' <span class="u">%</span>', "calificaciones automáticas",
+  sec.push([Math.round(cal.auto/cal.total*100)+'<span class="u">%</span>', "calificaciones automáticas",
     cal.auto+" de "+cal.total+" sin supuestos"]);
 
   document.getElementById(dest).innerHTML =
@@ -1303,7 +1307,7 @@ function kpis(r, dest){
     '<div class="cifra"><b>'+sel.length+'</b><span>de '+u.length+' proyectos</span></div>'+
     '<div class="prop"><i style="width:'+(sel.length/Math.max(1,u.length)*100).toFixed(1)+'%"></i></div>'+
     '<div class="pie"><strong>US$ '+fmt0(montoSel)+' MM</strong> comprometidos · '+
-      Math.round(montoSel/Math.max(1,montoTot)*100)+' % de los US$ '+fmt0(montoTot)+' MM del universo'+
+      Math.round(montoSel/Math.max(1,montoTot)*100)+'\u00a0% de los US$ '+fmt0(montoTot)+' MM del universo'+
       (cfg.fase||cfg.pend||cfg.soloMov ? " filtrado" : "")+'</div></div>'+
     sec.map(function(t){ return '<div class="kpi"><b>'+t[0]+'</b><span class="l"><b>'+esc(t[1])+
       '</b><br>'+esc(t[2])+'</span></div>'; }).join("");
@@ -1350,9 +1354,9 @@ function graficoConcentracion(r, dest){
   const ceros = filas.filter(f=>f.s===0);
   const nCeros = ceros.reduce(function(a,f){ return a+f.n; }, 0);
 
-  let h = '<div class="destac"><div><b>'+Math.round(top.ps)+' %</b>'+
-    '<span>de la selección es '+esc(top.sector)+', contra <span class="num">'+Math.round(top.pc)+
-    ' %</span> del portafolio</span></div>';
+  let h = '<div class="destac"><div><b>'+Math.round(top.ps)+'<span class="u">%</span></b>'+
+    '<span>de la selección es '+esc(top.sector)+', contra <span class="cifra">'+Math.round(top.pc)+
+    '\u00a0%</span> del portafolio</span></div>';
   if(nCeros) h += '<div><b style="color:var(--warn)">'+nCeros+'</b><span>proyectos de '+
     esc(ceros.map(f=>f.sector).join(", "))+': ninguno pasa el corte</span></div>';
   h += '</div><div style="display:flex;flex-direction:column;gap:13px">';
@@ -1418,7 +1422,7 @@ function colaPendientes(r){
     if(it.g !== gActual){ gActual = it.g; h += '<div class="grupo-cola">'+esc(GRUPOS_COLA[gActual])+'</div>'; }
     h += '<div class="cola"><span class="id">'+it.i+'</span>'+
       '<span class="nm">'+esc(P.indicadores[it.i].nombre)+'<span>'+esc(it.txt)+'</span></span>'+
-      '<span class="peso">'+(P.pesos[it.i]*100).toFixed(0)+' %</span>'+
+      '<span class="peso">'+(P.pesos[it.i]*100).toFixed(0)+'\u00a0%</span>'+
       '<span class="cuenta"'+(it.pend===it.n?' style="color:var(--warn)"':'')+'>'+it.n+
       '<em>'+(it.pend===it.n?"pendientes":"proyectos")+'</em></span>'+
       '<button class="accion'+(cfg.pend===it.i?" on":"")+'" data-ind="'+it.i+'">'+
@@ -1676,7 +1680,7 @@ function control(p,i,c){
       const selP = O(p,"i3_prov",null);
       h += '<div class="provbox">'+p.provincias_ambito.slice(0,60).map(x =>
         '<label><input type="checkbox" data-prov="'+x.ubigeo+'"'+(selP&&selP.includes(x.ubigeo)?" checked":"")+'>'+
-        esc(x.provincia)+'<span class="t">'+x.tasa.toFixed(1)+' %</span></label>').join("")+'</div>';
+        esc(x.provincia)+'<span class="t">'+x.tasa.toFixed(1)+'\u00a0%</span></label>').join("")+'</div>';
     }
     return h;
   }
