@@ -362,18 +362,12 @@ table.g tr.opc td{background:var(--surface-2)}
 
 <nav class="tabs" role="tablist">
   <button role="tab" data-tab="panel" aria-selected="true">Dashboard</button>
+  <button role="tab" data-tab="general" aria-selected="false">Ranking general</button>
   <button role="tab" data-tab="glosario" aria-selected="false">Glosario</button>
 </nav>
 
 <div class="filtros" id="barraFiltros">
-  <div class="f">
-    <label for="selModo">Jerarquía</label>
-    <select id="selModo">
-      <option value="sectorial">Sectorial · corte por sector</option>
-      <option value="general">General · lista única</option>
-    </select>
-  </div>
-  <div class="f">
+  <div class="f" id="fSector">
     <label for="selSector">Agrupación</label>
     <select id="selSector">
       <option value="sector">Sector</option>
@@ -414,19 +408,7 @@ table.g tr.opc td{background:var(--surface-2)}
 <div class="grid" id="vistaPanel">
   <div class="kpis" id="kpis"></div>
 
-  <section class="panel c8">
-    <header><h3 id="tCurva">Asignación presupuestal por orden de prelación</h3></header>
-    <p class="ph" id="pCurva"></p>
-    <div id="curva"></div>
-    <p class="note" id="avisoCurva" style="margin:8px 0 0"></p>
-    <div class="leyenda">
-      <span><i style="background:var(--mark-sel)"></i>Inversión acumulada</span>
-      <span><i style="background:var(--mark-sel);opacity:.5;height:2px;border-radius:0"></i>Línea de corte P70</span>
-      <span id="legLim" hidden><span class="ln"></span>Límite de capacidad de financiamiento</span>
-    </div>
-  </section>
-
-  <section class="panel c4">
+  <section class="panel c6">
     <header><h3>Calidad del dato</h3></header>
     <p class="ph">Origen de las calificaciones que sostienen el ranking. Mientras haya proxies y
       pendientes, la jerarquía es preliminar.</p>
@@ -483,10 +465,46 @@ table.g tr.opc td{background:var(--surface-2)}
   </section>
 
   <section class="panel c12">
-    <header><h3 id="tRank">Ranking</h3><span class="eyebrow" id="subRank"></span></header>
+    <header><h3>Rankings sectoriales</h3><span class="eyebrow" id="subRank"></span></header>
     <p class="ph">Cada barra vertical de la franja es un indicador (1 a 10); la altura es su valor
       normalizado. Abre un proyecto para revisar y corregir sus supuestos.</p>
     <div id="ranking"></div>
+  </section>
+</div>
+
+<div class="grid" id="vistaGeneral" hidden>
+  <div class="kpis" id="kpisG"></div>
+
+  <section class="panel c8">
+    <header><h3>Hasta dónde alcanza el presupuesto</h3></header>
+    <p class="ph">Inversión acumulada recorriendo la lista de mayor a menor puntaje. Donde la curva
+      cruza el límite de capacidad de financiamiento, se agota el presupuesto.</p>
+    <div id="curvaG"></div>
+    <p class="note" id="avisoCurvaG" style="margin:8px 0 0"></p>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-sel)"></i>Inversión acumulada</span>
+      <span><i style="background:var(--mark-sel);opacity:.5;height:2px;border-radius:0"></i>Línea de corte P70</span>
+      <span id="legLimG" hidden><span class="ln"></span>Límite de capacidad de financiamiento</span>
+    </div>
+  </section>
+
+  <section class="panel c4">
+    <header><h3>A quién deja fuera</h3></header>
+    <p class="ph">Peso de cada sector en el portafolio frente a su peso entre los seleccionados por
+      la lista única.</p>
+    <div id="concentracionG"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--mark-out)"></i>Portafolio</span>
+      <span><i style="background:var(--mark-sel)"></i>Selección</span>
+    </div>
+  </section>
+
+  <section class="panel c12">
+    <header><h3>Lista de prelación</h3><span class="eyebrow" id="subRankG"></span></header>
+    <p class="ph"><b>Extensión a la norma.</b> La RD 002-2026 ordena y corta por sector; esta lista
+      usa un único juego de pesos sobre los 73 proyectos para que los puntajes sean comparables
+      entre sectores, porque el presupuesto se asigna sobre una sola bolsa.</p>
+    <div id="rankingG"></div>
   </section>
 </div>
 
@@ -529,13 +547,14 @@ table.g tr.opc td{background:var(--surface-2)}
           calculados solo con los proyectos de ese sector. Un hospital compite contra hospitales,
           no contra puertos.</dd>
 
-        <dt>Ranking general</dt>
-        <dd>Una sola lista con los 73 proyectos y un único corte. <em>Es una extensión a la norma</em>,
+        <dt>Ranking general <span class="en">pestaña propia</span></dt>
+        <dd>Una sola lista con los 73 proyectos y un único corte, en su propia pestaña junto con la
+          curva de presupuesto. <em>Es una extensión a la norma</em>,
           agregada porque el presupuesto se asigna sobre una sola bolsa. Usa un único juego de pesos
           para que los puntajes sean comparables entre sectores, y ya no garantiza equilibrio sectorial.</dd>
 
         <dt>Puesto</dt>
-        <dd>La posición dentro del grupo activo. En modo general cada fila muestra además su puesto
+        <dd>La posición dentro del grupo activo. En la pestaña Ranking general cada fila muestra además su puesto
           dentro de su sector, y la ficha de cada proyecto muestra siempre los dos.</dd>
 
         <dt>Línea base</dt>
@@ -802,7 +821,7 @@ const P = DATOS.parametros, PROY = DATOS.proyectos;
 const FIJOS = [1,2,3,4,5,6,7,8];
 const LS = "jerarquizador-app-v2";
 
-let cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"",
+let cfg = {opc:[], sector:"sector", fase:"", uit:P.uit, presu:null, q:"",
            tab:"panel", soloMov:false, pend:null};
 let ov = {};
 try{
@@ -969,7 +988,7 @@ function jerarquizar(){
           corteB:todos[0]._cortegB, excl:rg.excl}, universo};
 }
 
-const GEN = () => cfg.modo==="general";
+const GEN = () => cfg.tab==="general";
 const W  = p => GEN() ? p._wg : p._w;
 const PT = p => GEN() ? p._ptg : p._pt;
 const RK = p => GEN() ? p._rkg : p._rk;
@@ -1008,9 +1027,9 @@ function svgEl(html, w, h){
 const ancho = id => Math.max(320, document.getElementById(id).clientWidth);
 
 /* ---- 1. curva de acumulación ---- */
-function graficoCurva(r){
+function graficoCurva(r, dest){
   const g = r.general.grupo;
-  const w = ancho("curva"), h = 232;
+  const w = ancho(dest), h = 232;
   const m = {t:12, r:14, b:26, l:56};
   const iw = w-m.l-m.r, ih = h-m.t-m.b;
   const maxY = Math.max(1, g[g.length-1]._acum);
@@ -1047,11 +1066,12 @@ function graficoCurva(r){
     +  '<circle id="crossDot" class="dot" r="4.5" fill="var(--mark-sel)" opacity="0"/>';
   s += '<rect id="curvaHit" x="'+m.l+'" y="'+m.t+'" width="'+iw+'" height="'+ih+'" fill="transparent"/>';
 
-  document.getElementById("curva").innerHTML = svgEl(s, w, h);
-  document.getElementById("avisoCurva").innerHTML = sinM
+  document.getElementById(dest).innerHTML = svgEl(s, w, h);
+  document.getElementById("aviso" + dest.charAt(0).toUpperCase() + dest.slice(1)).innerHTML = sinM
     ? '<b>'+sinM+' proyectos sin monto publicado:</b> la curva se queda plana en ellos y su inversión no entra en el acumulado.'
     : "";
-  const hit = document.getElementById("curvaHit"), cr = document.getElementById("cross"), cd = document.getElementById("crossDot");
+  const hit = document.getElementById(dest).querySelector("#curvaHit"), cr = document.getElementById(dest).querySelector("#cross"),
+        cd = document.getElementById(dest).querySelector("#crossDot");
   hit.addEventListener("mousemove", e => {
     const box = hit.getBoundingClientRect();
     const i = Math.max(0, Math.min(g.length-1, Math.round((e.clientX-box.left)/box.width*(g.length-1))));
@@ -1252,7 +1272,7 @@ function graficoCalidad(r){
 }
 
 /* ---- KPI ---- */
-function kpis(r){
+function kpis(r, dest){
   const u = r.universo, sel = u.filter(p=>SEL(p));
   const montoSel = sel.reduce((a,p)=>a+(p.monto_usd_mm||0),0);
   const montoTot = u.reduce((a,p)=>a+(p.monto_usd_mm||0),0);
@@ -1264,15 +1284,18 @@ function kpis(r){
   if(GEN() && fin)
     sec.push([fin.length, "caben en el presupuesto",
       "US$ "+fmt0(fin.reduce((a,p)=>a+(p.monto_usd_mm||0),0))+" MM de US$ "+fmt0(cfg.presu)+" MM"]);
-  else
-    sec.push([GEN() ? "1" : r.secciones.length, GEN() ? "lista de prelación" : "rankings sectoriales",
-      GEN() ? "un solo juego de pesos" : "un corte P70 por sector"]);
+  else if(GEN()){
+    const ceros = r.secciones.filter(f => !f.grupo.some(p=>SEL(p)));
+    sec.push([ceros.length, "sectores sin seleccionados",
+      ceros.length ? ceros.map(f=>f.sector).join(", ") : "todos los sectores conservan al menos uno"]);
+  } else
+    sec.push([r.secciones.length, "rankings sectoriales", "un corte P70 por sector"]);
   sec.push([sinCap, "sin capacidad presupuestal",
     "de los "+sel.length+" seleccionados, según el dashboard de ProInversión"]);
   sec.push([Math.round(cal.auto/cal.total*100)+' <span class="u">%</span>', "calificaciones automáticas",
     cal.auto+" de "+cal.total+" sin supuestos"]);
 
-  document.getElementById("kpis").innerHTML =
+  document.getElementById(dest).innerHTML =
     '<div class="kpi hero"><div class="eyebrow">Sobre la línea de corte</div>'+
     '<div class="cifra"><b>'+sel.length+'</b><span>de '+u.length+' proyectos</span></div>'+
     '<div class="prop"><i style="width:'+(sel.length/Math.max(1,u.length)*100).toFixed(1)+'%"></i></div>'+
@@ -1293,7 +1316,7 @@ function filtrosActivos(){
   if(cfg.presu && GEN()) chips.push(["presu", "Límite US$ "+fmt(cfg.presu)+" MM"]);
   if(!chips.length){ el.hidden = true; return; }
   el.hidden = false;
-  const visto = document.querySelectorAll("#ranking .row").length;
+  const visto = document.querySelectorAll((GEN()?"#rankingG":"#ranking")+" .row").length;
   el.innerHTML = '<span>Mostrando <b>'+visto+'</b> de '+PROY.length+' proyectos</span>'+
     chips.map(function(c){ return '<button class="quita" data-q="'+c[0]+'">'+esc(c[1])+
       '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" '+
@@ -1313,7 +1336,7 @@ function filtrosActivos(){
 }
 
 /* ---- concentracion sectorial ---- */
-function graficoConcentracion(r){
+function graficoConcentracion(r, dest){
   const u = r.universo, selN = u.filter(p=>SEL(p)).length || 1, n = u.length || 1;
   const filas = r.secciones.map(function(f){
     const s2 = f.grupo.filter(p=>SEL(p)).length;
@@ -1340,8 +1363,9 @@ function graficoConcentracion(r){
       '</div><span class="delta"'+(f.s?'':' style="color:var(--warn);font-weight:600"')+'>'+
       (d>=0?"+":"\u2212")+Math.abs(d).toFixed(1)+'<em>'+f.s+' de '+f.n+'</em></span></div>';
   }
-  document.getElementById("concentracion").innerHTML = h + '</div>';
-  document.getElementById("subConc").textContent = GEN() ? "jerarquía general" : "jerarquía sectorial";
+  document.getElementById(dest).innerHTML = h + '</div>';
+  const sub = document.getElementById("subConc");
+  if(sub) sub.textContent = GEN() ? "jerarquía general" : "jerarquía sectorial";
 }
 
 /* ---- cola de pendientes ---- */
@@ -1408,10 +1432,10 @@ function colaPendientes(r){
 }
 
 /* ================= ranking ================= */
-function renderRanking(r){
+function renderRanking(r, dest){
   const secciones = GEN() ? [r.general] : r.secciones;
   const q = cfg.q.trim().toLowerCase();
-  const cont = document.getElementById("ranking");
+  const cont = document.getElementById(dest);
   cont.innerHTML = "";
 
   if(hayEdiciones()){
@@ -1443,7 +1467,8 @@ function renderRanking(r){
     sec.className = "sector";
     const alerta = (!GEN() && sec0.grupo.length<4) ? "<em>· muestra pequeña, poder de discriminación limitado</em>" : "";
     const movio = Math.abs(sec0.corte - sec0.corteB) > 1e-9;
-    sec.innerHTML = '<div class="sector-head"><h4>'+esc(sec0.sector)+'</h4>'+
+    sec.innerHTML = '<div class="sector-head">'+
+      (GEN() ? '' : '<h4>'+esc(sec0.sector)+'</h4>')+
       '<span class="eyebrow">'+sec0.grupo.length+' proyectos</span>'+
       '<div class="meta">Corte P70 = <span class="num">'+sec0.corte.toFixed(4)+'</span>'+
       (movio ? '<br><span style="color:var(--warn)">antes '+sec0.corteB.toFixed(4)+' — el corte también se mueve</span>' : '')+
@@ -1464,7 +1489,8 @@ function renderRanking(r){
     cont.appendChild(sec);
   }
   if(!cont.querySelector(".sector")) cont.insertAdjacentHTML("beforeend", '<p class="note">Ningún proyecto coincide con los filtros activos.</p>');
-  document.getElementById("subRank").textContent = GEN() ? "lista general de prelación" : "un ranking por sector";
+  const sr = document.getElementById(GEN() ? "subRankG" : "subRank");
+  if(sr) sr.textContent = GEN() ? "un solo juego de pesos sobre los 73 proyectos" : "un ranking por sector";
   const bs = document.getElementById("btnSoloMov"), ba = document.getElementById("btnAuto");
   if(bs) bs.onclick = () => { cfg.soloMov = !cfg.soloMov; guardar(); render(); };
   if(ba) ba.onclick = () => {
@@ -1519,31 +1545,27 @@ let ultimo = null;
 function render(){
   const r = jerarquizar();
   ultimo = r;
-  graficoCurva(r);
-  graficoCalidad(r);
-  graficoDispersion(r);
-  graficoBarras(r);
-  graficoPerfil(r);
-  graficoConcentracion(r);
-  colaPendientes(r);
-  renderRanking(r);
-  kpis(r);
-  filtrosActivos();
   document.getElementById("nProy").textContent = PROY.length;
-  document.getElementById("tCurva").textContent = GEN()
-    ? "Asignación presupuestal por orden de prelación general"
-    : "Asignación presupuestal si se financia por puntaje general";
-  document.getElementById("pCurva").innerHTML = GEN()
-    ? "Inversión acumulada recorriendo la lista general de mayor a menor puntaje. Donde la curva cruza el límite se agota el presupuesto."
-    : "Referencia: la curva usa el ranking general aunque el corte activo sea sectorial, porque el presupuesto se asigna sobre una sola bolsa.";
-  document.getElementById("tDisp").textContent = GEN()
-    ? "Distribución de puntajes y corte general"
-    : "Distribución de puntajes y línea de corte de cada sector";
-  document.getElementById("pDisp").innerHTML = GEN()
-    ? "Un punto por proyecto, agrupado por sector para ver a quién deja fuera un corte único. <b>Extensión a la norma:</b> la RD 002-2026 corta por sector."
-    : "Un punto por proyecto. La marca vertical de cada fila es el percentil 70 de ese sector, calculado solo con sus proyectos.";
-  document.getElementById("tRank").textContent = GEN() ? "Ranking general" : "Rankings sectoriales";
-  document.getElementById("legLim").hidden = !cfg.presu;
+
+  if(GEN()){
+    graficoCurva(r, "curvaG");
+    graficoConcentracion(r, "concentracionG");
+    renderRanking(r, "rankingG");
+    kpis(r, "kpisG");
+    document.getElementById("legLimG").hidden = !cfg.presu;
+  } else {
+    graficoCalidad(r);
+    graficoDispersion(r);
+    graficoBarras(r);
+    graficoPerfil(r);
+    graficoConcentracion(r, "concentracion");
+    colaPendientes(r);
+    renderRanking(r, "ranking");
+    kpis(r, "kpis");
+    document.getElementById("tDisp").textContent = "Distribución de puntajes y línea de corte de cada sector";
+    document.getElementById("pDisp").innerHTML = "Un punto por proyecto. La marca vertical de cada fila es el percentil 70 de ese sector, calculado solo con sus proyectos.";
+  }
+  filtrosActivos();
 }
 
 /* ================= panel de detalle ================= */
@@ -1704,7 +1726,6 @@ function toggleOpc(i, el){
   el.setAttribute("aria-pressed", cfg.opc.includes(i));
   rerender();
 }
-document.getElementById("selModo").onchange = e => { cfg.modo = e.target.value; sincronizar(); rerender(); };
 document.getElementById("selSector").onchange = e => { cfg.sector = e.target.value; rerender(); };
 document.getElementById("selFase").onchange = e => { cfg.fase = e.target.value; rerender(); };
 document.getElementById("inUit").onchange = e => { cfg.uit = parseFloat(e.target.value)||P.uit; rerender(); };
@@ -1713,11 +1734,11 @@ document.getElementById("inPresu").onchange = e => {
   cfg.presu = (isFinite(v) && v>0) ? v : null;
   rerender();
 };
-document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; renderRanking(ultimo); };
+document.getElementById("inBuscar").oninput = e => { cfg.q = e.target.value; renderRanking(ultimo, GEN()?"rankingG":"ranking"); filtrosActivos(); };
 document.getElementById("btnCsv").onclick = csv;
 document.getElementById("btnReset").onclick = () => {
   if(!confirm("Se descartan todos los supuestos editados y se vuelve a la calificación automática. ¿Continuar?")) return;
-  ov = {}; cfg = {opc:[], modo:"sectorial", sector:"sector", fase:"", uit:P.uit, presu:null, q:"",
+  ov = {}; cfg = {opc:[], sector:"sector", fase:"", uit:P.uit, presu:null, q:"",
                   tab:cfg.tab, soloMov:false, pend:null};
   guardar(); sincronizar(); render(); cerrar();
 };
@@ -1739,9 +1760,12 @@ function mostrarTab(t){
   cfg.tab = t;
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab===t));
   document.getElementById("vistaPanel").hidden = t!=="panel";
+  document.getElementById("vistaGeneral").hidden = t!=="general";
   document.getElementById("vistaGlosario").hidden = t!=="glosario";
-  document.getElementById("barraFiltros").hidden = t!=="panel";
-  if(t==="panel" && ultimo) render();
+  document.getElementById("barraFiltros").hidden = t==="glosario";
+  document.getElementById("fPresu").hidden = t!=="general";
+  document.getElementById("fSector").hidden = t==="general";
+  if(t!=="glosario") render();
   guardar();
 }
 document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => mostrarTab(b.dataset.tab));
@@ -1779,13 +1803,11 @@ function construirGlosario(){
 }
 
 function sincronizar(){
-  document.getElementById("selModo").value = cfg.modo;
   document.getElementById("selSector").value = cfg.sector;
   document.getElementById("selFase").value = cfg.fase;
   document.getElementById("inUit").value = cfg.uit;
   document.getElementById("inPresu").value = cfg.presu ?? "";
   document.getElementById("inBuscar").value = cfg.q;
-  document.getElementById("fPresu").hidden = cfg.modo!=="general";
   document.getElementById("ch9").setAttribute("aria-pressed", cfg.opc.includes(9));
   document.getElementById("ch10").setAttribute("aria-pressed", cfg.opc.includes(10));
 }
